@@ -1,0 +1,173 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    background: linear-gradient( 90deg, rgb(2, 0, 36,1) 0%, rgb(74, 14, 154,1) 35%, rgb(0, 212, 225,1) 100% );
+    width: 100%;
+    height: 56px;
+}
+
+.nav-link {
+    color: rgb(240, 243, 246);
+}
+
+    .nav-link:hover {
+        color: rgb(167, 169, 172);
+    }
+
+.img {
+    width: 100px;
+    height: 56px;
+}
+
+.slider {
+    width: 100%;
+    height: 500%;
+    overflow: hidden;
+}
+
+figure {
+    position: relative;
+    left: 0;
+    width: 400%;
+    animation: 10s slide infinite;
+}
+
+.slide {
+    position: relative;
+    width: 25%;
+    float: left;
+}
+
+    .slide img {
+        width: 100%;
+        height: 650px;
+    }
+
+@keyframes slide {
+    0% {
+        left: 0;
+    }
+
+    10% {
+        left: 0;
+    }
+
+    20% {
+        left: 0%;
+    }
+
+    30% {
+        left: -50%;
+    }
+
+    40% {
+        left: -75%;
+    }
+
+    50% {
+        left: -100%;
+    }
+
+    60% {
+        left: -150%;
+    }
+
+    70% {
+        left: -200%;
+    }
+
+    80% {
+        left: -250%;
+    }
+
+    90% {
+        left: -300%;
+    }
+
+    100% {
+        left: 0%;
+    }
+}
+
+
+.footer {
+    background: linear-gradient( 90deg, rgb(2, 0, 36,1) 0%, rgb(74, 14, 154,1) 35%, rgb(0, 212, 225,1) 100% );
+    padding: 100px 0px;
+    font-family: "Play", sans-serif;
+    text-align: center;
+    height: 300px;
+}
+
+    .footer.column {
+        background: linear-gradient( 90deg, rgb(2, 0, 36,1) 0%, rgb(74, 14, 154,1) 35%, rgb(0, 212, 225,1) 100% );
+        font-size: 0.8em;
+    }
+
+        .footer .column a {
+            text-decoration: none;
+            color: rgb(229, 237, 247);
+            transition: 0.5s;
+            font-size: 28px; /* Increase this value as needed */
+        }
+
+    .footer .row a {
+        text-decoration: none;
+        color: rgb(240, 244, 249);
+        transition: 0.5s;
+    }
+
+    .footer .column a:hover {
+        color: #8d8b98;
+    }
+
+    .footer .row a:hover {
+        color: #a0a0a8;
+    }
+
+    .footer .row ul {
+        width: 100%;
+    }
+
+        .footer .row ul li {
+            display: inline-block;
+            margin: 0px 30px;
+        }
+
+    .footer .row a i {
+        font-size: 2em;
+    }
+
+@media (max-width: 720px) {
+    .footer {
+        text-align: left;
+        padding: 5%;
+    }
+
+        .footer .row ul li {
+            display: block;
+            margin: 10px 0px;
+            text-align: left;
+        }
+
+        .footer .row a i {
+            margin: 0% 3%;
+        }
+}
+
+.column {
+    justify-content: center;
+}
+
+.row {
+    justify-content: center;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
