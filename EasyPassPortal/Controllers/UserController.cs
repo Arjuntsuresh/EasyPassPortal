@@ -33,6 +33,7 @@ namespace EasyPassPortal.Controllers
                     if (userDetails.AddAccountDetails(user))
                     {
                         ViewBag.Message = "Data Inset SuccessFully.";
+                        return RedirectToAction("LoginUserDetail", "User");
                     }
                 }
                 return View();
@@ -49,40 +50,47 @@ namespace EasyPassPortal.Controllers
         /// </summary>
         /// <param name="returnURL"></param>
         /// <returns></returns>
-        public ActionResult LoginUserDetail(string returnURL)
+        public ActionResult LoginUserDetail()
         {
             return View();
         }
 
         // POST: User/Edit/5
         [HttpPost]
-        public ActionResult LoginUserDetail(LoginModel loginModel)
+        public ActionResult LoginUserDetail(LoginModel user)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
                     UserDetails userDetails = new UserDetails();
-                    if(userDetails.VerifyUser(loginModel.Email,loginModel.Password))
+                    var userLoggedIn = userDetails.VerifyUser(user.Email, user.Password);
+
+                    if (userLoggedIn)
                     {
-                        Session["UserEmail"] = loginModel.Email;
-                        return RedirectToAction("LoginUserDetail", "Home");
+                        ViewBag.message = "loggedin";
+                        ViewBag.triedOnce = "yes";
+                        Session["UserEmail"] = user.Email;
+                        return RedirectToAction("HomePageDetails", "User");
                     }
                     else
                     {
-                        ModelState.AddModelError("", "Invalid login details");
+                        ViewBag.triedOnce = "yes";
+                        return View();
                     }
                 }
-                return View(loginModel);
-               
+                return View(user);
             }
-            catch
+            catch (Exception ex)
             {
-                return View();
+                ViewBag.triedOnce = "yes";
+                ViewBag.message = "An error occurred: " + ex.Message;
+                return View(user);
             }
         }
 
-       public ActionResult HomePageDetails()
+
+        public ActionResult HomePageDetails()
         {
             return View();
         }
@@ -116,6 +124,41 @@ namespace EasyPassPortal.Controllers
                 }
             }
         }
+
+        public ActionResult About()
+        {
+            return View();
+        }
+
+
+        /// <summary>
+        /// userDetails page
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult GetUserDetail()
+        {
+            // Retrieve the email from the session
+            string userEmail = Session["UserEmail"] as string;
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                // Handle the case where the email is not found in the session
+                return RedirectToAction("LoginUserDetail", "User"); // Redirect to login if email is not found
+            }
+
+            UserDetails userDetails = new UserDetails();
+            UserModel user = userDetails.GetUserByEmail(userEmail);
+            if (user == null)
+            {
+                return HttpNotFound();
+            }
+            return View(user);
+        }
+
+
+
+
+
+
 
 
 

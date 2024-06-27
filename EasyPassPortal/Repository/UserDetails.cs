@@ -56,16 +56,19 @@ namespace EasyPassPortal.Repository
                 sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Email", email);
                 sqlCommand.Parameters.AddWithValue("@Password", password);
+
+                // Execute the stored procedure and get the result
                 int result = (int)sqlCommand.ExecuteScalar();
+                // If result is greater than 0, user exists
                 return result > 0;
             }
-            catch (Exception ex)
+            catch 
             {
-                // Log the exception (ex) here if necessary
                 return false;
             }
             finally
             {
+                // Ensure the connection is closed properly
                 if (UserDBConnection != null && UserDBConnection.State == System.Data.ConnectionState.Open)
                 {
                     UserDBConnection.Close();
@@ -73,35 +76,61 @@ namespace EasyPassPortal.Repository
             }
         }
 
+
         //Create Passport
         public bool AddPassportDetails(UserPassportDetails userPassportDetails)
         {
-            UserConnection();
-            SqlCommand sqlCommand = new SqlCommand("AddPassportDetail", UserDBConnection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-
-            sqlCommand.Parameters.AddWithValue("@FirstName", userPassportDetails.FullName);
-            sqlCommand.Parameters.AddWithValue("@FatherName", userPassportDetails.FatherName);
-            sqlCommand.Parameters.AddWithValue("@Gender", userPassportDetails.Gender);
-            sqlCommand.Parameters.AddWithValue("@DateOfBirth", userPassportDetails.DateOfBirth);
-            sqlCommand.Parameters.AddWithValue("@Address", userPassportDetails.Address);
-            sqlCommand.Parameters.AddWithValue("@Religion", userPassportDetails.Religion);
-            sqlCommand.Parameters.AddWithValue("@State", userPassportDetails.State);
-            sqlCommand.Parameters.AddWithValue("@Nationality", userPassportDetails.Nationality);
-            sqlCommand.Parameters.AddWithValue("@PhoneNumber", userPassportDetails.PhoneNumber);
-            sqlCommand.Parameters.AddWithValue("@Email", userPassportDetails.Email);
-            UserDBConnection.Open();
-            int i = sqlCommand.ExecuteNonQuery();
-            UserDBConnection.Close();
-            if (i >= 1)
+            try
             {
-                return true;
-            }
-            else
+                UserConnection();
+                SqlCommand sqlCommand = new SqlCommand("AddPassportDetail", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@FullName", userPassportDetails.FullName);
+                sqlCommand.Parameters.AddWithValue("@FatherName", userPassportDetails.FatherName);
+                sqlCommand.Parameters.AddWithValue("@Gender", userPassportDetails.Gender);
+                sqlCommand.Parameters.AddWithValue("@DateOfBirth", userPassportDetails.DateOfBirth);
+                sqlCommand.Parameters.AddWithValue("@Address", userPassportDetails.Address);
+                sqlCommand.Parameters.AddWithValue("@Religion", userPassportDetails.Religion);
+                sqlCommand.Parameters.AddWithValue("@State", userPassportDetails.State);
+                sqlCommand.Parameters.AddWithValue("@Nationality", userPassportDetails.Nationality);
+                sqlCommand.Parameters.AddWithValue("@PhoneNumber", userPassportDetails.PhoneNumber);
+                sqlCommand.Parameters.AddWithValue("@Email", userPassportDetails.Email);
+                UserDBConnection.Open();
+                int result = sqlCommand.ExecuteNonQuery();
+                UserDBConnection.Close();
+                return result > 0;
+            }catch
             {
                 return false;
             }
         }
+
+        public UserModel GetUserByEmail(string email)
+        {
+            UserConnection();
+            SqlCommand sqlCommand = new SqlCommand("GetUserDetails", UserDBConnection);
+            sqlCommand.CommandType = CommandType.StoredProcedure;
+            sqlCommand.Parameters.AddWithValue("@Email", email);
+
+            UserDBConnection.Open();
+            SqlDataReader reader = sqlCommand.ExecuteReader();
+
+            UserModel userModel = null;
+
+            if (reader.Read())
+            {
+                userModel = new UserModel
+                {
+                    UserID = Convert.ToInt32(reader["UserID"]),
+                    Email = Convert.ToString(reader["Email"]),
+                    Password = Convert.ToString(reader["Password"])
+                };
+            }
+
+            UserDBConnection.Close();
+            return userModel;
+        }
+
 
     }
 }

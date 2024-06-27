@@ -1,0 +1,41 @@
+﻿
+body {
+    background-color: #f8f9fa;
+    font-family: Arial, sans-serif;
+}
+
+.container {
+    margin-top: 50px;
+    max-width: 600px;
+    background-color: #fff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+}
+
+.profile-header {
+    text-align: center;
+    margin-bottom: 20px;
+}
+
+    .profile-header .title {
+        font-size: 24px;
+        font-weight: bold;
+        color: #007bff;
+    }
+
+.form-group {
+    margin-bottom: 15px;
+}
+
+    .form-group label {
+        font-weight: bold;
+        color: #333;
+    }
+
+    .form-group span {
+        display: block;
+        padding: 5px 0;
+        font-size: 16px;
+        color: #555;
+    }

@@ -8,19 +8,19 @@ namespace EasyPassPortal.Models
 {
     public class UserPassportDetails
     {
-        [Display(Name = "Account ID")]
-        public int id { get; set; }
+        [Display(Name = "id")]
+        public int Id { get; set; }
 
-        [Display(Name = "Full name")]
+        [Display(Name = "FullName")]
         public string FullName { get; set; }
 
-        [Display(Name = "Father name")]
+        [Display(Name = "FatherName")]
         public string FatherName { get; set; }
 
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
-        [Display(Name = "Date of birth")]
+        [Display(Name = "DateOfBirth")]
         public string DateOfBirth { get; set; }
 
         [Display(Name = "Address")]
@@ -35,7 +35,7 @@ namespace EasyPassPortal.Models
         [Display(Name = "Nationality")]
         public string Nationality { get; set; }
 
-        [Display(Name = "Phone number")]
+        [Display(Name = "PhoneNumber")]
         public string PhoneNumber { get; set; }
 
         [Display(Name = "Email")]
