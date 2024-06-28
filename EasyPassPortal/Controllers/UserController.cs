@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Configuration;
 using System.Data.SqlClient;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 using EasyPassPortal.Models;
@@ -12,6 +13,10 @@ namespace EasyPassPortal.Controllers
 {
     public class UserController : Controller
     {
+        /// <summary>
+        /// get user detail get method
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AddUserDetail()
         {
             return View();
@@ -37,16 +42,16 @@ namespace EasyPassPortal.Controllers
                     }
                 }
                 return View();
-              
+
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
-                ViewBag.Message = "Error occurred while inserting!" + ex.Message;
+                ViewBag.Message = "Error occurred while inserting!" + exception.Message;
                 return View();
             }
         }
         /// <summary>
-        /// 
+        /// Get login page.
         /// </summary>
         /// <param name="returnURL"></param>
         /// <returns></returns>
@@ -55,9 +60,13 @@ namespace EasyPassPortal.Controllers
             return View();
         }
 
-        // POST: User/Edit/5
+        /// <summary>
+        /// Login authentication of user.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         [HttpPost]
-        public ActionResult LoginUserDetail(LoginModel user)
+        public ActionResult LoginUserDetail(UserModel user)
         {
             try
             {
@@ -81,25 +90,35 @@ namespace EasyPassPortal.Controllers
                 }
                 return View(user);
             }
-            catch (Exception ex)
+            catch (Exception exception)
             {
                 ViewBag.triedOnce = "yes";
-                ViewBag.message = "An error occurred: " + ex.Message;
+                ViewBag.message = "An error occurred: " + exception.Message;
                 return View(user);
             }
         }
 
-
+        /// <summary>
+        /// Home page get method
+        /// </summary>
+        /// <returns></returns>
         public ActionResult HomePageDetails()
         {
             return View();
         }
-
+        /// <summary>
+        /// Show passport apply page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AddUserPassportDetail()
         {
             return View();
         }
-
+        /// <summary>
+        /// Adding a passport request for admin 
+        /// </summary>
+        /// <param name="passportDetails"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AddUserPassportDetail(UserPassportDetails passportDetails)
         {
@@ -117,9 +136,9 @@ namespace EasyPassPortal.Controllers
                     return View();
 
                 }
-                catch (Exception ex)
+                catch (Exception exception)
                 {
-                    ViewBag.Message = "Error occurred while inserting!" + ex.Message;
+                    ViewBag.Message = "Error occurred while inserting!" + exception.Message;
                     return View();
                 }
             }
@@ -137,67 +156,84 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult GetUserDetail()
         {
-            // Retrieve the email from the session
-            string userEmail = Session["UserEmail"] as string;
-            if (string.IsNullOrEmpty(userEmail))
-            {
-                // Handle the case where the email is not found in the session
-                return RedirectToAction("LoginUserDetail", "User"); // Redirect to login if email is not found
-            }
-
-            UserDetails userDetails = new UserDetails();
-            UserModel user = userDetails.GetUserByEmail(userEmail);
-            if (user == null)
-            {
-                return HttpNotFound();
-            }
-            return View(user);
-        }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-        // GET: User/Delete/5
-        public ActionResult Delete(int id)
-        {
-            return View();
-        }
-
-        // POST: User/Delete/5
-        [HttpPost]
-        public ActionResult Delete(int id, FormCollection collection)
-        {
             try
             {
-                // TODO: Add delete logic here
-
-                return RedirectToAction("Index");
+                string userEmail = Session["UserEmail"] as string;
+                if (string.IsNullOrEmpty(userEmail))
+                {
+                    return RedirectToAction("LoginUserDetail", "User");
+                }
+                UserDetails userDetails = new UserDetails();
+                UserModel user = userDetails.GetUserByEmail(userEmail);
+                if (user == null)
+                {
+                    return HttpNotFound();
+                }
+                return View(user);
             }
-            catch
+            catch (Exception exception)
             {
+                ViewBag.Message = "Error occurred while login!" + exception.Message;
                 return View();
             }
         }
+        /// <summary>
+        /// Edit user password view get method.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult EditUserPassword()
+        {
+            try
+            {
+                string userEmail = Session["UserEmail"] as string;
+                UserDetails userDetails = new UserDetails();
+                UserModel user = userDetails.GetUserByEmail(userEmail);
+                if (user == null)
+                {
+                    return RedirectToAction("LoginUserDetail");
+                }
+                return View(user);
+            }
+            catch
+            {
+               return RedirectToAction("LoginUserDetail");
+            }
+        }
+
+        /// <summary>
+        /// Editing user password.
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditUserPassword(UserModel userModel)
+        {
+            try
+            {
+                UserDetails userDetails = new UserDetails();
+                userDetails.EditPassword(userModel);
+                return RedirectToAction("GetUserDetail");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error occurred while editing!" + ex.Message;
+                return View();
+            }
+
+
+        }
+
+
+        /// <summary>
+        /// Logout for user side.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LogOutUser()
+        {
+            Session.Abandon();
+            return RedirectToAction("LoginUserDetail", "User");
+        }
+
     }
 }

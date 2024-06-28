@@ -12,8 +12,12 @@ namespace EasyPassPortal.Models
         [Display (Name ="User ID")]
         public int UserID { get; set; }
         [Display (Name="Email")]
+        [Required]
+        [EmailAddress]
         public string Email { get; set; }
         [Display (Name ="Password")]
+        [Required]
+        [DataType(DataType.Password)]
         public string Password { get; set; }
     }
 }

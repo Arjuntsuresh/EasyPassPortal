@@ -12,7 +12,10 @@ namespace EasyPassPortal.Controllers
     {
 
 
-        //Admin Login
+        /// <summary>
+        /// admin login page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AdminLoginDetail()
         {
             return View();
@@ -51,23 +54,49 @@ namespace EasyPassPortal.Controllers
             }
         }
 
-        //Admin Home page
+        /// <summary>
+        /// Admin home page
+        /// </summary>
+        /// <returns></returns>
         public ActionResult AdminHomePage()
         {
             return View();
         }
-        //Get all Passport registered users
+        /// <summary>
+        /// get all pssport reg users details for admin.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult GetAccountDetails()
         {
-            AdminDetails adminDetails = new AdminDetails();
-            ModelState.Clear();
-            return View(adminDetails.GetAllDetails());
+            try
+            {
+                AdminDetails adminDetails = new AdminDetails();
+                ModelState.Clear();
+                return View(adminDetails.GetAllDetails());
+            }catch (Exception exception)
+            {
+                ViewBag.Message = "Error occurred w!" + exception.Message;
+                return View();
+            }
         }
+        /// <summary>
+        /// This is to get all the user details for the admin.
+        /// </summary>
+        /// <returns>user detail</returns>
         public ActionResult GetUserDetails()
         {
-            AdminDetails adminDetails = new AdminDetails();
-            ModelState.Clear();
-            return View(adminDetails.GetAllUserDetails());
+            try
+            {
+                AdminDetails adminDetails = new AdminDetails();
+                ModelState.Clear();
+                return View(adminDetails.GetAllUserDetails());
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Message = "Error occurred w!" + exception.Message;
+                return View();
+            }
+           
         }
     }
 }

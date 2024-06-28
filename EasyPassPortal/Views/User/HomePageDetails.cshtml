@@ -21,7 +21,7 @@
 <body>
     <div class="navbar navbar-expand-lg">
        
-        <p style="color: aliceblue; padding-top: 20px; font-size: larger; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">EasyPassPortal</p>
+        <a href="@Url.Action("HomePageDetails","User")"> <p style="color: aliceblue; margin-left:50px; padding-top: 20px; font-size: larger; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">EasyPassPortal</p></a>
 
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="nav ml-auto">
@@ -29,19 +29,31 @@
                     <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
-                </li>
-                @*<li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Signin</a>
-                </li>*@
-                <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("GetUserDetail", "User")">User profile</a>
                 </li>
+
+                @{
+                    var userEmail = Session["UserEmail"] as string;
+                }
+
+                @if (string.IsNullOrEmpty(userEmail))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Signin</a>
+                    </li>
+                }
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
                 </li>
+
+                <li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
+                </li>
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact us</a>
+                </li>
+                <li class="nav-item">
+                    @Html.ActionLink("Logout", "LogOutUser", "User", new { @class = "nav-link" })
                 </li>
             </ul>
         </div>

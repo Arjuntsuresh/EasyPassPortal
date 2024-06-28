@@ -9,6 +9,7 @@ using EasyPassPortal.Models;
 using System.Data;
 using System.Web.ModelBinding;
 using System.Data.Common;
+using System.Web.Mvc;
 
 namespace EasyPassPortal.Repository
 {
@@ -16,34 +17,49 @@ namespace EasyPassPortal.Repository
     public class UserDetails
     {
         private SqlConnection UserDBConnection;
+
+        public object ViewBag { get; private set; }
+
+        /// <summary>
+        /// DB connection 
+        /// </summary>
         private void UserConnection()
         {
             string ConfigurationConnection = ConfigurationManager.ConnectionStrings["UserData"].ToString();
             UserDBConnection = new SqlConnection(ConfigurationConnection);
         }
 
-        //create user
+       /// <summary>
+       /// User adding the details and registering to the web site.
+       /// </summary>
+       /// <param name="user"></param>
+       /// <returns></returns>
         public bool AddAccountDetails(UserModel user)
         {
-            UserConnection();
-            SqlCommand sqlCommand = new SqlCommand("AddUserDetails", UserDBConnection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-
-            sqlCommand.Parameters.AddWithValue("@Email", user.Email);
-            sqlCommand.Parameters.AddWithValue("@Password", user.Password);
-            UserDBConnection.Open();
-            int i = sqlCommand.ExecuteNonQuery();
-            UserDBConnection.Close();
-            if (i >= 1)
+            try
             {
+                UserConnection();
+                SqlCommand sqlCommand = new SqlCommand("AddUserDetails", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+
+                sqlCommand.Parameters.AddWithValue("@Email", user.Email);
+                sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+                UserDBConnection.Open();
+                int result = sqlCommand.ExecuteNonQuery();
+                UserDBConnection.Close();
                 return true;
             }
-            else
+            catch
             {
                 return false;
             }
         }
-
+        /// <summary>
+        /// Verifing user login page.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <param name="password"></param>
+        /// <returns></returns>
         public bool VerifyUser(string email, string password)
         {
             SqlConnection UserDBConnection = null;
@@ -56,10 +72,7 @@ namespace EasyPassPortal.Repository
                 sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Email", email);
                 sqlCommand.Parameters.AddWithValue("@Password", password);
-
-                // Execute the stored procedure and get the result
                 int result = (int)sqlCommand.ExecuteScalar();
-                // If result is greater than 0, user exists
                 return result > 0;
             }
             catch 
@@ -68,7 +81,6 @@ namespace EasyPassPortal.Repository
             }
             finally
             {
-                // Ensure the connection is closed properly
                 if (UserDBConnection != null && UserDBConnection.State == System.Data.ConnectionState.Open)
                 {
                     UserDBConnection.Close();
@@ -77,7 +89,11 @@ namespace EasyPassPortal.Repository
         }
 
 
-        //Create Passport
+        /// <summary>
+        /// Creating the passport for user.
+        /// </summary>
+        /// <param name="userPassportDetails"></param>
+        /// <returns></returns>
         public bool AddPassportDetails(UserPassportDetails userPassportDetails)
         {
             try
@@ -104,31 +120,75 @@ namespace EasyPassPortal.Repository
                 return false;
             }
         }
-
+        /// <summary>
+        /// User profile getting from db using session.
+        /// </summary>
+        /// <param name="email"></param>
+        /// <returns></returns>
         public UserModel GetUserByEmail(string email)
         {
-            UserConnection();
-            SqlCommand sqlCommand = new SqlCommand("GetUserDetails", UserDBConnection);
-            sqlCommand.CommandType = CommandType.StoredProcedure;
-            sqlCommand.Parameters.AddWithValue("@Email", email);
-
-            UserDBConnection.Open();
-            SqlDataReader reader = sqlCommand.ExecuteReader();
-
-            UserModel userModel = null;
-
-            if (reader.Read())
+            try
             {
-                userModel = new UserModel
-                {
-                    UserID = Convert.ToInt32(reader["UserID"]),
-                    Email = Convert.ToString(reader["Email"]),
-                    Password = Convert.ToString(reader["Password"])
-                };
-            }
+                UserConnection();
+                SqlCommand sqlCommand = new SqlCommand("GetUserDetails", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Email", email);
 
-            UserDBConnection.Close();
-            return userModel;
+                UserDBConnection.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                UserModel userModel = null;
+
+                if (reader.Read())
+                {
+                    userModel = new UserModel
+                    {
+                        UserID = Convert.ToInt32(reader["UserID"]),
+                        Email = Convert.ToString(reader["Email"]),
+                        Password = Convert.ToString(reader["Password"])
+                    };
+                }
+
+                UserDBConnection.Close();
+                return userModel;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+        /// <summary>
+        /// Edit password of user from user side.
+        /// </summary>
+        /// <param name="userModel"></param>
+        /// <returns></returns>
+        public void EditPassword (UserModel user)
+        {
+            try
+            {
+                UserConnection();
+                using (SqlCommand sqlCommand = new SqlCommand("UpdateUserPassword", UserDBConnection))
+                {
+                    sqlCommand.CommandType = CommandType.StoredProcedure;
+                    sqlCommand.Parameters.AddWithValue("@UserID", user.UserID);
+                    sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+
+                    UserDBConnection.Open();
+                    sqlCommand.ExecuteNonQuery();
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception for debugging purposes
+                // Log.Error(ex);
+            }
+            finally
+            {
+                if (UserDBConnection.State == ConnectionState.Open)
+                {
+                    UserDBConnection.Close();
+                }
+            }
         }
 
 

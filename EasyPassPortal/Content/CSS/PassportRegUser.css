@@ -1,0 +1,18 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+    background: linear-gradient( 90deg, rgb(2, 0, 36,1) 0%, rgb(74, 14, 154,1) 35%, rgb(0, 212, 225,1) 100% );
+    width: 100%;
+    height: 56px;
+}
+
+.nav-link {
+    color: rgb(240, 243, 246);
+}
+
+    .nav-link:hover {
+        color: rgb(167, 169, 172);
+    }

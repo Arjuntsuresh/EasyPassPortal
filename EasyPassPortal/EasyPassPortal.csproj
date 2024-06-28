@@ -257,7 +257,9 @@
     <Content Include="Content\CSS\AdminCss\AdminHomePage.css" />
     <Content Include="Content\CSS\AdminCss\AdminHomePageResponsive.css" />
     <Content Include="Content\CSS\AdminCss\AdminLoginpage.css" />
+    <Content Include="Content\CSS\LoginUser.css" />
     <Content Include="Content\CSS\HomePage.css" />
+    <Content Include="Content\CSS\PassportRegUser.css" />
     <Content Include="Content\CSS\SignupCSS.css" />
     <Content Include="Content\CSS\UserProfile.css" />
     <Content Include="favicon.ico" />
@@ -305,6 +307,7 @@
     <Content Include="Views\Admin\AdminLoginDetail.cshtml" />
     <Content Include="Views\Admin\GetAccountDetails.cshtml" />
     <Content Include="Views\Admin\GetUserDetails.cshtml" />
+    <Content Include="Views\User\EditUserPassword.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
