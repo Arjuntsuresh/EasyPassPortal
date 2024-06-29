@@ -1,0 +1,73 @@
+﻿/* styles.css */
+
+body {
+    font-family: Arial, sans-serif;
+    margin: 0;
+    padding: 0;
+    background-color: #f4f4f4;
+}
+
+.container {
+    width: 80%;
+    margin: 20px auto;
+    background: #fff;
+    padding: 20px;
+    box-shadow: 0 0 10px rgba(0,0,0,0.1);
+    border-radius: 8px;
+    position: relative; /* Added for positioning the status indicator */
+}
+
+h4 {
+    font-size: 24px;
+    margin-bottom: 10px;
+    color: #333;
+}
+
+hr {
+    margin-bottom: 20px;
+}
+
+.details-list dt {
+    font-weight: bold;
+    color: #555;
+    margin-top: 10px;
+}
+
+.details-list dd {
+    margin-left: 20px;
+    margin-bottom: 10px;
+}
+
+.status-indicator {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    font-size: 14px;
+    background-color: #ffcc00; /* Change color as needed */
+    padding: 5px 10px;
+    border-radius: 5px;
+    box-shadow: 0 0 5px rgba(0,0,0,0.1);
+}
+
+.status-value {
+    font-weight: bold;
+    color: #fff;
+}
+.navbar {
+    background: linear-gradient( 90deg, rgb(2, 0, 36,1) 0%, rgb(74, 14, 154,1) 35%, rgb(0, 212, 225,1) 100% );
+    width: 100%;
+    height: 56px;
+}
+
+.nav-link {
+    color: rgb(240, 243, 246);
+}
+
+    .nav-link:hover {
+        color: rgb(167, 169, 172);
+    }
+
+.img {
+    width: 100px;
+    height: 56px;
+}

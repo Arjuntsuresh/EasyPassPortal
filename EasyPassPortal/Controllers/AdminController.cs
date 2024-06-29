@@ -2,6 +2,7 @@
 using EasyPassPortal.Repository;
 using System;
 using System.Collections.Generic;
+using System.Data.Common;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
@@ -10,8 +11,6 @@ namespace EasyPassPortal.Controllers
 {
     public class AdminController : Controller
     {
-
-
         /// <summary>
         /// admin login page
         /// </summary>
@@ -96,7 +95,113 @@ namespace EasyPassPortal.Controllers
                 ViewBag.Message = "Error occurred w!" + exception.Message;
                 return View();
             }
-           
+
+        }
+        /// <summary>
+        /// Add new admin view page 
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult AddNewAdmin()
+        {
+            return View();
+        }
+        /// <summary>
+        /// Add new admin post method.
+        /// </summary>
+        /// <param name="adminModel"></param>
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult AddNewAdmin(AdminModel adminModel)
+        {
+            try
+            {
+                if (ModelState.IsValid)
+                {
+                    AdminDetails adminDetails = new AdminDetails();
+                    if (adminDetails.AddNewAdmin(adminModel))
+                    {
+                        ViewBag.Message = "New Admin added successfully.";
+                        return RedirectToAction("AdminLoginDetail", "Admin");
+                    }
+                }
+                return View();
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Message = "Error occured while inserting!" + exception.Message;
+                return View();
+            }
+        }
+        /// <summary>
+        /// Edit admin password
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult EditAdminPassword()
+        {
+            try
+            {
+                string userEmail = Session["AdminEmail"] as string;
+                AdminDetails adminDetails = new AdminDetails();
+                AdminModel adminModel = adminDetails.GetAdminByEmail(userEmail);
+                if (adminModel == null)
+                {
+                    return RedirectToAction("AdminLoginDetail");
+                }
+                return View(adminModel);
+            }
+            catch
+            {
+                return RedirectToAction("AdminLoginDetail");
+            }
+        }
+
+        /// <returns></returns>
+        [HttpPost]
+        public ActionResult EditAdminPassword(AdminModel adminModel)
+        {
+            try
+            {
+                AdminDetails adminDetails = new AdminDetails();
+                adminDetails.EditPassword(adminModel);
+                return RedirectToAction("AdminHomePage");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error occurred while editing!" + ex.Message;
+                return View();
+            }
+
+
+        }
+
+        public ActionResult DeleteUserDetail(int id)
+        {
+            try
+            {
+                AdminDetails adminDetails = new AdminDetails();
+                if (adminDetails.DeleteUserFromAdmin(id))
+                {
+                    ViewBag.AlertMessage = ("User detail deleted successfully.");
+                }
+                return RedirectToAction("GetUserDetails");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error occurred while deleting!" + ex.Message;
+                return View();
+            }
+
+        }
+
+
+        /// <summary>
+        /// Admin logout function
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult LogOutAdmin()
+        {
+            Session.Abandon();
+            return RedirectToAction("AdminLoginDetail", "Admin");
         }
     }
 }

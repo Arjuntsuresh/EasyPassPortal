@@ -223,6 +223,31 @@ namespace EasyPassPortal.Controllers
 
 
         }
+        /// <summary>
+        /// This is the view for user enquirey.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult StatusEnquiry()
+        {
+            try
+            {
+                string userEmail = Session["UserEmail"] as string;
+                UserDetails userDetails = new UserDetails();
+                UserPassportDetails userPassportDetails = userDetails.GetUserPassportDetails(userEmail);
+                if (userPassportDetails == null)
+                {
+                    return RedirectToAction("LoginUserDetail");
+                }
+                return View(userPassportDetails);
+            }
+            catch(Exception ex) 
+            {
+                ViewBag.Message = "Error occurred while editing!" + ex.Message;
+                return View();
+            }
+        }
+
+      
 
 
         /// <summary>

@@ -19,36 +19,23 @@
 
 <body>
     <!-- for header part -->
-    <header>
+     <header>
+
         <div class="logosec">
             <div class="logo">EASYPASSPORTAL</div>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
-                 class="icn menuicn" id="menuicn" alt="menu-icon">
+                 class="icn menuicn"
+                 id="menuicn"
+                 alt="menu-icon">
         </div>
 
-        <div class="searchbar">
-            <input type="text" placeholder="Search">
-            <div class="searchbtn">
-                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
-                     class="icn srchicn" alt="search-icon">
-            </div>
-        </div>
-
-        <div class="message">
-            <div class="circle"></div>
-            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/8.png" class="icn" alt="">
-            <div class="dp">
-                <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180014/profile-removebg-preview.png"
-                     class="dpicn" alt="dp">
-            </div>
-        </div>
     </header>
 
     <div class="main-container">
         <div class="navcontainer">
             <nav class="nav">
                 <div class="nav-upper-options">
-                    <div class="nav-option option1">
+                    <div class="nav-option">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
                              class="nav-img"
                              alt="dashboard">
@@ -62,35 +49,29 @@
                         <a href="@Url.Action("GetAccountDetails","Admin")"><h3> Passport details</h3></a>
                     </div>
 
-                    <div class="nav-option option3">
+                    <div class="nav-option option1">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
                              class="nav-img"
                              alt="userDetails">
                         <a href="@Url.Action("GetUserDetails","Admin")"> <h3>User Details</h3></a>
                     </div>
-
-                    <div class="nav-option option4">
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/6.png"
-                             class="nav-img" alt="institution">
-                        <h3> Institution</h3>
+                    <div class="nav-option change-password">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                             class="nav-img"
+                             alt="change-password">
+                        <a href="@Url.Action("EditAdminPassword", "Admin")" class="nav-link">
+                            <h3>Change Password</h3>
+                        </a>
                     </div>
 
-                    <div class="nav-option option5">
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183323/10.png"
-                             class="nav-img" alt="blog">
-                        <h3> Profile</h3>
-                    </div>
-
-                    <div class="nav-option option6">
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/4.png"
-                             class="nav-img" alt="settings">
-                        <h3> Settings</h3>
-                    </div>
 
                     <div class="nav-option logout">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
-                             class="nav-img" alt="logout">
-                        <h3>Logout</h3>
+                             class="nav-img"
+                             alt="logout">
+                        <a href="@Url.Action("LogOutAdmin", "Admin")" class="nav-link">
+                            <h3>Logout</h3>
+                        </a>
                     </div>
                 </div>
             </nav>
@@ -146,10 +127,10 @@
             </div>
 
             <div class="report-container">
-                <div class="report-header">
+                @*<div class="report-header">
                     <h1 class="recent-Articles">User Details</h1>
                     @Html.ActionLink("Create New", "Create", new { @class = "view" })
-                </div>
+                </div>*@
 
                 <div class="report-body">
                     <table class="table">
@@ -169,9 +150,8 @@
                                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Password)</td>
                                     <td>
-                                        @Html.ActionLink("Edit", "Edit", new { id = item.UserID }) |
-                                        @Html.ActionLink("Details", "Details", new { id = item.UserID }) |
-                                        @Html.ActionLink("Delete", "Delete", new { id = item.UserID })
+                                       
+                                        @Html.ActionLink("Delete User", "DeleteUserDetail", new { id = item.UserID })
                                     </td>
                                 </tr>
                             }

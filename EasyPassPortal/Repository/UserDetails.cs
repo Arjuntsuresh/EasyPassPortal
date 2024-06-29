@@ -191,6 +191,47 @@ namespace EasyPassPortal.Repository
             }
         }
 
+        public UserPassportDetails GetUserPassportDetails(string email)
+        {
+            try
+            {
+                UserConnection();
+                SqlCommand sqlCommand = new SqlCommand("GetUserPassportDetails", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Email", email);
+
+                UserDBConnection.Open();
+                SqlDataReader reader = sqlCommand.ExecuteReader();
+
+                UserPassportDetails userPassport = null;
+
+                if (reader.Read())
+                {
+                    userPassport = new UserPassportDetails
+                    {
+                        Id = Convert.ToInt32(reader["id"]),
+                        FullName = Convert.ToString(reader["FullName"]),
+                        FatherName = Convert.ToString(reader["FatherName"]),
+                        Gender = Convert.ToString(reader["Gender"]),
+                        DateOfBirth = Convert.ToString(reader["DateOfBirth"]),
+                        Address = Convert.ToString(reader["Address"]),
+                        Religion = Convert.ToString(reader["Religion"]),
+                        State = Convert.ToString(reader["State"]),
+                        Nationality = Convert.ToString(reader["Nationality"]),
+                        PhoneNumber = Convert.ToString(reader["PhoneNumber"]),
+                        Email = Convert.ToString(reader["Email"]),
+                    };
+                }
+
+                UserDBConnection.Close();
+                return userPassport;
+            }
+            catch
+            {
+                return null;
+            }
+        }
+
 
     }
 }
