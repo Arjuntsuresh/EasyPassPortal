@@ -18,6 +18,7 @@
           href="~/Content/CSS/AdminCss/AdminHomePage.css">
     <link rel="stylesheet"
           href="~/Content/CSS/AdminCss/AdminHomePageResponsive.css">
+    
 </head>
 
 <body>
@@ -32,10 +33,7 @@
                  id="menuicn"
                  alt="menu-icon">
         </div>
-
-
     </header>
-
     <div class="main-container">
         <div class="navcontainer">
             <nav class="nav">
@@ -68,6 +66,14 @@
                             <h3>Change Password</h3>
                         </a>
                     </div>
+                    <div class="nav-option logout">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                             class="nav-img"
+                             alt="logout">
+                        <a href="@Url.Action("AddNewAdmin", "Admin")" class="nav-link">
+                            <h3>Add new admin</h3>
+                        </a>
+                    </div>
 
 
                     <div class="nav-option logout">
@@ -78,8 +84,6 @@
                             <h3>Logout</h3>
                         </a>
                     </div>
-
-
                 </div>
             </nav>
         </div>
@@ -96,133 +100,87 @@
                          alt="search-button">
                 </div>
             </div>
-
             <div class="box-container">
-
                 <div class="box box1">
                     <div class="text">
-                        <h2 class="topic-heading">60.5k</h2>
-                        <h2 class="topic">Article Views</h2>
+                        @if (ViewBag.TotalUserCount != null)
+                        {
+                            <h2 class="topic-heading"> @ViewBag.TotalUserCount</h2>
+                        }
+                        <h2 class="topic">Users</h2>
                     </div>
 
                     <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
                          alt="Views">
                 </div>
-
                 <div class="box box2">
                     <div class="text">
-                        <h2 class="topic-heading">150</h2>
-                        <h2 class="topic">Likes</h2>
+                        @if (ViewBag.TotalPassportCount != null)
+                        {
+                            <h2 class="topic-heading"> @ViewBag.TotalPassportCount</h2>
+                        }
+                        <h2 class="topic">Total passports</h2>
                     </div>
-
                     <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
                          alt="likes">
                 </div>
-
-                <div class="box box3">
-                    <div class="text">
-                        <h2 class="topic-heading">320</h2>
-                        <h2 class="topic">Comments</h2>
-                    </div>
-
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
-                         alt="comments">
-                </div>
-
-                <div class="box box4">
-                    <div class="text">
-                        <h2 class="topic-heading">70</h2>
-                        <h2 class="topic">Published</h2>
-                    </div>
-
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
-                </div>
             </div>
-
-            <div class="report-container">
-                <div class="report-header">
-                    <h1 class="recent-Articles">Recent Articles</h1>
-                    <button class="view">View All</button>
+            <div style="display: flex; padding-top: 50px; gap: 150px;">
+                <div style="flex: 1; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; background-color: white;">
+                    <canvas id="myChart" style="max-height: 290px;"></canvas>
                 </div>
-
-                <div class="report-body">
-                    <div class="report-topic-heading">
-                        <h3 class="t-op">Article</h3>
-                        <h3 class="t-op">Views</h3>
-                        <h3 class="t-op">Comments</h3>
-                        <h3 class="t-op">Status</h3>
-                    </div>
-
-                    <div class="items">
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 73</h3>
-                            <h3 class="t-op-nextlvl">2.9k</h3>
-                            <h3 class="t-op-nextlvl">210</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 72</h3>
-                            <h3 class="t-op-nextlvl">1.5k</h3>
-                            <h3 class="t-op-nextlvl">360</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 71</h3>
-                            <h3 class="t-op-nextlvl">1.1k</h3>
-                            <h3 class="t-op-nextlvl">150</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 70</h3>
-                            <h3 class="t-op-nextlvl">1.2k</h3>
-                            <h3 class="t-op-nextlvl">420</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 69</h3>
-                            <h3 class="t-op-nextlvl">2.6k</h3>
-                            <h3 class="t-op-nextlvl">190</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 68</h3>
-                            <h3 class="t-op-nextlvl">1.9k</h3>
-                            <h3 class="t-op-nextlvl">390</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 67</h3>
-                            <h3 class="t-op-nextlvl">1.2k</h3>
-                            <h3 class="t-op-nextlvl">580</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 66</h3>
-                            <h3 class="t-op-nextlvl">3.6k</h3>
-                            <h3 class="t-op-nextlvl">160</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                        <div class="item1">
-                            <h3 class="t-op-nextlvl">Article 65</h3>
-                            <h3 class="t-op-nextlvl">1.3k</h3>
-                            <h3 class="t-op-nextlvl">220</h3>
-                            <h3 class="t-op-nextlvl label-tag">Published</h3>
-                        </div>
-
-                    </div>
+                <div style="flex: 1; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; background-color: white;">
+                    <canvas id="myChart1" style="max-height: 290px;"></canvas>
                 </div>
             </div>
         </div>
     </div>
-
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <script src="~/Scripts/AdminScript/AdminHomePage.js"></script>
+    <script>
+        const ctx = document.getElementById('myChart');
+        const totalUserCount = @ViewBag.TotalUserCount ?? 0;
+        new Chart(ctx, {
+            type: 'bar',
+            data: {
+                labels: ["May", "June",
+                    "July", "August", "September"],
+                datasets: [{
+                    label: 'Total uses',
+                    data: [0, 5, totalUserCount, 0,0],
+                    borderWidth: 1
+                }]
+            },
+            options: {
+                scales: {
+                    y: {
+                        beginAtZero: true
+                    }
+                }
+            }
+        });
+
+         const ctx1 = document.getElementById('myChart1');
+        const TotalPassportCount = @ViewBag.TotalPassportCount ?? 0;
+            new Chart(ctx1, {
+             type: 'doughnut',
+            data: {
+              labels: ["May", "June",
+                 "July", "August", "September"],
+                 datasets: [{
+                     label: 'Passport request',
+                     data: [0, 4, TotalPassportCount, 0, 0],
+                     borderWidth: 1
+         }]
+     },
+     options: {
+         scales: {
+             y: {
+                 beginAtZero: true
+             }
+         }
+     }
+ });
+    </script>
 </body>
 </html>

@@ -4,14 +4,149 @@
 }
 
 <!DOCTYPE html>
+<html lang="en">
 
-<html>
 <head>
-    <meta name="viewport" content="width=device-width" />
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>About</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/css/bootstrap.min.css" rel="stylesheet"
+          integrity="sha384-QWTKZyjpPEjISv5WaRU9OFeRpok6YctnYmDr5pNlyT2bRjXh0JMhjY6hW+ALEwIH" crossorigin="anonymous">
+    <link rel="stylesheet" href="~/Content/CSS/About.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/4.7.0/css/font-awesome.min.css">
+
+
 </head>
 <body>
-    <div> 
+    <div class="navbar navbar-expand-lg">
+        <img class="img" src="~/Content/Images/3742bcd3b4b5d471dae27a60bd4b5f07.jpg" style="width:60px;height:56px" alt="Logo">
+        <a href="@Url.Action("HomePageDetails","User")"> <p style="color: aliceblue; margin-left:50px; padding-top: 20px; font-size: larger; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">EasyPassPortal</p></a>
+
+        <div class="collapse navbar-collapse justify-content-end">
+            <ul class="nav ml-auto">
+
+
+                @{
+                    var userEmail = Session["UserEmail"] as string;
+                }
+
+                @if (!string.IsNullOrEmpty(userEmail))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GetUserDetail", "User")">User profile</a>
+                    </li>
+
+                }
+                @if (string.IsNullOrEmpty(userEmail))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Signin</a>
+                    </li>
+                }
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
+                </li>
+
+                @*<li class="nav-item">
+                    <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
+                </li>*@
+                <li class="nav-item">
+                    <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
+                </li>
+                @if (!string.IsNullOrEmpty(userEmail))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Logout", "LogOutUser", "User", new { @class = "nav-link" })
+                    </li>
+                }
+            </ul>
+        </div>
     </div>
+
+
+    <div class="about-section">
+        <h1>About us</h1>
+        <h3 class="pt-4" style="text-decoration: underline;"> Passport Seva</h3>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-weight:500;" aria-readonly="true">
+
+            Vision
+            "To deliver passport services to citizens in a timely, transparent, more
+            accessible, reliable manner and in a comfortable environment through
+            streamlined processes and committed, trained and motivated workforce"
+
+            In recent years, the Government of India has taken many initiatives to usher in an era of e-Governance to improve the delivery of public services. The National e-Governance Plan (NeGP) includes many high impact e-Governance projects that have been identified as Mission Mode Projects (MMP's). One such project focuses on reforming Passport services in India.
+        </p>
+    </div>
+
+    <div class="img-background">
+        <div class="container">
+            <div class="row" style="display: flex; justify-content: center;">
+                <div class="col-md-3">
+                    <div class="card">
+
+                        <img src="~/Content/Images/under_profile.jpg" class="img-fluid" alt="Image 1">
+                        <h4 style="text-align: center; font-weight: 400 ;">Dr. S. Jaishankar</h4>
+                        <h6 style="text-align: center; font-weight: 100 ;">External Affairs Minister</h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+
+                        <img src="~/Content/Images/Shri_Kirtivardhan_Singh.jpg" class="img-fluid" alt="Image 2">
+                        <h4 style="text-align: center; font-weight: 400;">Shri_Kirtivardhan_Singh</h4>
+                        <h6 style="text-align: center; font-weight: 100;">Minister of State for External Affairs</h6>
+                    </div>
+                </div>
+                <div class="col-md-3">
+                    <div class="card">
+
+                        <img src="~/Content/Images/Shri_Pabitra_Margherita.jpg" class="img-fluid" alt="Image 2">
+                        <h4 style="text-align: center; font-weight: 400;">Shri Pabitra Margherita</h4>
+                        <h6 style="text-align: center; font-weight: 100;">Minister of State for External Affairs</h6>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+    <div class="about-section">
+        <h3 class="pt-4">our team</h3>
+        <p style="font-family: Arial, Helvetica, sans-serif; font-weight:500;" aria-readonly="true">
+            The project has been implemented in a Public Private Partnership (PPP) mode with Tata Consultancy Services, selected through a public competitive procurement process. Under this program, the sovereign and fiduciary functions like verification, granting and issuing of passport have been retained by MEA. The ownership and strategic control of the core assets including data/information is with MEA.
+
+            Passport Seva enables simple, efficient and transparent processes for delivery of passport and related services. Apart from creating a countrywide networked environment for Government staff, it integrates with the State Police for physical verification of applicant's credentials and with India Post for delivery of passports.
+        </p>
+    </div>
+    <div style="background-color: aliceblue; height: 1px;">
+
+    </div>
+
+    <footer>
+        <div class="footer">
+            <div class="column">
+                <a href="https://www.facebook.com/"><i class="fa fa-facebook" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://www.youtube.com/"><i class="fa fa-youtube" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://x.com/i/flow/login"><i class="fa fa-twitter" style="width: 50px; height: 50px;"></i></a>
+            </div>
+
+            <div class="row">
+                <ul>
+                    <li><a href="/contactus/contact.html">Contact us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 </body>
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+        crossorigin="anonymous"></script>
+
 </html>

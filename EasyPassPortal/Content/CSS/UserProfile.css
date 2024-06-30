@@ -39,3 +39,67 @@ body {
         font-size: 16px;
         color: #555;
     }
+
+.footer {
+     background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+    padding: 100px 0px;
+    font-family: "Play", sans-serif;
+    text-align: center;
+    height: 300px;
+}
+
+    .footer.column {
+       background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+        font-size: 0.8em;
+    }
+
+        .footer .column a {
+            text-decoration: none;
+            color: rgb(229, 237, 247);
+            transition: 0.5s;
+            font-size: 28px; /* Increase this value as needed */
+        }
+
+    .footer .row a {
+        text-decoration: none;
+        color: rgb(240, 244, 249);
+        transition: 0.5s;
+    }
+
+    .footer .column a:hover {
+        color: #6f6e74;
+    }
+
+    .footer .row a:hover {
+        color: #78777b;
+    }
+
+    .footer .row ul {
+        width: 100%;
+    }
+
+        .footer .row ul li {
+            display: inline-block;
+            margin: 0px 30px;
+        }
+
+    .footer .row a i {
+        font-size: 2em;
+    }
+
+@media (max-width: 720px) {
+    .footer {
+        text-align: left;
+        padding: 5%;
+    }
+
+        .footer .row ul li {
+            display: block;
+            margin: 10px 0px;
+            text-align: left;
+        }
+
+        .footer .row a i {
+            margin: 0% 3%;
+        }
+}

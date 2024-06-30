@@ -8,37 +8,64 @@ namespace EasyPassPortal.Models
 {
     public class UserPassportDetails
     {
-        [Display(Name = "id")]
+        [Display(Name = "ID")]
         public int Id { get; set; }
-        [Required]
-        [Display(Name = "FullName")]
+
+        [Required(ErrorMessage = "Full name is required.")]
+        [Display(Name = "Full Name")]
         public string FullName { get; set; }
-        [Required]
-        [Display(Name = "FatherName")]
+
+        [Required(ErrorMessage = "Father's name is required.")]
+        [Display(Name = "Father Name")]
         public string FatherName { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Gender is required.")]
         [Display(Name = "Gender")]
         public string Gender { get; set; }
-        [Required]
-        [Display(Name = "DateOfBirth")]
-        public string DateOfBirth { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Date of Birth is required.")]
+        [DataType(DataType.Date)]
+        [Display(Name = "Date of Birth")]
+        [CustomValidation(typeof(UserPassportDetails), "ValidateDateOfBirth")]
+        public DateTime DateOfBirth { get; set; }
+
+        [Required(ErrorMessage = "Address is required.")]
         [Display(Name = "Address")]
         public string Address { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Religion is required.")]
         [Display(Name = "Religion")]
         public string Religion { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "State is required.")]
         [Display(Name = "State")]
         public string State { get; set; }
-        [Required]
-        [Display(Name = "Nationality")]
-        public string Nationality { get; set; }
-        [Required]
-        [Display(Name = "PhoneNumber")]
+
+        [Required(ErrorMessage = "District is required.")]
+        [Display(Name = "District")]
+        public string District { get; set; }
+
+        [Required(ErrorMessage = "Phone number is required.")]
+        [Phone(ErrorMessage = "Invalid phone number.")]
+        [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
-        [Required]
+
+        [Required(ErrorMessage = "Email is required.")]
+        [EmailAddress(ErrorMessage = "Invalid email address.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+
+        public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth, ValidationContext context)
+        {
+            if (dateOfBirth >= DateTime.Now)
+            {
+                return new ValidationResult("Date of Birth cannot be in the future.");
+            }
+
+            int age = DateTime.Now.Year - dateOfBirth.Year;
+            if (dateOfBirth > DateTime.Now.AddYears(-age)) age--;
+
+            return age >= 18 ? ValidationResult.Success : new ValidationResult("Age should be 18 or above.");
+        }
     }
 }

@@ -1,0 +1,225 @@
+﻿* {
+    padding: 0;
+    margin: 0;
+}
+
+.navbar {
+     background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+    width: 100%;
+    height: 56px;
+}
+
+.nav-link {
+    color: rgb(240, 243, 246);
+}
+
+    .nav-link:hover {
+        color: rgb(152, 244, 187);
+    }
+
+.img {
+    width: 100px;
+    height: 56px;
+}
+
+.column {
+    float: left;
+    width: 50%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+}
+
+.about-section {
+    padding: 50px;
+    text-align: center;
+    background-color: #54eab0;
+    color: white;
+}
+
+
+
+
+
+.title {
+    color: grey;
+}
+
+.button {
+    border: none;
+    outline: 0;
+    display: inline-block;
+    padding: 8px;
+    color: white;
+    background-color: #000;
+    text-align: center;
+    cursor: pointer;
+    width: 100%;
+}
+
+    .button:hover {
+        background-color: #555;
+    }
+
+@media screen and (max-width: 650px) {
+    .column {
+        width: 100%;
+        display: block;
+    }
+}
+
+.footer {
+     background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+    padding: 100px 0px;
+    font-family: "Play", sans-serif;
+    text-align: center;
+    height: 300px;
+}
+
+    .footer.column {
+         background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+        font-size: 0.8em;
+    }
+
+        .footer .column a {
+            text-decoration: none;
+            color: rgb(229, 237, 247);
+            transition: 0.5s;
+            font-size: 28px; /* Increase this value as needed */
+        }
+
+    .footer .row a {
+        text-decoration: none;
+        color: rgb(240, 244, 249);
+        transition: 0.5s;
+    }
+
+    .footer .column a:hover {
+        color: #6f6e74;
+    }
+
+    .footer .row a:hover {
+        color: #78777b;
+    }
+
+    .footer .row ul {
+        width: 100%;
+    }
+
+        .footer .row ul li {
+            display: inline-block;
+            margin: 0px 30px;
+        }
+
+    .footer .row a i {
+        font-size: 2em;
+    }
+
+@media (max-width: 720px) {
+    .footer {
+        text-align: left;
+        padding: 5%;
+    }
+
+        .footer .row ul li {
+            display: block;
+            margin: 10px 0px;
+            text-align: left;
+        }
+
+        .footer .row a i {
+            margin: 0% 3%;
+        }
+}
+
+.column {
+    justify-content: center;
+}
+
+.btn {
+    background: rgb(10, 10, 10);
+    color: white;
+}
+
+    .btn:hover {
+        color: #6f6e74;
+    }
+
+.gap-header {
+    background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+    height: 200px;
+}
+
+.img-body {
+    background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+}
+/* Styling for popup */
+.popup {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: rgba(0, 0, 0, 0.5); /* Semi-transparent background */
+    display: none;
+    justify-content: center; /* Center horizontally */
+    align-items: center; /* Center vertically */
+    z-index: 9999; /* Ensure it's on top of other content */
+}
+
+/* Styling for popup content */
+.popup-content {
+    background-color: white;
+    padding: 20px;
+    border-radius: 8px;
+    width: 300px; /* Adjust width as needed */
+    text-align: center; /* Center-align text content */
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.1); /* Optional: Add box shadow for depth */
+}
+
+.close {
+    top: 10px;
+    left: 10px;
+    font-size: 20px;
+    cursor: pointer;
+    color: #888; /* Close icon color */
+    margin-left: 40%;
+    text-decoration: underline;
+    width: 20px;
+    height: 20px;
+}
+
+    .close:hover {
+        color: red;
+    }
+
+/* Styling for input and textarea */
+.popup-content input[type="email"],
+.popup-content textarea {
+    width: calc(100% - 40px); /* Adjust width minus padding */
+    padding: 10px;
+    margin: 10px 0;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+    box-sizing: border-box; /* Ensure padding doesn't affect width */
+}
+
+/* Styling for submit button */
+.popup-content .btn-1 {
+    display: inline-block;
+    padding: 10px 20px;
+    background-color: #adb0b2;
+    color: rgb(9, 9, 9);
+    text-decoration: none;
+    border-radius: 4px;
+    transition: background-color 0.3s ease;
+}
+
+    .popup-content .btn-1:hover {
+        background-color: #e4ebf1;
+    }

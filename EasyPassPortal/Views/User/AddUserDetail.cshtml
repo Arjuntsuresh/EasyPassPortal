@@ -16,7 +16,7 @@
 </head>
 <body>
     <div class="navbar navbar-expand-lg">
-
+        <img class="img" src="~/Content/Images/3742bcd3b4b5d471dae27a60bd4b5f07.jpg" style="width:60px;height:56px" alt="Logo">
         <a href="@Url.Action("HomePageDetails","User")"> <p style="color: aliceblue; margin-left:50px; padding-top: 20px; font-size: larger; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">EasyPassPortal</p></a>
 
         <div class="collapse navbar-collapse justify-content-end">
@@ -31,9 +31,17 @@
                         <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
                     </li>
                 }
+
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Signin</a>
                 </li>
+
+                @if (!string.IsNullOrEmpty(userEmail))
+                {
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GetUserDetail", "User")">User profile</a>
+                    </li>
+                }
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
@@ -44,7 +52,7 @@
                     <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact us</a>
+                    <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
                 </li>
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
@@ -55,6 +63,7 @@
             </ul>
         </div>
     </div>
+
     <div class="container pt-5">
         <div class="wrapper">
             <div class="title text-center" mb-4><h2>Sign up</h2></div>
@@ -83,7 +92,7 @@
                         <span class="text-danger" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
                     </div>
 
-                    <div class="button" style="text-align:end">
+                    <div class="button" style="text-align:end; padding-top:20px">
                         <input type="submit" value="Sign Up" class="btn btn-primary" />
                     </div>
                 </div>
@@ -94,6 +103,25 @@
                 </div>*@
         </div>
     </div>
+    <footer>
+        <div class="footer" style="margin-top:100px">
+            <div class="column">
+                <a href="https://www.facebook.com/"><i class="fa fa-facebook" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://www.youtube.com/"><i class="fa fa-youtube" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://x.com/i/flow/login"><i class="fa fa-twitter" style="width: 50px; height: 50px;"></i></a>
+            </div>
+
+            <div class="row">
+                <ul>
+                    <li><a href="@Url.Action("Contact", "User")">Contact us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")

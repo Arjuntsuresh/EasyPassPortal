@@ -42,7 +42,6 @@ namespace EasyPassPortal.Controllers
                     }
                 }
                 return View();
-
             }
             catch (Exception exception)
             {
@@ -112,6 +111,12 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult AddUserPassportDetail()
         {
+            string userEmail = Session["UserEmail"] as string;
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                 return RedirectToAction("LoginUserDetail", "User");
+               
+            }
             return View();
         }
         /// <summary>
@@ -131,7 +136,8 @@ namespace EasyPassPortal.Controllers
                         if (userDetails.AddPassportDetails(passportDetails))
                         {
                             ViewBag.Message = "Data Inset SuccessFully.";
-                        }
+                           return RedirectToAction("StatusEnquiry", "User");
+                        }                    
                     }
                     return View();
 
@@ -143,13 +149,22 @@ namespace EasyPassPortal.Controllers
                 }
             }
         }
-
+        /// <summary>
+        /// About us page.
+        /// </summary>
+        /// <returns></returns>
         public ActionResult About()
         {
             return View();
         }
-
-
+        /// <summary>
+        /// Contact us page
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult Contact()
+        {
+            return View();
+        }
         /// <summary>
         /// userDetails page
         /// </summary>
@@ -220,8 +235,6 @@ namespace EasyPassPortal.Controllers
                 ViewBag.Message = "Error occurred while editing!" + ex.Message;
                 return View();
             }
-
-
         }
         /// <summary>
         /// This is the view for user enquirey.
@@ -246,10 +259,6 @@ namespace EasyPassPortal.Controllers
                 return View();
             }
         }
-
-      
-
-
         /// <summary>
         /// Logout for user side.
         /// </summary>

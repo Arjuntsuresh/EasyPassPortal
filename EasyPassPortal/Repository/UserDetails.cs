@@ -108,7 +108,7 @@ namespace EasyPassPortal.Repository
                 sqlCommand.Parameters.AddWithValue("@Address", userPassportDetails.Address);
                 sqlCommand.Parameters.AddWithValue("@Religion", userPassportDetails.Religion);
                 sqlCommand.Parameters.AddWithValue("@State", userPassportDetails.State);
-                sqlCommand.Parameters.AddWithValue("@Nationality", userPassportDetails.Nationality);
+                sqlCommand.Parameters.AddWithValue("@District", userPassportDetails.District);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", userPassportDetails.PhoneNumber);
                 sqlCommand.Parameters.AddWithValue("@Email", userPassportDetails.Email);
                 UserDBConnection.Open();
@@ -213,11 +213,11 @@ namespace EasyPassPortal.Repository
                         FullName = Convert.ToString(reader["FullName"]),
                         FatherName = Convert.ToString(reader["FatherName"]),
                         Gender = Convert.ToString(reader["Gender"]),
-                        DateOfBirth = Convert.ToString(reader["DateOfBirth"]),
+                        DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
                         Address = Convert.ToString(reader["Address"]),
                         Religion = Convert.ToString(reader["Religion"]),
                         State = Convert.ToString(reader["State"]),
-                        Nationality = Convert.ToString(reader["Nationality"]),
+                        District = Convert.ToString(reader["District"]),
                         PhoneNumber = Convert.ToString(reader["PhoneNumber"]),
                         Email = Convert.ToString(reader["Email"]),
                     };

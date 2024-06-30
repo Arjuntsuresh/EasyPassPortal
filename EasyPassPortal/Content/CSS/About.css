@@ -1,7 +1,6 @@
 ﻿* {
     padding: 0;
     margin: 0;
-    box-sizing: border-box;
 }
 
 .navbar {
@@ -23,79 +22,38 @@
     height: 56px;
 }
 
-body {
-     background: linear-gradient(to bottom, #003366 0%, #003366 100%);
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif
+
+
+*, *:before, *:after {
+    box-sizing: inherit;
 }
 
-form {
-    width: 30%;
-    background-color: white;
+.column {
+    float: left;
+    width: 33.3%;
+    margin-bottom: 16px;
+    padding: 0 8px;
+}
+
+.card {
+    box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2);
+    margin: 8px;
+}
+
+.about-section {
     padding: 50px;
-    border-radius: 20px;
-    margin-top: 150px;
+    text-align: center;
+    background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+    color: white;
 }
 
-.btn-primary {
-    width: 100%;
-    border: none;
-    border-radius: 50px;
-     background: linear-gradient(to bottom, #003366 0%, #003366 100%);
-}
-
-    .btn-primary:hover {
-        color: rgb(133, 133, 136);
-    }
-
-.form-control {
-    color: rgba(0, 0, 0,.87);
-    border-bottom-color: rgba(0, 0, 0,.42);
-    box-shadow: none;
-    border: none;
-    border-bottom: 1px solid;
-    border-radius: 4px 4px 0 0;
-}
-
-h4 {
-    font-size: 2rem;
-    font-weight: 700;
-}
-
-.form-label {
-    font-family: 800;
-}
-
-select {
-    width: 100%;
-    padding: 10px;
-    font-size: 16px;
-    box-sizing: border-box;
-}
-
-@media only screen and (max-width:600px) {
-    form {
-        width: 100%;
-    }
-}
-
-p {
-    color: red;
-}
-
-.valid {
-    color: green;
-}
-
-.invalid {
-    color: red;
-}
 
 .footer {
     background: linear-gradient(to bottom, #003366 0%, #003366 100%);
     padding: 100px 0px;
     font-family: "Play", sans-serif;
     text-align: center;
-    height: 500px;
+    height: 100px;
 }
 
     .footer.column {
@@ -152,4 +110,8 @@ p {
         .footer .row a i {
             margin: 0% 3%;
         }
+}
+
+.img-background {
+    background: linear-gradient(to bottom, #003366 0%, #003366 100%);
 }

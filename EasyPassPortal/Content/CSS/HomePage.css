@@ -4,7 +4,7 @@
 }
 
 .navbar {
-    background: linear-gradient( 90deg, rgb(2, 0, 36,1) 0%, rgb(74, 14, 154,1) 35%, rgb(0, 212, 225,1) 100% );
+    background: linear-gradient(to bottom, #003366 0%, #003366 100%);
     width: 100%;
     height: 56px;
 }
@@ -94,7 +94,7 @@ figure {
 
 
 .footer {
-    background: linear-gradient( 90deg, rgb(2, 0, 36,1) 0%, rgb(74, 14, 154,1) 35%, rgb(0, 212, 225,1) 100% );
+    background: linear-gradient(to bottom, #003366 0%, #003366 100%);
     padding: 100px 0px;
     font-family: "Play", sans-serif;
     text-align: center;
@@ -102,7 +102,8 @@ figure {
 }
 
     .footer.column {
-        background: linear-gradient( 90deg, rgb(2, 0, 36,1) 0%, rgb(74, 14, 154,1) 35%, rgb(0, 212, 225,1) 100% );
+        background: linear-gradient(to bottom, #003366 0%, #003366 100%);
+    }
         font-size: 0.8em;
     }
 

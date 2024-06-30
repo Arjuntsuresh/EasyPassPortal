@@ -16,20 +16,25 @@
 </head>
 <body>
     <div class="navbar navbar-expand-lg">
-
+        <img class="img" src="~/Content/Images/3742bcd3b4b5d471dae27a60bd4b5f07.jpg" style="width:60px;height:56px" alt="Logo">
         <a href="@Url.Action("HomePageDetails","User")"> <p style="color: aliceblue; margin-left:50px; padding-top: 20px; font-size: larger; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">EasyPassPortal</p></a>
 
         <div class="collapse navbar-collapse justify-content-end">
             <ul class="nav ml-auto">
-                <li class="nav-item">
-                    <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
-                </li>
 
 
                 @{
                     var userEmail = Session["UserEmail"] as string;
                 }
 
+                @if (!string.IsNullOrEmpty(userEmail))
+                {
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GetUserDetail", "User")">User profile</a>
+                    </li>
+
+                }
                 @if (string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
@@ -39,18 +44,19 @@
                 <li class="nav-item">
                     <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
                 </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("GetUserDetail", "User")">User profile</a>
-                </li>
+
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact us</a>
+                    <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
                 </li>
-                <li class="nav-item">
-                    @Html.ActionLink("Logout", "LogOutUser", "User", new { @class = "nav-link" })
-                </li>
+                @if (!string.IsNullOrEmpty(userEmail))
+                {
+                    <li class="nav-item">
+                        @Html.ActionLink("Logout", "LogOutUser", "User", new { @class = "nav-link" })
+                    </li>
+                }
             </ul>
         </div>
     </div>
@@ -84,7 +90,18 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.Gender, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Gender, new { htmlAttributes = new { @class = "form-control" } })
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.Gender, "Male", new { @class = "form-check-input" })
+                            @Html.Label("Male", htmlAttributes: new { @class = "form-check-label" })
+                        </div>
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.Gender, "Female", new { @class = "form-check-input" })
+                            @Html.Label("Female", htmlAttributes: new { @class = "form-check-label" })
+                        </div>
+                        <div class="form-check form-check-inline">
+                            @Html.RadioButtonFor(model => model.Gender, "Other", new { @class = "form-check-input" })
+                            @Html.Label("Other", htmlAttributes: new { @class = "form-check-label" })
+                        </div>
                         @Html.ValidationMessageFor(model => model.Gender, "", new { @class = "text-danger" })
                     </div>
                 </div>
@@ -92,8 +109,9 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.DateOfBirth, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control" } })
+                        @Html.EditorFor(model => model.DateOfBirth, new { htmlAttributes = new { @class = "form-control", @type = "date", @id = "DateOfBirth" } })
                         @Html.ValidationMessageFor(model => model.DateOfBirth, "", new { @class = "text-danger" })
+                        <p id="dob_error" class="text-danger"></p>
                     </div>
                 </div>
 
@@ -116,16 +134,23 @@
                 <div class="form-group row">
                     @Html.LabelFor(model => model.State, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.State, new { htmlAttributes = new { @class = "form-control" } })
+                        <select name="State" id="State" class="form-control" onchange="changeValue(this.value)">
+                            <option value="" disabled selected>Select State</option>
+                            <option value="kerala">Kerala</option>
+                            <option value="Karnataka">Karnataka</option>
+                            <option value="Tamilnadu">Tamilnadu</option>
+                        </select>
                         @Html.ValidationMessageFor(model => model.State, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
                 <div class="form-group row">
-                    @Html.LabelFor(model => model.Nationality, htmlAttributes: new { @class = "control-label col-md-2" })
+                    @Html.LabelFor(model => model.District, htmlAttributes: new { @class = "control-label col-md-2" })
                     <div class="col-md-10">
-                        @Html.EditorFor(model => model.Nationality, new { htmlAttributes = new { @class = "form-control" } })
-                        @Html.ValidationMessageFor(model => model.Nationality, "", new { @class = "text-danger" })
+                        <select name="District" id="District" class="form-control">
+                            <option value="" disabled selected>District</option>
+                        </select>
+                        @Html.ValidationMessageFor(model => model.District, "", new { @class = "text-danger" })
                     </div>
                 </div>
 
@@ -148,14 +173,107 @@
                 <div class="form-group row">
                     <div class="col-md-10 offset-md-2">
                         <input type="submit" value="Create" class="btn btn-primary" />
-                        @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary ml-2" })
+                        @*@Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary ml-2" })*@
                     </div>
                 </div>
             </div>
         }
-    </div>
+        </div>
+        <footer>
+            <div class="footer">
+                <div class="column">
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook" style="width: 50px; height: 50px;"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="width: 50px; height: 50px;"></i></a>
+                    <a href="https://www.youtube.com/"><i class="fa fa-youtube" style="width: 50px; height: 50px;"></i></a>
+                    <a href="https://x.com/i/flow/login"><i class="fa fa-twitter" style="width: 50px; height: 50px;"></i></a>
+                </div>
 
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFw3Ij67x3y0upZe/J9Zv5aJ8e" crossorigin="anonymous"></script>
+                <div class="row">
+                    <ul>
+                        <li><a href="@Url.Action("Contact", "User")">Contact us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Career</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFw3Ij67x3y0upZe/J9Zv5aJ8e" crossorigin="anonymous"></script>
+        <script>
+            // Function to set max attribute of date input to today's date
+            function setMaxDate() {
+                let today = new Date().toISOString().split('T')[0];
+                document.getElementById("DateOfBirth").setAttribute("max", today);
+            }
+
+            // Function to handle date input changes
+            function handleDateChange() {
+                let selectedDate = new Date(document.getElementById("DateOfBirth").value);
+                let today = new Date();
+
+                // If selected date is in the future, reset input value to today's date
+                if (selectedDate > today) {
+                    document.getElementById("DateOfBirth").value = today.toISOString().split('T')[0];
+                }
+            }
+
+            // Call setMaxDate function when the page is loaded
+            window.onload = function () {
+                setMaxDate();
+
+                // Add event listener to handle date changes
+                document.getElementById("DateOfBirth").addEventListener("input", handleDateChange);
+            };
+
+            // State and District data
+            let state = {
+                kerala: [
+                    "Alappuzha", "Ernakulam", "Idukki", "Kannur", "Kasaragod",
+                    "Kollam", "Kottayam", "Kozhikode", "Malappuram", "Palakkad",
+                    "Pathanamthitta", "Thiruvananthapuram", "Thrissur", "Wayanad"
+                ],
+                Karnataka: [
+                    "Bagalkot", "Bangalore Rural", "Bangalore Urban", "Belgaum",
+                    "Bellary", "Bidar", "Chamarajanagar", "Chikballapur",
+                    "Chikkamagaluru", "Chitradurga", "Dakshina Kannada",
+                    "Davanagere", "Dharwad", "Gadag", "Gulbarga", "Hassan",
+                    "Haveri", "Kodagu", "Kolar", "Koppal", "Mandya", "Mysore",
+                    "Raichur", "Ramanagara", "Shimoga", "Tumkur", "Udupi",
+                    "Uttara Kannada", "Vijayapura", "Yadgir"
+                ],
+                Tamilnadu: [
+                    "Ariyalur", "Chengalpattu", "Chennai", "Coimbatore",
+                    "Cuddalore", "Dharmapuri", "Dindigul", "Erode", "Kallakurichi",
+                    "Kanchipuram", "Kanyakumari", "Karur", "Krishnagiri",
+                    "Madurai", "Mayiladuthurai", "Nagapattinam", "Namakkal",
+                    "Nilgiris", "Perambalur", "Pudukkottai", "Ramanathapuram",
+                    "Ranipet", "Salem", "Sivaganga", "Tenkasi", "Thanjavur",
+                    "Theni", "Thoothukudi", "Tiruchirappalli", "Tirunelveli",
+                    "Tirupattur", "Tiruppur", "Tiruvallur", "Tiruvannamalai",
+                    "Tiruvarur", "Vellore", "Viluppuram", "Virudhunagar"
+                ]
+            };
+
+            // Function to change district options based on selected state
+            function changeValue(value) {
+                const citySelect = document.getElementsByName('District')[0];
+                if (value.length === 0) {
+                    citySelect.innerHTML = '<option disabled selected>District</option>';
+                } else {
+                    let options = '<option disabled selected>District</option>';
+                    for (let id in state[value]) {
+                        options += "<option>" + state[value][id] + "</option>";
+                    }
+                    citySelect.innerHTML = options;
+                }
+            }
+
+            function setMaxDate() {
+                let today = new Date().toISOString().split('T')[0];
+                document.getElementById("DateOfBirth").setAttribute("max", today);
+            }
+        </script>
+        }
 </body>
 </html>

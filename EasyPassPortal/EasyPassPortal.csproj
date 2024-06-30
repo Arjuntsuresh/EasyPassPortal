@@ -254,11 +254,13 @@
     <Content Include="Content\bootstrap.min.css" />
     <Content Include="Content\bootstrap.rtl.css" />
     <Content Include="Content\bootstrap.rtl.min.css" />
+    <Content Include="Content\CSS\About.css" />
     <Content Include="Content\CSS\AdminCss\AddNewAdmin.css" />
     <Content Include="Content\CSS\AdminCss\AdminHomePage.css" />
     <Content Include="Content\CSS\AdminCss\AdminHomePageResponsive.css" />
     <Content Include="Content\CSS\AdminCss\AdminLoginpage.css" />
     <Content Include="Content\CSS\AdminCss\EditAdminPassword.css" />
+    <Content Include="Content\CSS\Contact.css" />
     <Content Include="Content\CSS\EditUserPassword.css" />
     <Content Include="Content\CSS\LoginUser.css" />
     <Content Include="Content\CSS\HomePage.css" />
@@ -315,6 +317,7 @@
     <Content Include="Views\User\StatusEnquiry.cshtml" />
     <Content Include="Views\Admin\AddNewAdmin.cshtml" />
     <Content Include="Views\Admin\EditAdminPassword.cshtml" />
+    <Content Include="Views\User\Contact.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

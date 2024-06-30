@@ -81,11 +81,11 @@ namespace EasyPassPortal.Repository
                             FullName = Convert.ToString(dataRow["FullName"]),
                             FatherName = Convert.ToString(dataRow["FatherName"]),
                             Gender = Convert.ToString(dataRow["Gender"]),
-                            DateOfBirth = Convert.ToString(dataRow["DateOfBirth"]),
+                            DateOfBirth = Convert.ToDateTime(dataRow["DateOfBirth"]),
                             Address = Convert.ToString(dataRow["Address"]),
                             Religion = Convert.ToString(dataRow["Religion"]),
                             State = Convert.ToString(dataRow["State"]),
-                            Nationality = Convert.ToString(dataRow["Nationality"]),
+                            District = Convert.ToString(dataRow["District"]),
                             PhoneNumber = Convert.ToString(dataRow["PhoneNumber"]),
                             Email = Convert.ToString(dataRow["Email"])
 
@@ -133,7 +133,11 @@ namespace EasyPassPortal.Repository
             return null;
             }
         }
-
+        /// <summary>
+        /// Add new admin 
+        /// </summary>
+        /// <param name="adminModel"></param>
+        /// <returns></returns>
         public bool AddNewAdmin(AdminModel adminModel)
         {
             try
@@ -153,7 +157,10 @@ namespace EasyPassPortal.Repository
                 return false;
             }
         }
-
+        /// <summary>
+        /// Edit password for admin.
+        /// </summary>
+        /// <param name="adminModel"></param>
         public void EditPassword(AdminModel adminModel)
         {
             try
@@ -257,7 +264,11 @@ namespace EasyPassPortal.Repository
                 }
             }
         }
-
+        /// <summary>
+        /// Delete user from admin side.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public bool DeleteUserFromAdmin(int id)
         {
             try
@@ -276,6 +287,92 @@ namespace EasyPassPortal.Repository
                 return false;
             }
         }
+        /// <summary>
+        /// Delete passport detail from admin side.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public bool DeletePassportDetailFromAdmin(int id)
+        {
+            try
+            {
+                UserConnection();
+                SqlCommand sqlCommand = new SqlCommand("DeletePassportDetailAccount", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@id", id);
+                UserDBConnection.Open();
+                sqlCommand.ExecuteNonQuery();
+                UserDBConnection.Close();
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
+        /// <summary>
+        /// Total users count.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public int TotalCountOfUser()
+        {
+            try
+            {
+                UserConnection();
+                SqlCommand sqlCommand = new SqlCommand("GetTotalUserCount", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                UserDBConnection.Open();
+                var result = sqlCommand.ExecuteScalar();
+                UserDBConnection.Close();
+
+                return Convert.ToInt32(result);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                throw new Exception("An error occurred while getting the total count of users.", ex);
+            }
+            finally
+            {
+                if (UserDBConnection.State == ConnectionState.Open)
+                {
+                    UserDBConnection.Close();
+                }
+            }
+        }
+        /// <summary>
+        /// Total passpost request count.
+        /// </summary>
+        /// <returns></returns>
+        /// <exception cref="Exception"></exception>
+        public int TotalPassportRequestCountOfUser()
+        {
+            try
+            {
+                UserConnection();
+                SqlCommand sqlCommand = new SqlCommand("GetTotalPassportCount", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                UserDBConnection.Open();
+                var result = sqlCommand.ExecuteScalar();
+                UserDBConnection.Close();
+
+                return Convert.ToInt32(result);
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                throw new Exception("An error occurred while getting the total count of users.", ex);
+            }
+            finally
+            {
+                if (UserDBConnection.State == ConnectionState.Open)
+                {
+                    UserDBConnection.Close();
+                }
+            }
+        }
+
 
 
 

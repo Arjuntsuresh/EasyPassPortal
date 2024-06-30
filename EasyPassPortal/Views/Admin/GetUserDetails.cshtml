@@ -87,10 +87,14 @@
             </div>
 
             <div class="box-container">
+
                 <div class="box box1">
                     <div class="text">
-                        <h2 class="topic-heading">60.5k</h2>
-                        <h2 class="topic">Article Views</h2>
+                        @if (ViewBag.TotalUserCount != null)
+                        {
+                            <h2 class="topic-heading"> @ViewBag.TotalUserCount</h2>
+                        }
+                        <h2 class="topic">Users</h2>
                     </div>
 
                     <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
@@ -99,38 +103,23 @@
 
                 <div class="box box2">
                     <div class="text">
-                        <h2 class="topic-heading">150</h2>
-                        <h2 class="topic">Likes</h2>
+                        @if (ViewBag.TotalPassportCount != null)
+                        {
+                            <h2 class="topic-heading"> @ViewBag.TotalPassportCount</h2>
+                        }
+                        <h2 class="topic">Total passports</h2>
                     </div>
 
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png" alt="likes">
-                </div>
-
-                <div class="box box3">
-                    <div class="text">
-                        <h2 class="topic-heading">320</h2>
-                        <h2 class="topic">Comments</h2>
-                    </div>
-
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(32).png"
-                         alt="comments">
-                </div>
-
-                <div class="box box4">
-                    <div class="text">
-                        <h2 class="topic-heading">70</h2>
-                        <h2 class="topic">Published</h2>
-                    </div>
-
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185029/13.png" alt="published">
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
+                         alt="likes">
                 </div>
             </div>
 
             <div class="report-container">
                 @*<div class="report-header">
-                    <h1 class="recent-Articles">User Details</h1>
-                    @Html.ActionLink("Create New", "Create", new { @class = "view" })
-                </div>*@
+                <h1 class="recent-Articles">User Details</h1>
+                @Html.ActionLink("Create New", "Create", new { @class = "view" })
+            </div>*@
 
                 <div class="report-body">
                     <table class="table">
@@ -150,7 +139,7 @@
                                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Password)</td>
                                     <td>
-                                       
+
                                         @Html.ActionLink("Delete User", "DeleteUserDetail", new { id = item.UserID })
                                     </td>
                                 </tr>

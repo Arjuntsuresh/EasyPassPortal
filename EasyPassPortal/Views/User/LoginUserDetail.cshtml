@@ -12,12 +12,11 @@
     <title>Sign in Form | EasyPassPortal</title>
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-   
     <link rel="stylesheet" href="~/Content/CSS/PassportRegUser.css" />
 </head>
 <body>
     <div class="navbar navbar-expand-lg">
-
+        <img class="img" src="~/Content/Images/3742bcd3b4b5d471dae27a60bd4b5f07.jpg" style="width:60px;height:56px" alt="Logo">
         <a href="@Url.Action("HomePageDetails","User")"> <p style="color: aliceblue; margin-left:50px; padding-top: 20px; font-size: larger; font-family:'Gill Sans', 'Gill Sans MT', Calibri, 'Trebuchet MS', sans-serif;">EasyPassPortal</p></a>
 
         <div class="collapse navbar-collapse justify-content-end">
@@ -53,7 +52,7 @@
                     <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
                 </li>
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact us</a>
+                    <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
                 </li>
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
@@ -87,12 +86,31 @@
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
                     <div class="form-group text-right">
-                        <input type="submit" value="Sign Up" class="btn btn-primary" />
+                        <input type="submit" value="Sign In" class="btn btn-primary" />
                     </div>
                 </div>
             }
         </div>
     </div>
+    <footer>
+        <div class="footer" style="margin-top:100px">
+            <div class="column">
+                <a href="https://www.facebook.com/"><i class="fa fa-facebook" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://www.youtube.com/"><i class="fa fa-youtube" style="width: 50px; height: 50px;"></i></a>
+                <a href="https://x.com/i/flow/login"><i class="fa fa-twitter" style="width: 50px; height: 50px;"></i></a>
+            </div>
+
+            <div class="row">
+                <ul>
+                    <li><a href="@Url.Action("Contact", "User")">Contact us</a></li>
+                    <li><a href="#">Privacy Policy</a></li>
+                    <li><a href="#">Terms & Conditions</a></li>
+                    <li><a href="#">Career</a></li>
+                </ul>
+            </div>
+        </div>
+    </footer>
 
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFw3Ij67x3y0upZe/J9Zv5aJ8e" crossorigin="anonymous"></script>

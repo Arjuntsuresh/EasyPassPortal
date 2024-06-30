@@ -19,7 +19,11 @@ namespace EasyPassPortal.Controllers
         {
             return View();
         }
-
+        /// <summary>
+        /// AdminLoginDetail post method.
+        /// </summary>
+        /// <param name="adminModel"></param>
+        /// <returns></returns>
         [HttpPost]
         public ActionResult AdminLoginDetail(AdminModel adminModel)
         {
@@ -59,6 +63,13 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult AdminHomePage()
         {
+            string adminEmail = Session["AdminEmail"] as string;
+            if (string.IsNullOrEmpty(adminEmail))
+            {
+                return RedirectToAction("AdminLoginDetail", "Admin");
+            }
+            TotalUserCount();
+            TotalUserPassportRequestCount();
             return View();
         }
         /// <summary>
@@ -69,6 +80,8 @@ namespace EasyPassPortal.Controllers
         {
             try
             {
+                TotalUserCount();
+                TotalUserPassportRequestCount();
                 AdminDetails adminDetails = new AdminDetails();
                 ModelState.Clear();
                 return View(adminDetails.GetAllDetails());
@@ -86,6 +99,8 @@ namespace EasyPassPortal.Controllers
         {
             try
             {
+                TotalUserCount();
+                TotalUserPassportRequestCount();
                 AdminDetails adminDetails = new AdminDetails();
                 ModelState.Clear();
                 return View(adminDetails.GetAllUserDetails());
@@ -155,6 +170,10 @@ namespace EasyPassPortal.Controllers
             }
         }
 
+        /// <summary>
+        /// Edit admin password 
+        /// </summary>
+        /// <param name="adminModel"></param>
         /// <returns></returns>
         [HttpPost]
         public ActionResult EditAdminPassword(AdminModel adminModel)
@@ -173,7 +192,11 @@ namespace EasyPassPortal.Controllers
 
 
         }
-
+        /// <summary>
+        /// Delete user from admin.
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
         public ActionResult DeleteUserDetail(int id)
         {
             try
@@ -191,6 +214,66 @@ namespace EasyPassPortal.Controllers
                 return View();
             }
 
+        }
+        /// <summary>
+        /// This is the method for deleting user requested passport .
+        /// </summary>
+        /// <param name="id"></param>
+        /// <returns></returns>
+        public ActionResult DeletePassportDetail(int id)
+        {
+            try
+            {
+                AdminDetails adminDetails = new AdminDetails();
+                if (adminDetails.DeletePassportDetailFromAdmin(id))
+                {
+                    ViewBag.AlertMessage = ("Passport  deleted successfully.");
+                }
+                return RedirectToAction("GetAccountDetails");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error occurred while deleting!" + ex.Message;
+                return View();
+            }
+
+        }
+        /// <summary>
+        /// Get total users count.
+        /// </summary>
+        /// <returns></returns>
+        public ActionResult TotalUserCount()
+        {
+            try
+            {
+                AdminDetails adminDetails = new AdminDetails();
+                ModelState.Clear();
+                int totalCount = adminDetails.TotalCountOfUser();
+                ViewBag.TotalUserCount = totalCount;
+                return View();
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Message = "Error occurred: " + exception.Message;
+                return View();
+            }
+        }
+
+        public ActionResult TotalUserPassportRequestCount()
+        {
+            try
+            {
+                AdminDetails adminDetails = new AdminDetails();
+                ModelState.Clear();
+                int totalCount = adminDetails.TotalPassportRequestCountOfUser();
+                ViewBag.TotalPassportCount = totalCount;
+                return View();
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Message = "Error occurred: " + exception.Message;
+                return View();
+            }
         }
 
 
