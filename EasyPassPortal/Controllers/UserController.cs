@@ -127,28 +127,26 @@ namespace EasyPassPortal.Controllers
         [HttpPost]
         public ActionResult AddUserPassportDetail(UserPassportDetails passportDetails)
         {
+            try
             {
-                try
+                if (ModelState.IsValid)
                 {
-                    if (ModelState.IsValid)
+                    UserDetails userDetails = new UserDetails();
+                    if (userDetails.AddPassportDetails(passportDetails))
                     {
-                        UserDetails userDetails = new UserDetails();
-                        if (userDetails.AddPassportDetails(passportDetails))
-                        {
-                            ViewBag.Message = "Data Inset SuccessFully.";
-                           return RedirectToAction("StatusEnquiry", "User");
-                        }                    
+                        ViewBag.Message = "Data Inserted Successfully.";
+                        return RedirectToAction("StatusEnquiry", "User");
                     }
-                    return View();
-
                 }
-                catch (Exception exception)
-                {
-                    ViewBag.Message = "Error occurred while inserting!" + exception.Message;
-                    return View();
-                }
+                return View();
+            }
+            catch (Exception exception)
+            {
+                ViewBag.Message = "Error occurred while inserting! " + exception.Message;
+                return View();
             }
         }
+
         /// <summary>
         /// About us page.
         /// </summary>
@@ -249,7 +247,7 @@ namespace EasyPassPortal.Controllers
                 UserPassportDetails userPassportDetails = userDetails.GetUserPassportDetails(userEmail);
                 if (userPassportDetails == null)
                 {
-                    return RedirectToAction("LoginUserDetail");
+                    return RedirectToAction("GetUserDetail");
                 }
                 return View(userPassportDetails);
             }

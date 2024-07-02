@@ -54,7 +54,19 @@ namespace EasyPassPortal.Models
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+        [Required(ErrorMessage = "Aadhar number is required.")]
+        [Display(Name = "Aadhar Number")]
+        public string AadharNumber { get; set; }
 
+        [Required(ErrorMessage = "Pancard number is required.")]
+        [Display(Name = "Pancard Number")]
+        public string PancardNumber { get; set; }
+
+        [Required(ErrorMessage = "Education field is required.")]
+        [Display(Name = "Education")]
+        public string Education { get; set; }
+
+        public string Status { get; set; }
         public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth, ValidationContext context)
         {
             if (dateOfBirth >= DateTime.Now)

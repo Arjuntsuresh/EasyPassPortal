@@ -63,7 +63,14 @@
                             <h3>Change Password</h3>
                         </a>
                     </div>
-
+                    <div class="nav-option logout">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                             class="nav-img"
+                             alt="logout">
+                        <a href="@Url.Action("AddNewAdmin", "Admin")" class="nav-link">
+                            <h3>Add new admin</h3>
+                        </a>
+                    </div>
 
                     <div class="nav-option logout">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
@@ -135,7 +142,11 @@
                                 <th>District</th>
                                 <th>Phone Number</th>
                                 <th>Email</th>
+                                <th>AadharNumber</th>
+                                <th>PancardNumber</th>
+                                <th>Education</th>
                                 <th>Status</th>
+                                <th>Action</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -152,8 +163,12 @@
                                     <td>@Html.DisplayFor(modelItem => item.District)</td>
                                     <td>@Html.DisplayFor(modelItem => item.PhoneNumber)</td>
                                     <td>@Html.DisplayFor(modelItem => item.Email)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.AadharNumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.PancardNumber)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Education)</td>
+                                    <td>@Html.DisplayFor(modelItem => item.Status)</td>
                                     <td>
-                                        @Html.ActionLink("Details", "Details", new { id = item.Id })
+                                        @Html.ActionLink("View Details", "AdminPassportManagement", "Admin", new { email = item.Email }, null)
                                         @Html.ActionLink("Delete", "DeletePassportDetail", new { id = item.Id })
                                     </td>
                                 </tr>

@@ -268,6 +268,7 @@
     <Content Include="Content\CSS\SignupCSS.css" />
     <Content Include="Content\CSS\StatusEnquiry.css" />
     <Content Include="Content\CSS\UserProfile.css" />
+    <Content Include="Content\js\PassportRegValidation.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -318,6 +319,7 @@
     <Content Include="Views\Admin\AddNewAdmin.cshtml" />
     <Content Include="Views\Admin\EditAdminPassword.cshtml" />
     <Content Include="Views\User\Contact.cshtml" />
+    <Content Include="Views\Admin\AdminPassportManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />

@@ -87,7 +87,12 @@ namespace EasyPassPortal.Repository
                             State = Convert.ToString(dataRow["State"]),
                             District = Convert.ToString(dataRow["District"]),
                             PhoneNumber = Convert.ToString(dataRow["PhoneNumber"]),
-                            Email = Convert.ToString(dataRow["Email"])
+                            Email = Convert.ToString(dataRow["Email"]),
+                            AadharNumber = Convert.ToString(dataRow["AadarNumber"]),
+                            PancardNumber = Convert.ToString(dataRow["PancardNumber"]),
+                            Education = Convert.ToString(dataRow["Education"]),
+                            Status = Convert.ToString(dataRow["Status"])
+
 
                         }
                     );
@@ -373,6 +378,38 @@ namespace EasyPassPortal.Repository
             }
         }
 
+        public bool EditAccountDetails(UserPassportDetails userPassportDetails)
+        {
+            try
+            {
+                UserConnection();
+                SqlCommand sqlCommand = new SqlCommand("UpdateUserPassportDetails", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@id",userPassportDetails.Id);
+                sqlCommand.Parameters.AddWithValue("@FullName", userPassportDetails.FullName);
+                sqlCommand.Parameters.AddWithValue("@FatherName", userPassportDetails.FatherName);
+                sqlCommand.Parameters.AddWithValue("@Gender", userPassportDetails.Gender);
+                sqlCommand.Parameters.AddWithValue("@DateOfBirth", userPassportDetails.DateOfBirth);
+                sqlCommand.Parameters.AddWithValue("@Address", userPassportDetails.Address);
+                sqlCommand.Parameters.AddWithValue("@Religion", userPassportDetails.Religion);
+                sqlCommand.Parameters.AddWithValue("@State", userPassportDetails.State);
+                sqlCommand.Parameters.AddWithValue("@District", userPassportDetails.District);
+                sqlCommand.Parameters.AddWithValue("@PhoneNumber", userPassportDetails.PhoneNumber);
+                sqlCommand.Parameters.AddWithValue("@Email", userPassportDetails.Email);
+                sqlCommand.Parameters.AddWithValue("@AadharNumber", userPassportDetails.AadharNumber);
+                sqlCommand.Parameters.AddWithValue("@PancardNumber", userPassportDetails.PancardNumber);
+                sqlCommand.Parameters.AddWithValue("@Education", userPassportDetails.Education);
+                sqlCommand.Parameters.AddWithValue("@Status", userPassportDetails.Status);
+                UserDBConnection.Open();
+                int result = sqlCommand.ExecuteNonQuery();
+                UserDBConnection.Close();
+                return result > 0;
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
 
 

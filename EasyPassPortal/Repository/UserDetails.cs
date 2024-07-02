@@ -29,31 +29,47 @@ namespace EasyPassPortal.Repository
             UserDBConnection = new SqlConnection(ConfigurationConnection);
         }
 
-       /// <summary>
-       /// User adding the details and registering to the web site.
-       /// </summary>
-       /// <param name="user"></param>
-       /// <returns></returns>
+        /// <summary>
+        /// User adding the details and registering to the web site.
+        /// </summary>
+        /// <param name="user"></param>
+        /// <returns></returns>
         public bool AddAccountDetails(UserModel user)
         {
             try
             {
                 UserConnection();
-                SqlCommand sqlCommand = new SqlCommand("AddUserDetails", UserDBConnection);
-                sqlCommand.CommandType = CommandType.StoredProcedure;
+                SqlCommand checkCommand = new SqlCommand("CheckUserExist", UserDBConnection);
+                checkCommand.CommandType = CommandType.StoredProcedure;
+                checkCommand.Parameters.AddWithValue("@Email", user.Email);
 
-                sqlCommand.Parameters.AddWithValue("@Email", user.Email);
-                sqlCommand.Parameters.AddWithValue("@Password", user.Password);
                 UserDBConnection.Open();
-                int result = sqlCommand.ExecuteNonQuery();
+                int userExists = Convert.ToInt32(checkCommand.ExecuteScalar());
                 UserDBConnection.Close();
-                return true;
+
+                if (userExists == 0) 
+                {
+                    SqlCommand addCommand = new SqlCommand("AddUserDetails", UserDBConnection);
+                    addCommand.CommandType = CommandType.StoredProcedure;
+                    addCommand.Parameters.AddWithValue("@Email", user.Email);
+                    addCommand.Parameters.AddWithValue("@Password", user.Password);
+
+                    UserDBConnection.Open();
+                    int result = addCommand.ExecuteNonQuery();
+                    UserDBConnection.Close();
+
+                    return result > 0; 
+                }
+
+                return false;
             }
-            catch
+            catch (Exception ex)
             {
+                // Optionally log the exception
                 return false;
             }
         }
+
         /// <summary>
         /// Verifing user login page.
         /// </summary>
@@ -99,7 +115,7 @@ namespace EasyPassPortal.Repository
             try
             {
                 UserConnection();
-                SqlCommand sqlCommand = new SqlCommand("AddPassportDetail", UserDBConnection);
+                SqlCommand sqlCommand = new SqlCommand("AddPassportDetail", UserDBConnection); // Ensure the stored procedure name matches
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@FullName", userPassportDetails.FullName);
                 sqlCommand.Parameters.AddWithValue("@FatherName", userPassportDetails.FatherName);
@@ -111,15 +127,22 @@ namespace EasyPassPortal.Repository
                 sqlCommand.Parameters.AddWithValue("@District", userPassportDetails.District);
                 sqlCommand.Parameters.AddWithValue("@PhoneNumber", userPassportDetails.PhoneNumber);
                 sqlCommand.Parameters.AddWithValue("@Email", userPassportDetails.Email);
+                sqlCommand.Parameters.AddWithValue("@AadarNumber", userPassportDetails.AadharNumber); // Ensure parameter names match
+                sqlCommand.Parameters.AddWithValue("@PancardNumber", userPassportDetails.PancardNumber);
+                sqlCommand.Parameters.AddWithValue("@Education", userPassportDetails.Education);
+                sqlCommand.Parameters.AddWithValue("@Status", userPassportDetails.Status);
                 UserDBConnection.Open();
                 int result = sqlCommand.ExecuteNonQuery();
                 UserDBConnection.Close();
                 return result > 0;
-            }catch
+            }
+            catch (Exception ex)
             {
+                // Log or handle the exception as needed
                 return false;
             }
         }
+
         /// <summary>
         /// User profile getting from db using session.
         /// </summary>
@@ -170,7 +193,7 @@ namespace EasyPassPortal.Repository
                 using (SqlCommand sqlCommand = new SqlCommand("UpdateUserPassword", UserDBConnection))
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
-                    sqlCommand.Parameters.AddWithValue("@UserID", user.UserID);
+                    sqlCommand.Parameters.AddWithValue("@Email", user.Email);
                     sqlCommand.Parameters.AddWithValue("@Password", user.Password);
 
                     UserDBConnection.Open();
@@ -220,6 +243,10 @@ namespace EasyPassPortal.Repository
                         District = Convert.ToString(reader["District"]),
                         PhoneNumber = Convert.ToString(reader["PhoneNumber"]),
                         Email = Convert.ToString(reader["Email"]),
+                        AadharNumber = Convert.ToString(reader["AadarNumber"]),
+                        PancardNumber = Convert.ToString(reader["PancardNumber"]),
+                        Education = Convert.ToString(reader["Education"]),
+                        Status = Convert.ToString(reader["Status"])
                     };
                 }
 

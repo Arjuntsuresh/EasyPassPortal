@@ -1,0 +1,2 @@
+﻿ALTER TABLE PassportTable
+ADD Status VARCHAR(50) DEFAULT 'Pending' NOT NULL;

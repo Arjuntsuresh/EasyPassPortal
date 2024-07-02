@@ -63,81 +63,69 @@
     </div>
     <div class="container">
         <div class="status-indicator">
-            Current Status: <span class="status-value">Police Inquiry Pending</span>
+            Current Status: <span class="status-value">@Model.Status</span>
         </div>
         <h4>User Passport Details</h4>
         <hr />
-        <dl class="details-list">
-            <dt>
-                @Html.DisplayNameFor(model => model.FullName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.FullName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.FatherName)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.FatherName)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Gender)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Gender)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.DateOfBirth)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.DateOfBirth)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Address)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Address)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Religion)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Religion)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.State)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.State)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.District)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.District)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.PhoneNumber)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.PhoneNumber)
-            </dd>
-
-            <dt>
-                @Html.DisplayNameFor(model => model.Email)
-            </dt>
-            <dd>
-                @Html.DisplayFor(model => model.Email)
-            </dd>
-        </dl>
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <td>@Html.DisplayFor(model => model.Id)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                <td>@Html.DisplayFor(model => model.FullName)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FatherName)</th>
+                <td>@Html.DisplayFor(model => model.FatherName)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                <td>@Html.DisplayFor(model => model.Gender)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+                <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                <td>@Html.DisplayFor(model => model.Address)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Religion)</th>
+                <td>@Html.DisplayFor(model => model.Religion)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.State)</th>
+                <td>@Html.DisplayFor(model => model.State)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.District)</th>
+                <td>@Html.DisplayFor(model => model.District)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <td>@Html.DisplayFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.AadharNumber)</th>
+                <td>@Html.DisplayFor(model => model.AadharNumber)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PancardNumber)</th>
+                <td>@Html.DisplayFor(model => model.PancardNumber)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Education)</th>
+                <td>@Html.DisplayFor(model => model.Education)</td>
+            </tr>
+        </table>
+        <button id="downloadButton" onclick="download()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">Download PDF</button>
     </div>
     <footer>
         <div class="footer">
@@ -158,5 +146,27 @@
             </div>
         </div>
     </footer>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-XYZ1234correcthashvalue=" crossorigin="anonymous"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+    <script>
+        function download() {
+            var element = document.body; // Select the entire page
+
+
+            let randomNumber = Math.floor(Math.random() * (10000000000 - 1)) + 1;
+
+            setTimeout(function () {
+                var opt = {
+                    margin: 0,
+                    filename: 'Application form' + randomNumber + '.pdf',
+                    html2canvas: { scale: 3 }, // Adjust the scale as needed
+                    jsPDF: { unit: 'in', format: [20, 15], orientation: 'portrait' } // Set custom page size
+                };
+
+                html2pdf().set(opt).from(element).save();
+            }, 1000); // Adjust the delay as needed
+        }
+    </script>
 </body>
 </html>

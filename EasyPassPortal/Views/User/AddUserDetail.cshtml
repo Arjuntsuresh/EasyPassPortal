@@ -66,7 +66,7 @@
 
     <div class="container pt-5">
         <div class="wrapper">
-            <div class="title text-center" mb-4><h2>Sign up</h2></div>
+            <div class="title text-center mb-4"><h2>Sign up</h2></div>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -82,7 +82,7 @@
 
                     <div class="row">
                         <i class="fas fa-lock"></i>
-                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password" })
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password", id = "Password" })
                         @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
                     </div>
 
@@ -97,12 +97,9 @@
                     </div>
                 </div>
             }
-
-            @*<div class="signup-link">
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
-                </div>*@
         </div>
     </div>
+
     <footer>
         <div class="footer" style="margin-top:100px">
             <div class="column">
@@ -125,6 +122,25 @@
 
     @Scripts.Render("~/bundles/jquery")
     @Scripts.Render("~/bundles/jqueryval")
+
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <script>
+    $(document).ready(function () {
+        $('form').submit(function () {
+            var password = $('#Password').val();
+            var confirmPassword = $('#ConfirmPassword').val();
+
+            if (password !== confirmPassword) {
+                $('.text-danger[data-valmsg-for="ConfirmPassword"]').text("Passwords do not match.");
+                return false; // Prevent form submission
+            } else {
+                $('.text-danger[data-valmsg-for="ConfirmPassword"]').text("");
+                return true; // Allow form submission
+            }
+        });
+    });
+    </script>
+
 </body>
 </html>
 

@@ -4,6 +4,7 @@ using System;
 using System.Collections.Generic;
 using System.Data.Common;
 using System.Linq;
+using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
 
@@ -275,7 +276,40 @@ namespace EasyPassPortal.Controllers
                 return View();
             }
         }
-
+  
+        public ActionResult AdminPassportManagement(string email)
+        {
+            try
+            {
+                UserDetails userDetails = new UserDetails();
+                UserPassportDetails userPassportDetails = userDetails.GetUserPassportDetails(email);
+                if (userPassportDetails == null)
+                {
+                    return RedirectToAction("GetAccountDetails");
+                }
+                return View(userPassportDetails);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error occurred while editing!" + ex.Message;
+                return View();
+            }
+        }
+        [HttpPost]
+        public ActionResult AdminPassportManagement(UserPassportDetails userPassportDetails)
+        {
+            try
+            {
+                AdminDetails adminDetails = new AdminDetails();
+                adminDetails.EditAccountDetails(userPassportDetails);
+                return RedirectToAction("GetAccountDetails");
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error occurred while editing!" + ex.Message;
+                return View();
+            }
+        }
 
         /// <summary>
         /// Admin logout function
