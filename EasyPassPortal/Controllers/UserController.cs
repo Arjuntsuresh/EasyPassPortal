@@ -6,6 +6,7 @@ using System.Linq;
 using System.Security.Principal;
 using System.Web;
 using System.Web.Mvc;
+using System.Web.UI;
 using EasyPassPortal.Models;
 using EasyPassPortal.Repository;
 
@@ -41,6 +42,7 @@ namespace EasyPassPortal.Controllers
                         return RedirectToAction("LoginUserDetail", "User");
                     }
                 }
+                ViewBag.Message = "Email allready exist!";
                 return View();
             }
             catch (Exception exception)
@@ -83,6 +85,7 @@ namespace EasyPassPortal.Controllers
                     }
                     else
                     {
+                        ViewBag.Message = "Email or password is incorrect!";
                         ViewBag.triedOnce = "yes";
                         return View();
                     }
@@ -114,11 +117,19 @@ namespace EasyPassPortal.Controllers
             string userEmail = Session["UserEmail"] as string;
             if (string.IsNullOrEmpty(userEmail))
             {
-                 return RedirectToAction("LoginUserDetail", "User");
-               
+                return RedirectToAction("LoginUserDetail", "User");
             }
+
+            // Set cache control headers to prevent back button after logout
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+            Response.Cache.AppendCacheExtension("post-check=0, pre-check=0");
+
             return View();
         }
+
         /// <summary>
         /// Adding a passport request for admin 
         /// </summary>
@@ -169,6 +180,13 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult GetUserDetail()
         {
+            // Set cache control headers to prevent back button after logout
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+            Response.Cache.AppendCacheExtension("post-check=0, pre-check=0");
+
             try
             {
                 string userEmail = Session["UserEmail"] as string;
@@ -176,20 +194,23 @@ namespace EasyPassPortal.Controllers
                 {
                     return RedirectToAction("LoginUserDetail", "User");
                 }
+
                 UserDetails userDetails = new UserDetails();
                 UserModel user = userDetails.GetUserByEmail(userEmail);
                 if (user == null)
                 {
                     return HttpNotFound();
                 }
+
                 return View(user);
             }
-            catch (Exception exception)
+            catch (Exception ex)
             {
-                ViewBag.Message = "Error occurred while login!" + exception.Message;
+                ViewBag.Message = "Error occurred while login!" + ex.Message;
                 return View();
             }
         }
+
         /// <summary>
         /// Edit user password view get method.
         /// </summary>
@@ -238,25 +259,38 @@ namespace EasyPassPortal.Controllers
         /// This is the view for user enquirey.
         /// </summary>
         /// <returns></returns>
-        public ActionResult StatusEnquiry()
+    public ActionResult StatusEnquiry()
+{
+    string userEmail = Session["UserEmail"] as string;
+    if (string.IsNullOrEmpty(userEmail))
+    {
+        return RedirectToAction("LoginUserDetail", "User");
+    }
+
+    // Set cache control headers to prevent back button after logout
+    Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+    Response.Cache.SetCacheability(HttpCacheability.NoCache);
+    Response.Cache.SetNoStore();
+    Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+    Response.Cache.AppendCacheExtension("post-check=0, pre-check=0");
+
+    try
+    {
+        UserDetails userDetails = new UserDetails();
+        UserPassportDetails userPassportDetails = userDetails.GetUserPassportDetails(userEmail);
+        if (userPassportDetails == null)
         {
-            try
-            {
-                string userEmail = Session["UserEmail"] as string;
-                UserDetails userDetails = new UserDetails();
-                UserPassportDetails userPassportDetails = userDetails.GetUserPassportDetails(userEmail);
-                if (userPassportDetails == null)
-                {
-                    return RedirectToAction("GetUserDetail");
-                }
-                return View(userPassportDetails);
-            }
-            catch(Exception ex) 
-            {
-                ViewBag.Message = "Error occurred while editing!" + ex.Message;
-                return View();
-            }
+            return RedirectToAction("GetUserDetail");
         }
+        return View(userPassportDetails);
+    }
+    catch (Exception ex)
+    {
+        ViewBag.Message = "Error occurred while editing!" + ex.Message;
+        return View();
+    }
+}
+
         /// <summary>
         /// Logout for user side.
         /// </summary>

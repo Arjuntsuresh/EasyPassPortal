@@ -47,17 +47,18 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Signin</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
+                    </li>
                 }
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
-                </li>
+
 
                 <li class="nav-item">
                     <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
                 </li>
                 @*<li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact us</a>
-                </li>*@
+            <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact us</a>
+        </li>*@
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">

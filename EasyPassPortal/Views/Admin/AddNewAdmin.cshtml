@@ -41,28 +41,38 @@
                         @using (Html.BeginForm())
                         {
                             @Html.AntiForgeryToken()
-                            <div class="form-group">
-                                @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                                <div class="form-group">
-                                    <label for="Email" class="control-label"><i class="fas fa-envelope"></i> Email</label>
-                                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
-                                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                    <div class="form-group">
+                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+                        <div class="form-group">
+                            <label for="Email" class="control-label"><i class="fas fa-envelope"></i> Email</label>
+                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="Password" class="control-label"><i class="fas fa-lock"></i> Password</label>
+                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", type = "password" } })
+                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                        </div>
+                        <div class="form-group">
+                            <label for="ConfirmPassword" class="control-label"><i class="fas fa-lock"></i> Confirm Password</label>
+                            <input type="password" name="ConfirmPassword" id="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
+                            <span id="confirmPasswordError" class="text-danger"></span>
+                        </div>
+                        <div>
+                            @if (ViewBag.Message != null)
+                            {
+                                <div class="alert alert-danger" role="alert">
+                                    @ViewBag.Message
                                 </div>
-                                <div class="form-group">
-                                    <label for="Password" class="control-label"><i class="fas fa-lock"></i> Password</label>
-                                    @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", type = "password" } })
-                                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                                </div>
-                                <div class="form-group text-right">
-                                    <input type="submit" value="Create" class="btn btn-primary btn-block" />
-                                </div>
-                            </div>
+                            }
+                        </div>
+                        <div class="form-group text-right">
+                            <input type="submit" value="Create" class="btn btn-primary btn-block" />
+                        </div>
+                    </div>
                         }
                     </div>
                 </div>
-                @*<div class="text-center mt-3">
-                    @Html.ActionLink("Back to List", "Index", null, new { @class = "btn btn-secondary" })
-                </div>*@
             </div>
         </div>
     </div>
@@ -70,5 +80,18 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFw3Ij67x3y0upZe/J9Zv5aJ8e" crossorigin="anonymous"></script>
     <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script>
+        document.querySelector('form').addEventListener('submit', function (e) {
+            var password = document.getElementById('Password').value;
+            var confirmPassword = document.getElementById('ConfirmPassword').value;
+            var confirmPasswordError = document.getElementById('confirmPasswordError');
+            if (password !== confirmPassword) {
+                e.preventDefault();
+                confirmPasswordError.textContent = 'Passwords do not match.';
+            } else {
+                confirmPasswordError.textContent = '';
+            }
+        });
+    </script>
 </body>
 </html>

@@ -44,6 +44,7 @@ namespace EasyPassPortal.Controllers
                     }
                     else
                     {
+                        ViewBag.message = "Email or password is incorrect!";
                         ViewBag.triedOnce = "yes";
                         return View();
                     }
@@ -79,6 +80,12 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult GetAccountDetails()
         {
+            string adminEmail = Session["AdminEmail"] as string;
+            if (string.IsNullOrEmpty(adminEmail))
+            {
+                return RedirectToAction("AdminLoginDetail", "Admin");
+            }
+
             try
             {
                 TotalUserCount();
@@ -86,18 +93,26 @@ namespace EasyPassPortal.Controllers
                 AdminDetails adminDetails = new AdminDetails();
                 ModelState.Clear();
                 return View(adminDetails.GetAllDetails());
-            }catch (Exception exception)
+            }
+            catch (Exception exception)
             {
-                ViewBag.Message = "Error occurred w!" + exception.Message;
+                ViewBag.Message = "Error occurred: " + exception.Message;
                 return View();
             }
         }
+
         /// <summary>
         /// This is to get all the user details for the admin.
         /// </summary>
         /// <returns>user detail</returns>
         public ActionResult GetUserDetails()
         {
+            string adminEmail = Session["AdminEmail"] as string;
+            if (string.IsNullOrEmpty(adminEmail))
+            {
+                return RedirectToAction("AdminLoginDetail", "Admin");
+            }
+
             try
             {
                 TotalUserCount();
@@ -108,19 +123,26 @@ namespace EasyPassPortal.Controllers
             }
             catch (Exception exception)
             {
-                ViewBag.Message = "Error occurred w!" + exception.Message;
+                ViewBag.Message = "Error occurred: " + exception.Message;
                 return View();
             }
-
         }
+
         /// <summary>
         /// Add new admin view page 
         /// </summary>
         /// <returns></returns>
         public ActionResult AddNewAdmin()
         {
+            string adminEmail = Session["AdminEmail"] as string;
+            if (string.IsNullOrEmpty(adminEmail))
+            {
+                return RedirectToAction("AdminLoginDetail", "Admin");
+            }
+
             return View();
         }
+
         /// <summary>
         /// Add new admin post method.
         /// </summary>
@@ -214,7 +236,6 @@ namespace EasyPassPortal.Controllers
                 ViewBag.Message = "Error occurred while deleting!" + ex.Message;
                 return View();
             }
-
         }
         /// <summary>
         /// This is the method for deleting user requested passport .
@@ -276,9 +297,15 @@ namespace EasyPassPortal.Controllers
                 return View();
             }
         }
-  
+
         public ActionResult AdminPassportManagement(string email)
         {
+            string adminEmail = Session["AdminEmail"] as string;
+            if (string.IsNullOrEmpty(adminEmail))
+            {
+                return RedirectToAction("AdminLoginDetail", "Admin");
+            }
+
             try
             {
                 UserDetails userDetails = new UserDetails();
@@ -295,6 +322,7 @@ namespace EasyPassPortal.Controllers
                 return View();
             }
         }
+
         [HttpPost]
         public ActionResult AdminPassportManagement(UserPassportDetails userPassportDetails)
         {
