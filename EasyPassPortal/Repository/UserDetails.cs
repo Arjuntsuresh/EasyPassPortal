@@ -131,6 +131,7 @@ namespace EasyPassPortal.Repository
                 sqlCommand.Parameters.AddWithValue("@PancardNumber", userPassportDetails.PancardNumber);
                 sqlCommand.Parameters.AddWithValue("@Education", userPassportDetails.Education);
                 sqlCommand.Parameters.AddWithValue("@Status", userPassportDetails.Status);
+                sqlCommand.Parameters.AddWithValue("@Image", userPassportDetails.Image);
                 UserDBConnection.Open();
                 int result = sqlCommand.ExecuteNonQuery();
                 UserDBConnection.Close();
@@ -236,7 +237,7 @@ namespace EasyPassPortal.Repository
                         FullName = Convert.ToString(reader["FullName"]),
                         FatherName = Convert.ToString(reader["FatherName"]),
                         Gender = Convert.ToString(reader["Gender"]),
-                        DateOfBirth = Convert.ToDateTime(reader["DateOfBirth"]),
+                        DateOfBirth = Convert.ToString(reader["DateOfBirth"]),
                         Address = Convert.ToString(reader["Address"]),
                         Religion = Convert.ToString(reader["Religion"]),
                         State = Convert.ToString(reader["State"]),
@@ -246,18 +247,59 @@ namespace EasyPassPortal.Repository
                         AadharNumber = Convert.ToString(reader["AadarNumber"]),
                         PancardNumber = Convert.ToString(reader["PancardNumber"]),
                         Education = Convert.ToString(reader["Education"]),
-                        Status = Convert.ToString(reader["Status"])
+                        Status = Convert.ToString(reader["Status"]),
+                        Image = reader["Image"] != DBNull.Value ? (byte[])reader["Image"] : null
                     };
                 }
 
+                reader.Close();
                 UserDBConnection.Close();
                 return userPassport;
             }
-            catch
+            catch (Exception ex)
             {
+                // Log the exception
                 return null;
             }
         }
+
+        public bool IsUserPassportApplyed(string email)
+        {
+            try
+            {
+                UserConnection(); // Assuming this method sets up UserDBConnection
+                SqlCommand sqlCommand = new SqlCommand("IsUserPassportApplyed", UserDBConnection);
+                sqlCommand.CommandType = CommandType.StoredProcedure;
+                sqlCommand.Parameters.AddWithValue("@Email", email);
+
+                UserDBConnection.Open();
+                var result = sqlCommand.ExecuteScalar();
+
+                // Check if result is not null and is greater than 0
+                if (result != null && Convert.ToInt32(result) > 0)
+                {
+                    return true; // Data found, return true
+                }
+                else
+                {
+                    return false; // No data found, return false
+                }
+            }
+            catch (Exception ex)
+            {
+                // Log the exception or handle it as needed
+                throw new Exception("An error occurred while checking if user has applied for passport.", ex);
+            }
+            finally
+            {
+                if (UserDBConnection.State == ConnectionState.Open)
+                {
+                    UserDBConnection.Close();
+                }
+            }
+        }
+
+
 
 
     }

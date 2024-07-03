@@ -81,7 +81,7 @@ namespace EasyPassPortal.Repository
                             FullName = Convert.ToString(dataRow["FullName"]),
                             FatherName = Convert.ToString(dataRow["FatherName"]),
                             Gender = Convert.ToString(dataRow["Gender"]),
-                            DateOfBirth = Convert.ToDateTime(dataRow["DateOfBirth"]),
+                            DateOfBirth = Convert.ToString(dataRow["DateOfBirth"]),
                             Address = Convert.ToString(dataRow["Address"]),
                             Religion = Convert.ToString(dataRow["Religion"]),
                             State = Convert.ToString(dataRow["State"]),

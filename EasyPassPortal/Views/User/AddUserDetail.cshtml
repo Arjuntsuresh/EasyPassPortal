@@ -24,12 +24,25 @@
                 @{
                     var userEmail = Session["UserEmail"] as string;
                 }
-
-                @if (!string.IsNullOrEmpty(userEmail))
+                @if (ViewBag.IsUserPassportApplyed == true)
                 {
+                    // User has applied for a passport
+                    // You can add content here that should be displayed when the user has applied for a passport
+                }
+                else
+                {
+                    // User has not applied for a passport
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
                     </li>
+                }
+
+
+                @if (!string.IsNullOrEmpty(userEmail))
+                {
+                    @*<li class="nav-item">
+                <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+            </li>*@
                 }
 
                 <li class="nav-item">

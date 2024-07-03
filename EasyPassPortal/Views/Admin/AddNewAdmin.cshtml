@@ -6,92 +6,185 @@
 
 <!DOCTYPE html>
 <html lang="en">
-<head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Add New Admin | EasyPassPortal</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/css/bootstrap.min.css" integrity="sha384-Gn5384xqQ1aoWXA+058RXPxPg6fy4IWvTNh0E263XmFcJlSAwiGgFAW/dAiS6JXm" crossorigin="anonymous">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.2/css/all.min.css" />
-    <link rel="stylesheet" href="~/Content/CSS/AdminCss/AddNewAdmin.css" />
-</head>
-<body>
-    <div class="navbar navbar-expand-lg navbar-dark bg-dark">
-        <a href="@Url.Action("HomePageDetails","User")" class="navbar-brand">EasyPassPortal - ADMIN PANEL</a>
-        <div class="collapse navbar-collapse justify-content-end">
-            <ul class="navbar-nav">
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("AdminLoginDetail", "Admin")">Signin</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "Home")">Contact us</a>
-                </li>
-            </ul>
-        </div>
-    </div>
 
-    <div class="container mt-5">
-        <div class="row justify-content-center">
-            <div class="col-md-6">
-                <div class="card shadow-lg p-4">
-                    <div class="card-body">
-                        <h4 class="card-title text-center mb-4">Add New Admin</h4>
-                        @using (Html.BeginForm())
-                        {
-                            @Html.AntiForgeryToken()
-                    <div class="form-group">
-                        @Html.ValidationSummary(true, "", new { @class = "text-danger" })
-                        <div class="form-group">
-                            <label for="Email" class="control-label"><i class="fas fa-envelope"></i> Email</label>
-                            @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
-                            @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            <label for="Password" class="control-label"><i class="fas fa-lock"></i> Password</label>
-                            @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", type = "password" } })
-                            @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
-                        </div>
-                        <div class="form-group">
-                            <label for="ConfirmPassword" class="control-label"><i class="fas fa-lock"></i> Confirm Password</label>
-                            <input type="password" name="ConfirmPassword" id="ConfirmPassword" class="form-control" placeholder="Confirm Password" />
-                            <span id="confirmPasswordError" class="text-danger"></span>
-                        </div>
-                        <div>
-                            @if (ViewBag.Message != null)
-                            {
-                                <div class="alert alert-danger" role="alert">
-                                    @ViewBag.Message
-                                </div>
-                            }
-                        </div>
-                        <div class="form-group text-right">
-                            <input type="submit" value="Create" class="btn btn-primary btn-block" />
-                        </div>
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible"
+          content="IE=edge">
+    <meta name="viewport"
+          content="width=device-width,
+                   initial-scale=1.0">
+    <title>Edit Admin Password</title>
+    <link rel="stylesheet"
+          href="~/Content/CSS/AdminCss/AdminHomePage.css">
+    <link rel="stylesheet"
+          href="~/Content/CSS/AdminCss/AdminHomePageResponsive.css">
+</head>
+
+<body>
+    <!-- for header part -->
+    <header>
+
+        <div class="logosec">
+            <div class="logo">EASYPASSPORTAL</div>
+            <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
+                 class="icn menuicn"
+                 id="menuicn"
+                 alt="menu-icon">
+        </div>
+    </header>
+    <div class="main-container">
+        <div class="navcontainer">
+            <nav class="nav">
+                <div class="nav-upper-options">
+                    <div class="nav-option">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
+                             class="nav-img"
+                             alt="dashboard">
+                        <a href="@Url.Action("AdminHomePage","Admin")"> <h3> Dashboard</h3></a>
                     </div>
-                        }
+
+                    <div class="option2 nav-option">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
+                             class="nav-img"
+                             alt="PassportDetails">
+                        <a href="@Url.Action("GetAccountDetails","Admin")"><h3> Passport details</h3></a>
+                    </div>
+
+                    <div class="nav-option option3">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
+                             class="nav-img"
+                             alt="userDetails">
+                        <a href="@Url.Action("GetUserDetails","Admin")"> <h3>User Details</h3></a>
+                    </div>
+                    <div class="nav-option change-password">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                             class="nav-img"
+                             alt="change-password">
+                        <a href="@Url.Action("EditAdminPassword", "Admin")" class="nav-link">
+                            <h3>Change Password</h3>
+                        </a>
+                    </div>
+                    <div class="nav-option option1">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                             class="nav-img"
+                             alt="logout">
+                        <a href="@Url.Action("AddNewAdmin", "Admin")" class="nav-link">
+                            <h3>Add new admin</h3>
+                        </a>
+                    </div>
+
+
+                    <div class="nav-option logout">
+                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
+                             class="nav-img"
+                             alt="logout">
+                        <a href="@Url.Action("LogOutAdmin", "Admin")" class="nav-link">
+                            <h3>Logout</h3>
+                        </a>
                     </div>
                 </div>
+            </nav>
+        </div>
+        <div class="main">
+
+            <div class="searchbar2">
+                <input type="text"
+                       name=""
+                       id=""
+                       placeholder="Search">
+                <div class="searchbtn">
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210180758/Untitled-design-(28).png"
+                         class="icn srchicn"
+                         alt="search-button">
+                </div>
             </div>
+            <div class="box-container">
+                <div class="box box1">
+                    <div class="text">
+                        @if (ViewBag.TotalUserCount != null)
+                        {
+                            <h2 class="topic-heading"> @ViewBag.TotalUserCount</h2>
+                        }
+                        <h2 class="topic">Users</h2>
+                    </div>
+
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
+                         alt="Views">
+                </div>
+                <div class="box box2">
+                    <div class="text">
+                        @if (ViewBag.TotalPassportCount != null)
+                        {
+                            <h2 class="topic-heading"> @ViewBag.TotalPassportCount</h2>
+                        }
+                        <h2 class="topic">Total passports</h2>
+                    </div>
+                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
+                         alt="likes">
+                </div>
+            </div>
+            <div style="margin-top: 50px; display: flex; justify-content: center;">
+                <div style="width: 50%; padding: 20px; box-shadow: 0 4px 8px rgba(0,0,0,0.1); border-radius: 8px; background-color: white;">
+                    <h4 style="text-align: center; margin-bottom: 20px;">Add New Admin</h4>
+                    @using (Html.BeginForm())
+                    {
+                        @Html.AntiForgeryToken()
+                        <div style="display: flex; flex-direction: column;">
+                            @Html.ValidationSummary(true, "", new { @class = "text-danger" })
+
+                            <div style="margin-bottom: 15px;">
+                                @Html.LabelFor(model => model.Email, "Email", new { @class = "control-label", @style = "font-weight: bold;" })
+                                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email", @style = "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" } })
+                                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="margin-bottom: 15px;">
+                                @Html.LabelFor(model => model.Password, "Password", new { @class = "control-label", @style = "font-weight: bold;" })
+                                @Html.EditorFor(model => model.Password, new { htmlAttributes = new { @class = "form-control", placeholder = "Password", @style = "width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" } })
+                                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                            </div>
+
+                            <div style="margin-bottom: 15px;">
+                                <label for="ConfirmPassword" class="control-label" style="font-weight: bold;"><i class="fas fa-lock"></i> Confirm Password</label>
+                                <input type="password" name="ConfirmPassword" id="ConfirmPassword" class="form-control" style="width: 100%; padding: 10px; border: 1px solid #ccc; border-radius: 4px;" placeholder="Confirm Password" />
+                                <span id="confirmPasswordError" class="text-danger"></span>
+                            </div>
+
+                            <div>
+                                @if (ViewBag.Message != null)
+                                {
+                                    <div style="color: red; text-align: center;">
+                                        @ViewBag.Message
+                                    </div>
+                                }
+                            </div>
+                            <div style="text-align: right;">
+                                <input type="submit" value="Create" class="btn btn-primary" style="background-color: #007bff; color: white; border: none; padding: 10px 20px; border-radius: 4px;" />
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+
         </div>
     </div>
-
-    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@4.0.0/dist/js/bootstrap.min.js" integrity="sha384-JZR6Spejh4U02d8jOt6vLEHfe/JQGiRRSQQxSfFw3Ij67x3y0upZe/J9Zv5aJ8e" crossorigin="anonymous"></script>
-    <script src="https://kit.fontawesome.com/a076d05399.js"></script>
+    <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"
+            integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN"
+            crossorigin="anonymous"></script>
+    <script src="~/Scripts/AdminScript/AdminHomePage.js"></script>
     <script>
-        document.querySelector('form').addEventListener('submit', function (e) {
-            var password = document.getElementById('Password').value;
-            var confirmPassword = document.getElementById('ConfirmPassword').value;
-            var confirmPasswordError = document.getElementById('confirmPasswordError');
+        function validatePassword() {
+            var password = document.querySelector('[name="Password"]').value;
+            var confirmPassword = document.querySelector('[name="ConfirmPassword"]').value;
+            var validationMessage = document.getElementById('confirmPasswordValidationMessage');
             if (password !== confirmPassword) {
-                e.preventDefault();
-                confirmPasswordError.textContent = 'Passwords do not match.';
-            } else {
-                confirmPasswordError.textContent = '';
+                validationMessage.textContent = "Passwords do not match.";
+                return false;
             }
-        });
+            validationMessage.textContent = "";
+            return true;
+        }
     </script>
 </body>
 </html>

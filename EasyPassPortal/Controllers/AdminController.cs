@@ -49,7 +49,7 @@ namespace EasyPassPortal.Controllers
                         return View();
                     }
                 }
-                return View(adminModel);
+                return View();
             }
             catch (Exception ex)
             {
@@ -134,6 +134,8 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult AddNewAdmin()
         {
+            TotalUserCount();
+            TotalUserPassportRequestCount();
             string adminEmail = Session["AdminEmail"] as string;
             if (string.IsNullOrEmpty(adminEmail))
             {
@@ -178,6 +180,8 @@ namespace EasyPassPortal.Controllers
         {
             try
             {
+                TotalUserCount();
+                TotalUserPassportRequestCount();
                 string userEmail = Session["AdminEmail"] as string;
                 AdminDetails adminDetails = new AdminDetails();
                 AdminModel adminModel = adminDetails.GetAdminByEmail(userEmail);

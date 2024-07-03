@@ -58,6 +58,12 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult LoginUserDetail()
         {
+            // Set cache control headers to prevent back button after logout
+            Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
+            Response.Cache.SetCacheability(HttpCacheability.NoCache);
+            Response.Cache.SetNoStore();
+            Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
+            Response.Cache.AppendCacheExtension("post-check=0, pre-check=0");
             return View();
         }
 
@@ -106,6 +112,7 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult HomePageDetails()
         {
+            IsPassportApplyed();
             return View();
         }
         /// <summary>
@@ -136,12 +143,14 @@ namespace EasyPassPortal.Controllers
         /// <param name="passportDetails"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AddUserPassportDetail(UserPassportDetails passportDetails)
+        public ActionResult AddUserPassportDetail(UserPassportDetails passportDetails,HttpPostedFileBase image1)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
+                    passportDetails.Image=new byte[image1.ContentLength];
+                    image1.InputStream.Read(passportDetails.Image,0,image1.ContentLength);
                     UserDetails userDetails = new UserDetails();
                     if (userDetails.AddPassportDetails(passportDetails))
                     {
@@ -164,6 +173,7 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult About()
         {
+            IsPassportApplyed();
             return View();
         }
         /// <summary>
@@ -172,6 +182,7 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult Contact()
         {
+            IsPassportApplyed();
             return View();
         }
         /// <summary>
@@ -180,6 +191,7 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult GetUserDetail()
         {
+            IsPassportApplyed();
             // Set cache control headers to prevent back button after logout
             Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
@@ -220,6 +232,7 @@ namespace EasyPassPortal.Controllers
         {
             try
             {
+                IsPassportApplyed();
                 string userEmail = Session["UserEmail"] as string;
                 UserDetails userDetails = new UserDetails();
                 UserModel user = userDetails.GetUserByEmail(userEmail);
@@ -261,7 +274,8 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
     public ActionResult StatusEnquiry()
 {
-    string userEmail = Session["UserEmail"] as string;
+            IsPassportApplyed();
+            string userEmail = Session["UserEmail"] as string;
     if (string.IsNullOrEmpty(userEmail))
     {
         return RedirectToAction("LoginUserDetail", "User");
@@ -289,7 +303,27 @@ namespace EasyPassPortal.Controllers
         ViewBag.Message = "Error occurred while editing!" + ex.Message;
         return View();
     }
+
 }
+        public ActionResult IsPassportApplyed()
+        {
+            try
+            {
+                string userEmail = Session["UserEmail"] as string;
+                UserDetails userDetails = new UserDetails();
+                bool isPassportApplied = userDetails.IsUserPassportApplyed(userEmail);
+
+                // Set ViewBag based on the result
+                ViewBag.IsUserPassportApplyed = isPassportApplied;
+
+                return View();
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error occurred while checking passport application status: " + ex.Message;
+                return View();
+            }
+        }
 
         /// <summary>
         /// Logout for user side.

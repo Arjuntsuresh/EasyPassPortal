@@ -27,7 +27,7 @@ namespace EasyPassPortal.Models
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
         [CustomValidation(typeof(UserPassportDetails), "ValidateDateOfBirth")]
-        public DateTime DateOfBirth { get; set; }
+        public String DateOfBirth { get; set; }
 
         [Required(ErrorMessage = "Address is required.")]
         [Display(Name = "Address")]
@@ -67,6 +67,8 @@ namespace EasyPassPortal.Models
         public string Education { get; set; }
 
         public string Status { get; set; }
+       
+        public byte[] Image { get; set; }
         public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth, ValidationContext context)
         {
             if (dateOfBirth >= DateTime.Now)
