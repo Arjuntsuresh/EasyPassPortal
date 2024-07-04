@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Microsoft.Extensions.Options;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel.DataAnnotations;
 using System.Linq;
@@ -45,6 +46,7 @@ namespace EasyPassPortal.Models
         [Display(Name = "District")]
         public string District { get; set; }
 
+   
         [Required(ErrorMessage = "Phone number is required.")]
         [Phone(ErrorMessage = "Invalid phone number.")]
         [Display(Name = "Phone Number")]
@@ -54,6 +56,7 @@ namespace EasyPassPortal.Models
         [EmailAddress(ErrorMessage = "Invalid email address.")]
         [Display(Name = "Email")]
         public string Email { get; set; }
+    
         [Required(ErrorMessage = "Aadhar number is required.")]
         [Display(Name = "Aadhar Number")]
         public string AadharNumber { get; set; }
@@ -67,7 +70,6 @@ namespace EasyPassPortal.Models
         public string Education { get; set; }
 
         public string Status { get; set; }
-       
         public byte[] Image { get; set; }
         public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth, ValidationContext context)
         {

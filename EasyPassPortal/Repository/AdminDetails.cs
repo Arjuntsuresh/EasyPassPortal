@@ -60,49 +60,51 @@ namespace EasyPassPortal.Repository
         /// Get all passsport applyed persons details
         /// </summary>
         /// <returns></returns>
-        public List<UserPassportDetails> GetAllDetails()
+public List<UserPassportDetails> GetAllDetails()
+{
+    try
+    {
+        UserConnection();
+        List<UserPassportDetails> userPassportDetails = new List<UserPassportDetails>();
+        SqlCommand command = new SqlCommand("GetRegisteredPassportDetails", UserDBConnection);
+        command.CommandType = CommandType.StoredProcedure;
+        SqlDataAdapter adapter = new SqlDataAdapter(command);
+        DataTable dataTable = new DataTable();
+        UserDBConnection.Open();
+        adapter.Fill(dataTable);
+        UserDBConnection.Close();
+
+        foreach (DataRow dataRow in dataTable.Rows)
         {
-            try
+            userPassportDetails.Add(new UserPassportDetails
             {
-                UserConnection();
-                List<UserPassportDetails> userPassportDetails = new List<UserPassportDetails>();
-                SqlCommand command = new SqlCommand("GetRegisteredPassportDetails", UserDBConnection);
-                command.CommandType = CommandType.StoredProcedure;
-                SqlDataAdapter adapter = new SqlDataAdapter(command);
-                DataTable dataTable = new DataTable();
-                UserDBConnection.Open();
-                adapter.Fill(dataTable);
-                UserDBConnection.Close();
-                foreach (DataRow dataRow in dataTable.Rows)
-                    userPassportDetails.Add(
-                        new UserPassportDetails
-                        {
-                            Id = Convert.ToInt32(dataRow["id"]),
-                            FullName = Convert.ToString(dataRow["FullName"]),
-                            FatherName = Convert.ToString(dataRow["FatherName"]),
-                            Gender = Convert.ToString(dataRow["Gender"]),
-                            DateOfBirth = Convert.ToString(dataRow["DateOfBirth"]),
-                            Address = Convert.ToString(dataRow["Address"]),
-                            Religion = Convert.ToString(dataRow["Religion"]),
-                            State = Convert.ToString(dataRow["State"]),
-                            District = Convert.ToString(dataRow["District"]),
-                            PhoneNumber = Convert.ToString(dataRow["PhoneNumber"]),
-                            Email = Convert.ToString(dataRow["Email"]),
-                            AadharNumber = Convert.ToString(dataRow["AadarNumber"]),
-                            PancardNumber = Convert.ToString(dataRow["PancardNumber"]),
-                            Education = Convert.ToString(dataRow["Education"]),
-                            Status = Convert.ToString(dataRow["Status"])
-
-
-                        }
-                    );
-                return userPassportDetails;
-            }
-            catch
-            {
-                return null;
-            }
+                Id = Convert.ToInt32(dataRow["id"]),
+                FullName = Convert.ToString(dataRow["FullName"]),
+                FatherName = Convert.ToString(dataRow["FatherName"]),
+                Gender = Convert.ToString(dataRow["Gender"]),
+                DateOfBirth = Convert.ToString(dataRow["DateOfBirth"]),
+                Address = Convert.ToString(dataRow["Address"]),
+                Religion = Convert.ToString(dataRow["Religion"]),
+                State = Convert.ToString(dataRow["State"]),
+                District = Convert.ToString(dataRow["District"]),
+                PhoneNumber = Convert.ToString(dataRow["PhoneNumber"]),
+                Email = Convert.ToString(dataRow["Email"]),
+                AadharNumber = Convert.ToString(dataRow["AadarNumber"]),  // Corrected spelling
+                PancardNumber = Convert.ToString(dataRow["PancardNumber"]),
+                Education = Convert.ToString(dataRow["Education"]),
+                Status = Convert.ToString(dataRow["Status"]),
+                Image = dataRow["Image"] != DBNull.Value ? (byte[])dataRow["Image"] : null
+            });
         }
+
+        return userPassportDetails;
+    }
+    catch
+    {
+        return null;
+    }
+}
+
         /// <summary>
         /// Get all registered user details for admin.
         /// </summary>
