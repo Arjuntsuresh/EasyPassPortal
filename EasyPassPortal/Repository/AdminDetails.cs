@@ -93,7 +93,10 @@ public List<UserPassportDetails> GetAllDetails()
                 PancardNumber = Convert.ToString(dataRow["PancardNumber"]),
                 Education = Convert.ToString(dataRow["Education"]),
                 Status = Convert.ToString(dataRow["Status"]),
-                Image = dataRow["Image"] != DBNull.Value ? (byte[])dataRow["Image"] : null
+                Image = dataRow["Image"] != DBNull.Value ? (byte[])dataRow["Image"] : null,
+                MothersName = Convert.ToString(dataRow["MothersName"]),
+                AadharPhoto = dataRow["AadharPhoto"] != DBNull.Value ? (byte[])dataRow["AadharPhoto"] : null,
+                IdProof = dataRow["IdProof"] != DBNull.Value ? (byte[])dataRow["IdProof"] : null,
             });
         }
 

@@ -225,16 +225,19 @@
     <Compile Include="App_Start\RouteConfig.cs" />
     <Compile Include="Controllers\AdminController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Controllers\PoliceController.cs" />
     <Compile Include="Controllers\UserController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AdminModel.cs" />
+    <Compile Include="Models\PoliceDept.cs" />
     <Compile Include="Models\UserModel.cs" />
     <Compile Include="Models\LoginModel.cs" />
     <Compile Include="Models\UserPassportDetails.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Repository\AdminDetails.cs" />
+    <Compile Include="Repository\PoliceDetail.cs" />
     <Compile Include="Repository\UserDetails.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -268,6 +271,29 @@
     <Content Include="Content\CSS\SignupCSS.css" />
     <Content Include="Content\CSS\StatusEnquiry.css" />
     <Content Include="Content\CSS\UserProfile.css" />
+    <Content Include="Content\Images\03_SUB_Leonid_Furmansky_Specialized_Domain_Final_Web_ 25G copy.jpg" />
+    <Content Include="Content\Images\20240611FoundationSub.jpg" />
+    <Content Include="Content\Images\3135715.png" />
+    <Content Include="Content\Images\3742bcd3b4b5d471dae27a60bd4b5f07.jpg" />
+    <Content Include="Content\Images\404-Desktop.jpg" />
+    <Content Include="Content\Images\About Us_files\0064d26124ae8407.css" />
+    <Content Include="Content\Images\About Us_files\bootstrap.min.css" />
+    <Content Include="Content\Images\About Us_files\sitecontext.min.html" />
+    <Content Include="Content\Images\annika-gordon-xaIC5JbUepM-unsplash.jpg" />
+    <Content Include="Content\Images\ethan-wilkinson-gUwTYmydga0-unsplash.jpg" />
+    <Content Include="Content\Images\jaimie-harmsen-8d9jdqyGaQA-unsplash.jpg" />
+    <Content Include="Content\Images\jurica-koletic-7YVZYZeITc8-unsplash.jpg" />
+    <Content Include="Content\Images\kylie-anderson-aGDILBE1Kus-unsplash.jpg" />
+    <Content Include="Content\Images\mana5280-ivG8LkDrtjs-unsplash.jpg" />
+    <Content Include="Content\Images\nicole-geri-gMJ3tFOLvnA-unsplash.jpg" />
+    <Content Include="Content\Images\Passport-logo.png" />
+    <Content Include="Content\Images\PedalPlex.__1_-removebg-preview.png" />
+    <Content Include="Content\Images\png-transparent-spider-man-heroes-download-with-transparent-background-free-thumbnail.png" />
+    <Content Include="Content\Images\Shri_Kirtivardhan_Singh.jpg" />
+    <Content Include="Content\Images\Shri_Pabitra_Margherita.jpg" />
+    <Content Include="Content\Images\stephanie-liverani-Zz5LQe-VSMY-unsplash.jpg" />
+    <Content Include="Content\Images\under_profile.jpg" />
+    <Content Include="Content\Images\vicky-hladynets-C8Ta0gwPbQg-unsplash.jpg" />
     <Content Include="Content\js\PassportRegValidation.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
@@ -279,6 +305,58 @@
     <Content Include="Scripts\bootstrap.esm.min.js" />
     <Content Include="Scripts\bootstrap.js" />
     <Content Include="Scripts\bootstrap.min.js" />
+    <Content Include="Content\Images\About Us_files\1108-9bb23decd7cc5ab4.js.download" />
+    <Content Include="Content\Images\About Us_files\1130-e177794d21fdfef5.js.download" />
+    <Content Include="Content\Images\About Us_files\1216-3fb8fa644ce2539a.js.download" />
+    <Content Include="Content\Images\About Us_files\1307-713cb2fc2e9c87d0.js.download" />
+    <Content Include="Content\Images\About Us_files\2004-abb67fcb256f7a94.js.download" />
+    <Content Include="Content\Images\About Us_files\428-bf89f6659628b199.js.download" />
+    <Content Include="Content\Images\About Us_files\4651-472b1e44f21167f0.js.download" />
+    <Content Include="Content\Images\About Us_files\5573-99c937c0c2abcc2c.js.download" />
+    <Content Include="Content\Images\About Us_files\6066-d8c4a2665023d1c5.js.download" />
+    <Content Include="Content\Images\About Us_files\6113-225815f6c2316318.js.download" />
+    <Content Include="Content\Images\About Us_files\6261-29408c7835415eba.js.download" />
+    <Content Include="Content\Images\About Us_files\6859-ac2adb6d2c5f684b.js.download" />
+    <Content Include="Content\Images\About Us_files\7555-9d1d0804b874fcbd.js.download" />
+    <Content Include="Content\Images\About Us_files\8562-92f55e1b7a4ed31f.js.download" />
+    <Content Include="Content\Images\About Us_files\8780-1db3ef06dc96ea55.js.download" />
+    <Content Include="Content\Images\About Us_files\8994-3a3cba08ea6a4d1c.js.download" />
+    <Content Include="Content\Images\About Us_files\9382-0e2b54dab9ca7fd7.js.download" />
+    <Content Include="Content\Images\About Us_files\94726e6d-56ea2e54af8a2ba8.js.download" />
+    <Content Include="Content\Images\About Us_files\9490-b08287eb1a6e3b95.js.download" />
+    <Content Include="Content\Images\About Us_files\990-4252353774a86d2b.js.download" />
+    <Content Include="Content\Images\About Us_files\app-store-black" />
+    <Content Include="Content\Images\About Us_files\bootstrap.min.js.download" />
+    <Content Include="Content\Images\About Us_files\default~signup_forms~onsite-triggering.cfe3998831b94919fcd8.js.download" />
+    <Content Include="Content\Images\About Us_files\entry.js.download" />
+    <Content Include="Content\Images\About Us_files\fender_analytics.f692ee00c71150d7db91.js.download" />
+    <Content Include="Content\Images\About Us_files\framework-4e455cd48f2147ae.js.download" />
+    <Content Include="Content\Images\About Us_files\google-play-black" />
+    <Content Include="Content\Images\About Us_files\gtm.js.download" />
+    <Content Include="Content\Images\About Us_files\icons8-facebook" />
+    <Content Include="Content\Images\About Us_files\icons8-instagram" />
+    <Content Include="Content\Images\About Us_files\icons8-youtube" />
+    <Content Include="Content\Images\About Us_files\inert.min.js.download" />
+    <Content Include="Content\Images\About Us_files\is.min.js.download" />
+    <Content Include="Content\Images\About Us_files\klaviyo.js.download" />
+    <Content Include="Content\Images\About Us_files\lib.js.download" />
+    <Content Include="Content\Images\About Us_files\main-17d46aadc1918831.js.download" />
+    <Content Include="Content\Images\About Us_files\polyfills-78c92fac7aa8fdd8.js.download" />
+    <Content Include="Content\Images\About Us_files\post_identification_sync.c45bc1da7d619d242b74.js.download" />
+    <Content Include="Content\Images\About Us_files\runtime.72c3ec9a764b20847567.js.download" />
+    <Content Include="Content\Images\About Us_files\sharedUtils.057cb0eb98650d30aff7.js.download" />
+    <Content Include="Content\Images\About Us_files\signup_forms.8626cad0ac6603def4c9.js.download" />
+    <Content Include="Content\Images\About Us_files\sitecontext.min.js.download" />
+    <Content Include="Content\Images\About Us_files\static.500134348b1f0969ffe3.js.download" />
+    <Content Include="Content\Images\About Us_files\tiktok-icon-50-footer" />
+    <Content Include="Content\Images\About Us_files\vcd15cbe7772f49c399c6a5babf22c1241717689176015" />
+    <Content Include="Content\Images\About Us_files\vendors~signup_forms.8d18a176cd326e575af9.js.download" />
+    <Content Include="Content\Images\About Us_files\vendors~signup_forms~onsite-triggering.f845316191668c116a7f.js.download" />
+    <Content Include="Content\Images\About Us_files\webpack-6048dea3407f33a0.js.download" />
+    <Content Include="Content\Images\About Us_files\[...slug]-ae4f3c99aa0da696.js.download" />
+    <Content Include="Content\Images\About Us_files\_app-08ab061cdf164a3f.js.download" />
+    <Content Include="Content\Images\About Us_files\_buildManifest.js.download" />
+    <Content Include="Content\Images\About Us_files\_ssgManifest.js.download" />
     <None Include="Scripts\jquery-3.7.1.intellisense.js" />
     <Content Include="Scripts\jquery-3.7.1.js" />
     <Content Include="Scripts\jquery-3.7.1.min.js" />
@@ -320,10 +398,12 @@
     <Content Include="Views\User\Contact.cshtml" />
     <Content Include="Views\Admin\AdminPassportManagement.cshtml" />
     <Content Include="Views\User\StatusEnquiry.cshtml" />
+    <Content Include="Views\Police\PoliceLoginDetail.cshtml" />
+    <Content Include="Views\Police\PoliceHomePage.cshtml" />
+    <Content Include="Views\Police\PolicePassportManagement.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
-    <Folder Include="Content\Images\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

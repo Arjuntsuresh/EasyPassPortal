@@ -115,7 +115,7 @@ namespace EasyPassPortal.Repository
             try
             {
                 UserConnection();
-                SqlCommand sqlCommand = new SqlCommand("AddPassportDetail", UserDBConnection); // Ensure the stored procedure name matches
+                SqlCommand sqlCommand = new SqlCommand("AddPassportData", UserDBConnection); // Ensure the stored procedure name matches
                 sqlCommand.CommandType = CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@FullName", userPassportDetails.FullName);
                 sqlCommand.Parameters.AddWithValue("@FatherName", userPassportDetails.FatherName);
@@ -130,8 +130,10 @@ namespace EasyPassPortal.Repository
                 sqlCommand.Parameters.AddWithValue("@AadarNumber", userPassportDetails.AadharNumber); // Ensure parameter names match
                 sqlCommand.Parameters.AddWithValue("@PancardNumber", userPassportDetails.PancardNumber);
                 sqlCommand.Parameters.AddWithValue("@Education", userPassportDetails.Education);
-                sqlCommand.Parameters.AddWithValue("@Status", userPassportDetails.Status);
                 sqlCommand.Parameters.AddWithValue("@Image", userPassportDetails.Image);
+                sqlCommand.Parameters.AddWithValue("@AadharPhoto", userPassportDetails.AadharPhoto);
+                sqlCommand.Parameters.AddWithValue("@IdProof", userPassportDetails.IdProof);
+                sqlCommand.Parameters.AddWithValue("@MothersName", userPassportDetails.MothersName);
                 UserDBConnection.Open();
                 int result = sqlCommand.ExecuteNonQuery();
                 UserDBConnection.Close();
@@ -248,7 +250,10 @@ namespace EasyPassPortal.Repository
                         PancardNumber = Convert.ToString(reader["PancardNumber"]),
                         Education = Convert.ToString(reader["Education"]),
                         Status = Convert.ToString(reader["Status"]),
-                        Image = reader["Image"] != DBNull.Value ? (byte[])reader["Image"] : null
+                        Image = reader["Image"] != DBNull.Value ? (byte[])reader["Image"] : null,
+                        AadharPhoto = reader["AadharPhoto"] != DBNull.Value ? (byte[])reader["AadharPhoto"] : null,
+                        IdProof = reader["IdProof"] != DBNull.Value ? (byte[])reader["IdProof"] : null,
+                        MothersName = Convert.ToString(reader["MothersName"])
                     };
                 }
 

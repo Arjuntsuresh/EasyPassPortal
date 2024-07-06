@@ -1,5 +1,4 @@
-﻿
-@model IEnumerable<EasyPassPortal.Models.UserPassportDetails>
+﻿@model IEnumerable<EasyPassPortal.Models.UserPassportDetails>
 
 @{
     Layout = null;
@@ -12,16 +11,14 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Passport Details</title>
+    <title>Police Home Page</title>
     <link rel="stylesheet" href="~/Content/CSS/AdminCss/AdminHomePage.css">
     <link rel="stylesheet" href="~/Content/CSS/AdminCss/AdminHomePageResponsive.css">
-  
 </head>
 
 <body>
     <!-- for header part -->
     <header>
-
         <div class="logosec">
             <div class="logo">EASYPASSPORTAL</div>
             <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182541/Untitled-design-(30).png"
@@ -29,18 +26,13 @@
                  id="menuicn"
                  alt="menu-icon">
         </div>
-
     </header>
 
     <div class="main-container">
         <div class="navcontainer">
             <nav class="nav">
                 <div class="nav-upper-options">
-                    <div class="nav-option">
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210182148/Untitled-design-(29).png"
-                             class="nav-img" alt="dashboard">
-                        <a href="@Url.Action("AdminHomePage","Admin")"> <h3> Dashboard</h3></a>
-                    </div>
+                  
 
                     <div class="nav-option option1">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183322/9.png"
@@ -48,30 +40,6 @@
                              alt="PassportDetails">
                         <a href="@Url.Action("GetAccountDetails","Admin")"><h3> Passport details</h3></a>
                     </div>
-
-                    <div class="nav-option option3">
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183320/5.png"
-                             class="nav-img"
-                             alt="userDetails">
-                        <a href="@Url.Action("GetUserDetails","Admin")"> <h3>User Details</h3></a>
-                    </div>
-                    <div class="nav-option change-password">
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
-                             class="nav-img"
-                             alt="change-password">
-                        <a href="@Url.Action("EditAdminPassword", "Admin")" class="nav-link">
-                            <h3>Change Password</h3>
-                        </a>
-                    </div>
-                    <div class="nav-option logout">
-                        <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
-                             class="nav-img"
-                             alt="logout">
-                        <a href="@Url.Action("AddNewAdmin", "Admin")" class="nav-link">
-                            <h3>Add new admin</h3>
-                        </a>
-                    </div>
-
                     <div class="nav-option logout">
                         <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210183321/7.png"
                              class="nav-img"
@@ -92,42 +60,7 @@
                          class="icn srchicn" alt="search-button">
                 </div>
             </div>
-
-            <div class="box-container">
-
-                <div class="box box1">
-                    <div class="text">
-                        @if (ViewBag.TotalUserCount != null)
-                        {
-                            <h2 class="topic-heading"> @ViewBag.TotalUserCount</h2>
-                        }
-                        <h2 class="topic">Users</h2>
-                    </div>
-
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210184645/Untitled-design-(31).png"
-                         alt="Views">
-                </div>
-
-                <div class="box box2">
-                    <div class="text">
-                        @if (ViewBag.TotalPassportCount != null)
-                        {
-                            <h2 class="topic-heading"> @ViewBag.TotalPassportCount</h2>
-                        }
-                        <h2 class="topic">Total passports</h2>
-                    </div>
-
-                    <img src="https://media.geeksforgeeks.org/wp-content/uploads/20221210185030/14.png"
-                         alt="likes">
-                </div>
-            </div>
-
             <div class="report-container">
-                @*<div class="report-header">
-                <h1 class="recent-Articles">User Passport Details</h1>
-                @Html.ActionLink("Create New", "Create", new { @class = "view" })
-            </div>*@
-
                 <div class="report-body">
                     <table class="table">
                         <thead>
@@ -143,13 +76,13 @@
                                 <th>District</th>
                                 <th>Phone Number</th>
                                 <th>Email</th>
-                                <th>AadharNumber</th>
-                                <th>PancardNumber</th>
+                                <th>Aadhar Number</th>
+                                <th>Pancard Number</th>
                                 <th>Education</th>
                                 <th>Status</th>
                                 <th>Image</th>
                                 <th>Aadhar Photo</th>
-                                <th>IdProof</th>
+                                <th>Id Proof</th>
                                 <th>Action</th>
                             </tr>
                         </thead>
@@ -208,10 +141,8 @@
                                             <span>No image available</span>
                                         }
                                     </td>
-
                                     <td>
-                                        @Html.ActionLink("View Details", "AdminPassportManagement", "Admin", new { email = item.Email }, null)
-                                        @Html.ActionLink("Delete", "DeletePassportDetail", new { id = item.Id })
+                                        @Html.ActionLink("View Details", "PolicePassportManagement", "Police", new { email = item.Email }, null)
                                     </td>
                                 </tr>
                             }
@@ -226,3 +157,4 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz" crossorigin="anonymous"></script>
 </body>
 </html>
+

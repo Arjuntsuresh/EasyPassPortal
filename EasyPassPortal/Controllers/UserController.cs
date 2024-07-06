@@ -143,7 +143,8 @@ namespace EasyPassPortal.Controllers
         /// <param name="passportDetails"></param>
         /// <returns></returns>
         [HttpPost]
-        public ActionResult AddUserPassportDetail(UserPassportDetails passportDetails,HttpPostedFileBase image1)
+        public ActionResult AddUserPassportDetail(UserPassportDetails passportDetails,
+            HttpPostedFileBase image1,HttpPostedFileBase aadharPhoto1,HttpPostedFileBase idProof1)
         {
             try
             {
@@ -151,6 +152,13 @@ namespace EasyPassPortal.Controllers
                 {
                     passportDetails.Image=new byte[image1.ContentLength];
                     image1.InputStream.Read(passportDetails.Image,0,image1.ContentLength);
+
+                    passportDetails.AadharPhoto = new byte[aadharPhoto1.ContentLength];
+                    aadharPhoto1.InputStream.Read(passportDetails.AadharPhoto, 0, aadharPhoto1.ContentLength);
+
+                    passportDetails.IdProof = new byte[idProof1.ContentLength];
+                    idProof1.InputStream.Read(passportDetails.IdProof, 0, idProof1.ContentLength);
+
                     UserDetails userDetails = new UserDetails();
                     if (userDetails.AddPassportDetails(passportDetails))
                     {

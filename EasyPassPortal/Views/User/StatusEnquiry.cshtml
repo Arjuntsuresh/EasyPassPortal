@@ -74,101 +74,131 @@
             </ul>
         </div>
     </div>
-    <div class="container">
-        @if (Model.Status == "Rejected")
-        {
-            <div class="status-indicator" style=" background-color: red;">
-                Current Status:
-                <span class="status-value">@Model.Status</span>
-            </div>
-        }
-        else
-        {
-            <div class="status-indicator">
-                Current Status:
-                <span class="status-value">@Model.Status</span>
-            </div>
-        }
+<div class="container mt-4">
+    @if (Model.Status == "Rejected")
+    {
+        <div class="alert alert-danger">
+            Current Status: <span class="font-weight-bold">@Model.Status</span>
+        </div>
+    }
+    else
+    {
+        <div class="alert alert-info">
+            Current Status: <span class="font-weight-bold">@Model.Status</span>
+        </div>
+    }
 
+    <h4>User Passport Details</h4>
+    <hr />
 
-        <h4>User Passport Details</h4>
-        <hr />
-        <table class="table table-bordered table-striped">
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Id)</th>
-                <td>@Html.DisplayFor(model => model.Id)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.FullName)</th>
-                <td>@Html.DisplayFor(model => model.FullName)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.FatherName)</th>
-                <td>@Html.DisplayFor(model => model.FatherName)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Gender)</th>
-                <td>@Html.DisplayFor(model => model.Gender)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
-                <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Address)</th>
-                <td>@Html.DisplayFor(model => model.Address)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Religion)</th>
-                <td>@Html.DisplayFor(model => model.Religion)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.State)</th>
-                <td>@Html.DisplayFor(model => model.State)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.District)</th>
-                <td>@Html.DisplayFor(model => model.District)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
-                <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Email)</th>
-                <td>@Html.DisplayFor(model => model.Email)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.AadharNumber)</th>
-                <td>@Html.DisplayFor(model => model.AadharNumber)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.PancardNumber)</th>
-                <td>@Html.DisplayFor(model => model.PancardNumber)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Education)</th>
-                <td>@Html.DisplayFor(model => model.Education)</td>
-            </tr>
-            <tr>
-                <th>@Html.DisplayNameFor(model => model.Image)</th>
-                <td>
-                    @if (Model.Image != null && Model.Image.Length > 0)
-                    {
-                        var base64 = Convert.ToBase64String(Model.Image);
-                        var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
-                        <img src="@imgSrc" style="max-width:100px; max-height:100px;" />
+    <table class="table table-bordered table-striped">
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Image)</th>
+            <td>
+                @if (Model.Image != null && Model.Image.Length > 0)
+                {
+                    var base64 = Convert.ToBase64String(Model.Image);
+                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
+                }
+                else
+                {
+                    <p>No image available</p>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.AadharPhoto)</th>
+            <td>
+                @if (Model.AadharPhoto != null && Model.AadharPhoto.Length > 0)
+                {
+                    var base64 = Convert.ToBase64String(Model.AadharPhoto);
+                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
+                }
+                else
+                {
+                    <p>No image available</p>
+                }
+            </td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Id)</th>
+            <td>@Html.DisplayFor(model => model.Id)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FullName)</th>
+            <td>@Html.DisplayFor(model => model.FullName)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.FatherName)</th>
+            <td>@Html.DisplayFor(model => model.FatherName)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.MothersName)</th>
+            <td>@Html.DisplayFor(model => model.MothersName)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Gender)</th>
+            <td>@Html.DisplayFor(model => model.Gender)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+            <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Address)</th>
+            <td>@Html.DisplayFor(model => model.Address)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Religion)</th>
+            <td>@Html.DisplayFor(model => model.Religion)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.State)</th>
+            <td>@Html.DisplayFor(model => model.State)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.District)</th>
+            <td>@Html.DisplayFor(model => model.District)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+            <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Email)</th>
+            <td>@Html.DisplayFor(model => model.Email)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.AadharNumber)</th>
+            <td>@Html.DisplayFor(model => model.AadharNumber)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.PancardNumber)</th>
+            <td>@Html.DisplayFor(model => model.PancardNumber)</td>
+        </tr>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.Education)</th>
+            <td>@Html.DisplayFor(model => model.Education)</td>
+        </tr>
 
-                    }
-                    else
-                    {
-                        <p>No image available</p>
-                    }
-                </td>
-            </tr>
-        </table>
-        <button id="downloadButton" onclick="download()" style="background-color: #4CAF50; color: white; padding: 10px 20px; border: none; cursor: pointer; border-radius: 5px;">Download PDF</button>
-    </div>
+        <tr>
+            <th>@Html.DisplayNameFor(model => model.IdProof)</th>
+            <td>
+                @if (Model.IdProof != null && Model.IdProof.Length > 0)
+                {
+                    var base64 = Convert.ToBase64String(Model.IdProof);
+                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                    <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
+                }
+                else
+                {
+                    <p>No image available</p>
+                }
+            </td>
+        </tr>
+    </table>
     <footer>
         <div class="footer">
             <div class="column">

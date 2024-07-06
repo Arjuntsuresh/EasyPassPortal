@@ -3,37 +3,26 @@
 @{
     ViewBag.Title = "AdminPassportManagement";
 
-    // Method to get the filtered status list
     Func<string, List<SelectListItem>> getStatusList = (currentStatus) =>
     {
         var statuses = new List<SelectListItem>
                 {
-            new SelectListItem { Text = "Police Inquiry", Value = "Police Inquiry" },
-            new SelectListItem { Text = "Pending", Value = "Pending" },
-            new SelectListItem { Text = "Rejected", Value = "Rejected" },
-            new SelectListItem { Text = "Success", Value = "Success" }
-                                };
+        new SelectListItem { Text = "Police inquiry completed", Value = "Police inquiry completed" },
+        new SelectListItem { Text = "police inquiry rejected", Value = "police inquiry rejected" },
+        new SelectListItem { Text = "Success", Value = "Success" }
+                };
 
-        // Include current status in the list
-        var currentStatusItem = new SelectListItem { Text = currentStatus, Value = currentStatus };
-        statuses.Add(currentStatusItem);
-
-        // Filter the list based on current status
-        switch (currentStatus)
+        // Check if the current status is not already in the list
+        if (!statuses.Any(s => s.Value == currentStatus))
         {
-            case "Pending":
-                return statuses.Where(s => s.Value != "Pending").ToList();
-            case "Police Inquiry":
-                return statuses.Where(s => s.Value != "Pending" && s.Value != "Police Inquiry").ToList();
-            case "Success":
-            case "Rejected":
-                return new List<SelectListItem> { currentStatusItem }; // Only show the current status
-            default:
-                return statuses;
+            statuses.Add(new SelectListItem { Text = currentStatus, Value = currentStatus });
         }
+
+        return statuses;
     };
 
     var statusList = getStatusList(Model.Status);
+
 }
 
 
@@ -192,10 +181,10 @@
                                 @Html.EditorFor(model => model.Education, new { htmlAttributes = new { @class = "form-control" } })
                                 @Html.ValidationMessageFor(model => model.Education, "", new { @class = "text-danger" })
                             </td>
-
+                           
                         </tr>
                         <tr>
-
+                           
                             <th>@Html.LabelFor(model => model.IdProof, htmlAttributes: new { @class = "control-label" })</th>
                             <td>
                                 @if (Model.IdProof != null && Model.IdProof.Length > 0)
@@ -209,17 +198,9 @@
                                 }
                             </td>
                             <th>@Html.LabelFor(model => model.Status, htmlAttributes: new { @class = "control-label" })</th>
-                            <td>
-
-                                @if (Model.Status == "Police Inquiry")
-                                {
-                                    <p class="form-control">Police inquiry pending</p>
-                                }
-                                else
-                                {
+                            <td>   
                                     @Html.DropDownListFor(model => model.Status, statusList, new { @class = "form-control" })
                                     @Html.ValidationMessageFor(model => model.Status, "", new { @class = "text-danger" })
-                                }
                             </td>
                         </tr>
                     </tbody>

@@ -71,6 +71,41 @@ namespace EasyPassPortal.Models
 
         public string Status { get; set; }
         public byte[] Image { get; set; }
+        
+        public byte[] AadharPhoto { get; set; }
+        public byte[] IdProof { get; set; }
+
+        [Required(ErrorMessage = "Mothers name is required.")]
+        [Display(Name = "MothersName")]
+        public string MothersName { get; set; }
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
         public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth, ValidationContext context)
         {
             if (dateOfBirth >= DateTime.Now)

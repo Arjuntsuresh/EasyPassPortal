@@ -1,2 +1,1 @@
-﻿ALTER TABLE PassportTable
-ADD Status VARCHAR(50) DEFAULT 'Pending' NOT NULL;
+﻿INSERT INTO PoliceDept (Email,Password) VALUES ("police@gmail.com","12345");
