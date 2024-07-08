@@ -264,6 +264,7 @@
     <Content Include="Content\CSS\AdminCss\AdminLoginpage.css" />
     <Content Include="Content\CSS\AdminCss\EditAdminPassword.css" />
     <Content Include="Content\CSS\Contact.css" />
+    <Content Include="Content\CSS\DownloadPage.css" />
     <Content Include="Content\CSS\EditUserPassword.css" />
     <Content Include="Content\CSS\LoginUser.css" />
     <Content Include="Content\CSS\HomePage.css" />
@@ -279,22 +280,44 @@
     <Content Include="Content\Images\About Us_files\0064d26124ae8407.css" />
     <Content Include="Content\Images\About Us_files\bootstrap.min.css" />
     <Content Include="Content\Images\About Us_files\sitecontext.min.html" />
+    <Content Include="Content\Images\amrita-egov-project-passport-seva-img.jpg" />
     <Content Include="Content\Images\annika-gordon-xaIC5JbUepM-unsplash.jpg" />
     <Content Include="Content\Images\ethan-wilkinson-gUwTYmydga0-unsplash.jpg" />
+    <Content Include="Content\Images\FI-3-4.jpg" />
+    <Content Include="Content\Images\gettyimages-114906576-612x612.jpg" />
+    <Content Include="Content\Images\gettyimages-1436112530-612x612.jpg" />
+    <Content Include="Content\Images\gettyimages-144462145-612x612.jpg" />
+    <Content Include="Content\Images\gettyimages-3041007-612x612.jpg" />
+    <Content Include="Content\Images\gettyimages-451720580-612x612.jpg" />
+    <Content Include="Content\Images\gettyimages-989578628-612x612.jpg" />
+    <Content Include="Content\Images\government-of-india.jpg" />
+    <Content Include="Content\Images\Government_of_Kerala_Logo.svg.png" />
+    <Content Include="Content\Images\H20240618161073.jpg" />
+    <Content Include="Content\Images\H20240704162133.jpg" />
+    <Content Include="Content\Images\H20240705162155.jpg" />
+    <Content Include="Content\Images\images.png" />
+    <Content Include="Content\Images\india-kerala-kochi-ernakulam-kerala-police-badge-on-side-of-traffic-BJCXF9.jpg" />
+    <Content Include="Content\Images\india-symbol-narcotics-control-bureau-delhi-illegal-drug-trade-heroin-indian-police-service-law-enforcement-in-india-intelligence-agency-png-clipart.jpg" />
     <Content Include="Content\Images\jaimie-harmsen-8d9jdqyGaQA-unsplash.jpg" />
     <Content Include="Content\Images\jurica-koletic-7YVZYZeITc8-unsplash.jpg" />
     <Content Include="Content\Images\kylie-anderson-aGDILBE1Kus-unsplash.jpg" />
     <Content Include="Content\Images\mana5280-ivG8LkDrtjs-unsplash.jpg" />
+    <Content Include="Content\Images\mock.jpg" />
     <Content Include="Content\Images\nicole-geri-gMJ3tFOLvnA-unsplash.jpg" />
     <Content Include="Content\Images\Passport-logo.png" />
+    <Content Include="Content\Images\passportseva.jpg" />
     <Content Include="Content\Images\PedalPlex.__1_-removebg-preview.png" />
+    <Content Include="Content\Images\png-transparent-kerala-police-academy-state-police-police-police-officer-text-people.png" />
     <Content Include="Content\Images\png-transparent-spider-man-heroes-download-with-transparent-background-free-thumbnail.png" />
     <Content Include="Content\Images\Shri_Kirtivardhan_Singh.jpg" />
     <Content Include="Content\Images\Shri_Pabitra_Margherita.jpg" />
     <Content Include="Content\Images\stephanie-liverani-Zz5LQe-VSMY-unsplash.jpg" />
+    <Content Include="Content\Images\stock-photo-india-passport-stamp-visa-stamp-for-travel-delhi-international-airport-grunge-sign-immigration-1621592347.jpg" />
     <Content Include="Content\Images\under_profile.jpg" />
+    <Content Include="Content\Images\up-ploice.jpg" />
     <Content Include="Content\Images\vicky-hladynets-C8Ta0gwPbQg-unsplash.jpg" />
     <Content Include="Content\js\PassportRegValidation.js" />
+    <Content Include="Content\js\textAutoRun.js" />
     <Content Include="favicon.ico" />
     <Content Include="Global.asax" />
     <Content Include="Content\Site.css" />
@@ -368,6 +391,7 @@
     <Content Include="Scripts\jquery.validate.unobtrusive.js" />
     <Content Include="Scripts\jquery.validate.unobtrusive.min.js" />
     <Content Include="Scripts\modernizr-2.8.3.js" />
+    <Content Include="Scripts\userScript\passportScript.js" />
     <Content Include="Web.config" />
     <Content Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
@@ -401,9 +425,11 @@
     <Content Include="Views\Police\PoliceLoginDetail.cshtml" />
     <Content Include="Views\Police\PoliceHomePage.cshtml" />
     <Content Include="Views\Police\PolicePassportManagement.cshtml" />
+    <Content Include="Views\User\PassportFormPage.cshtml" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\CSS\PoliceCss\" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\bootstrap.rtl.min.css.map" />

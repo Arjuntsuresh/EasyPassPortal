@@ -121,12 +121,6 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         public ActionResult AddUserPassportDetail()
         {
-            string userEmail = Session["UserEmail"] as string;
-            if (string.IsNullOrEmpty(userEmail))
-            {
-                return RedirectToAction("LoginUserDetail", "User");
-            }
-
             // Set cache control headers to prevent back button after logout
             Response.Cache.SetExpires(DateTime.UtcNow.AddMinutes(-1));
             Response.Cache.SetCacheability(HttpCacheability.NoCache);
@@ -134,6 +128,11 @@ namespace EasyPassPortal.Controllers
             Response.Cache.SetRevalidation(HttpCacheRevalidation.AllCaches);
             Response.Cache.AppendCacheExtension("post-check=0, pre-check=0");
 
+            string userEmail = Session["UserEmail"] as string;
+            if (string.IsNullOrEmpty(userEmail))
+            {
+                return RedirectToAction("LoginUserDetail", "User");
+            }
             return View();
         }
 
@@ -144,14 +143,17 @@ namespace EasyPassPortal.Controllers
         /// <returns></returns>
         [HttpPost]
         public ActionResult AddUserPassportDetail(UserPassportDetails passportDetails,
-            HttpPostedFileBase image1,HttpPostedFileBase aadharPhoto1,HttpPostedFileBase idProof1)
+       HttpPostedFileBase image1, HttpPostedFileBase aadharPhoto1, HttpPostedFileBase idProof1)
         {
             try
             {
                 if (ModelState.IsValid)
                 {
-                    passportDetails.Image=new byte[image1.ContentLength];
-                    image1.InputStream.Read(passportDetails.Image,0,image1.ContentLength);
+                    // Retrieve the email from the session and set it in the passportDetails model
+                    passportDetails.Email = Session["UserEmail"] as string;
+
+                    passportDetails.Image = new byte[image1.ContentLength];
+                    image1.InputStream.Read(passportDetails.Image, 0, image1.ContentLength);
 
                     passportDetails.AadharPhoto = new byte[aadharPhoto1.ContentLength];
                     aadharPhoto1.InputStream.Read(passportDetails.AadharPhoto, 0, aadharPhoto1.ContentLength);
@@ -174,6 +176,7 @@ namespace EasyPassPortal.Controllers
                 return View();
             }
         }
+
 
         /// <summary>
         /// About us page.
@@ -329,6 +332,30 @@ namespace EasyPassPortal.Controllers
             catch (Exception ex)
             {
                 ViewBag.Message = "Error occurred while checking passport application status: " + ex.Message;
+                return View();
+            }
+        }
+
+        public ActionResult PassportFormPage()
+        {
+            try
+            {
+                string userEmail = Session["UserEmail"] as string;
+                //if (string.IsNullOrEmpty(userEmail))
+                //{
+                //    return RedirectToAction("LoginUserDetail", "User");
+                //}
+                UserDetails userDetails = new UserDetails();
+                UserPassportDetails userPassportDetails = userDetails.GetUserPassportDetails(userEmail);
+                if (userPassportDetails == null)
+                {
+                    return RedirectToAction("GetUserDetail");
+                }
+                return View(userPassportDetails);
+            }
+            catch (Exception ex)
+            {
+                ViewBag.Message = "Error occurred while editing!" + ex.Message;
                 return View();
             }
         }

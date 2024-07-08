@@ -19,6 +19,32 @@
 </head>
 
 <body>
+    <style>
+        .group {
+            position: relative;
+            height: 30px;
+            overflow: hidden;
+            color: black; /* Text color */
+            background-color: white; /* Background color */
+           
+        }
+
+            .group .text {
+                position: absolute;
+                margin: 5px 0;
+                padding: 0;
+                width: max-content;
+                animation: my-animation 24s linear infinite;
+                $
+
+        {
+            position
+        }
+
+        : -100%; /* Initial position off-screen */
+        }
+    </style>
+
     <div class="navbar navbar-expand-lg">
 
         <img class="img" src="~/Content/Images/3742bcd3b4b5d471dae27a60bd4b5f07.jpg" style="width:60px;height:56px" alt="Logo">
@@ -32,19 +58,6 @@
                 @{
                     var userEmail = Session["UserEmail"] as string;
                 }
-                @if (ViewBag.IsUserPassportApplyed == true)
-                {
-                    // User has applied for a passport
-                    // You can add content here that should be displayed when the user has applied for a passport
-                }
-                else
-                {
-                    // User has not applied for a passport
-                    <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
-                    </li>
-                }
-
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     @*<li class="nav-item">
@@ -55,6 +68,24 @@
                     </li>
 
                 }
+                @if (ViewBag.IsUserPassportApplyed == true)
+                {
+                    // User has applied for a passport
+                    // You can add content here that should be displayed when the user has applied for a passport
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("StatusEnquiry", "User")">Status Inquiry</a>
+                    </li>
+                }
+                else
+                {
+                    // User has not applied for a passport
+                    <li class="nav-item">
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+                    </li>
+
+                }
+
+
                 @if (string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
@@ -63,15 +94,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
+                    </li>
                 }
 
 
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
-                </li>
+
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
@@ -81,31 +113,82 @@
             </ul>
         </div>
     </div>
+    <div class="container">
+        <div class="group">
+            <p class="text">
+                Applicants having appointment at PSK Shalimar Place, PSK Herald House-ITO, PSK Ambala, PSK Jammu, PSK Ranchi, PSK Bhubaneshwar and PSK R K Puram kindly note there is address change. Please refer to respective RPO page for new address.
+            </p>
+        </div>
+    </div>
     <div class="slider">
         <figure>
-            <div class="slide">
+            @if (string.IsNullOrEmpty(userEmail))
+            {
 
-                <img class="img-fluid" src="~/Content/Images/annika-gordon-xaIC5JbUepM-unsplash.jpg"
-                     alt="Image 3">
 
-            </div>
-            <div class="slide">
+                <div class="slide">
 
-                <img class="img-fluid" src="~/Content/Images/kylie-anderson-aGDILBE1Kus-unsplash.jpg"
-                     alt="Image 3">
+                    <img class="img-fluid" src="~/Content/Images/gettyimages-989578628-612x612.jpg"
+                         alt="Image 3">
 
-            </div>
-            <div class="slide">
+                </div>
 
-                <img class="img-fluid" src="~/Content/Images/annika-gordon-xaIC5JbUepM-unsplash.jpg"
-                     alt="Image 3">
 
-            </div>
-            <div class="slide">
+                <div class="slide">
 
-                <img class="img-fluid" src="~/Content/Images/nicole-geri-gMJ3tFOLvnA-unsplash.jpg"
-                     alt="Image 3">
-            </div>
+                    <img class="img-fluid" src="~/Content/Images/H20240618161073.jpg"
+                         alt="Image 3">
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img class="img-fluid" src="~/Content/Images/H20240704162133.jpg"
+                         alt="Image 3">
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img class="img-fluid" src="~/Content/Images/H20240705162155.jpg"
+                         alt="Image 3">
+                </div>
+
+            }
+            else
+            {
+                <div class="slide">
+
+                    <img class="img-fluid" src="~/Content/Images/gettyimages-114906576-612x612.jpg"
+                         alt="Image 3">
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img class="img-fluid" src="~/Content/Images/gettyimages-3041007-612x612.jpg"
+                         alt="Image 3">
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img class="img-fluid" src="~/Content/Images/gettyimages-1436112530-612x612.jpg"
+                         alt="Image 3">
+
+                </div>
+
+
+                <div class="slide">
+
+                    <img class="img-fluid" src="~/Content/Images/gettyimages-451720580-612x612.jpg"
+                         alt="Image 3">
+                </div>
+            }
         </figure>
     </div>
     <footer>
@@ -126,9 +209,10 @@
             </div>
         </div>
     </footer>
+    <script src="~/Content/js/textAutoRun.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
+            integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
+            crossorigin="anonymous"></script>
 </body>
-<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.3/dist/js/bootstrap.bundle.min.js"
-        integrity="sha384-YvpcrYf0tY3lHB60NNkmXc5s9fDVZLESaAA55NDzOxhy9GkcIdslK1eN7N6jIeHz"
-        crossorigin="anonymous"></script>
 
 </html>

@@ -31,6 +31,9 @@
                 {
                     // User has applied for a passport
                     // You can add content here that should be displayed when the user has applied for a passport
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("GetUserDetail", "User")">User profile</a>
+                    </li>
                 }
                 else
                 {
@@ -44,8 +47,8 @@
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     @*<li class="nav-item">
-                            <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
-                        </li>*@
+                <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+            </li>*@
 
                 }
                 @if (string.IsNullOrEmpty(userEmail))
@@ -56,15 +59,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
+                    </li>
                 }
 
 
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
-                </li>
+
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
@@ -74,171 +78,196 @@
             </ul>
         </div>
     </div>
-<div class="container mt-4">
-    @if (Model.Status == "Rejected")
-    {
-        <div class="alert alert-danger">
-            Current Status: <span class="font-weight-bold">@Model.Status</span>
-        </div>
-    }
-    else
-    {
-        <div class="alert alert-info">
-            Current Status: <span class="font-weight-bold">@Model.Status</span>
-        </div>
-    }
-
-    <h4>User Passport Details</h4>
-    <hr />
-
-    <table class="table table-bordered table-striped">
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Image)</th>
-            <td>
-                @if (Model.Image != null && Model.Image.Length > 0)
-                {
-                    var base64 = Convert.ToBase64String(Model.Image);
-                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
-                    <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
-                }
-                else
-                {
-                    <p>No image available</p>
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.AadharPhoto)</th>
-            <td>
-                @if (Model.AadharPhoto != null && Model.AadharPhoto.Length > 0)
-                {
-                    var base64 = Convert.ToBase64String(Model.AadharPhoto);
-                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
-                    <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
-                }
-                else
-                {
-                    <p>No image available</p>
-                }
-            </td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Id)</th>
-            <td>@Html.DisplayFor(model => model.Id)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.FullName)</th>
-            <td>@Html.DisplayFor(model => model.FullName)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.FatherName)</th>
-            <td>@Html.DisplayFor(model => model.FatherName)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.MothersName)</th>
-            <td>@Html.DisplayFor(model => model.MothersName)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Gender)</th>
-            <td>@Html.DisplayFor(model => model.Gender)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
-            <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Address)</th>
-            <td>@Html.DisplayFor(model => model.Address)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Religion)</th>
-            <td>@Html.DisplayFor(model => model.Religion)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.State)</th>
-            <td>@Html.DisplayFor(model => model.State)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.District)</th>
-            <td>@Html.DisplayFor(model => model.District)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
-            <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Email)</th>
-            <td>@Html.DisplayFor(model => model.Email)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.AadharNumber)</th>
-            <td>@Html.DisplayFor(model => model.AadharNumber)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.PancardNumber)</th>
-            <td>@Html.DisplayFor(model => model.PancardNumber)</td>
-        </tr>
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.Education)</th>
-            <td>@Html.DisplayFor(model => model.Education)</td>
-        </tr>
-
-        <tr>
-            <th>@Html.DisplayNameFor(model => model.IdProof)</th>
-            <td>
-                @if (Model.IdProof != null && Model.IdProof.Length > 0)
-                {
-                    var base64 = Convert.ToBase64String(Model.IdProof);
-                    var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
-                    <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
-                }
-                else
-                {
-                    <p>No image available</p>
-                }
-            </td>
-        </tr>
-    </table>
-    <footer>
-        <div class="footer">
-            <div class="column">
-                <a href="https://www.facebook.com/"><i class="fa fa-facebook" style="width: 50px; height: 50px;"></i></a>
-                <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="width: 50px; height: 50px;"></i></a>
-                <a href="https://www.youtube.com/"><i class="fa fa-youtube" style="width: 50px; height: 50px;"></i></a>
-                <a href="https://x.com/i/flow/login"><i class="fa fa-twitter" style="width: 50px; height: 50px;"></i></a>
+    <div class="container mt-4">
+        @if (Model.Status == "Rejected" || Model.Status == "police inquiry rejected")
+        {
+            <div class="alert alert-danger">
+                Current Status: <span class="font-weight-bold">@Model.Status</span>
             </div>
-
-            <div class="row">
-                <ul>
-                    <li><a href="@Url.Action("Contact", "User")">Contact us</a></li>
-                    <li><a href="#">Privacy Policy</a></li>
-                    <li><a href="#">Terms & Conditions</a></li>
-                    <li><a href="#">Career</a></li>
-                </ul>
-            </div>
-        </div>
-    </footer>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.esm.min.js" integrity="sha512-p6KKvRUjLcXZtvsFd+01s4jcHKu0PNWplQNHeEHmq+27tF5osNRRNkziDu45B5Mo+0+DE/k1qD0ZI29DHEutww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
-
-    <script>
-        function download() {
-            var element = document.body; // Select the entire page
-
-
-            let randomNumber = Math.floor(Math.random() * (10000000000 - 1)) + 1;
-
-            setTimeout(function () {
-                var opt = {
-                    margin: 0,
-                    filename: 'Application form' + randomNumber + '.pdf',
-                    html2canvas: { scale: 3 }, // Adjust the scale as needed
-                    jsPDF: { unit: 'in', format: [20, 15], orientation: 'portrait' } // Set custom page size
-                };
-
-                html2pdf().set(opt).from(element).save();
-            }, 1000); // Adjust the delay as needed
         }
-    </script>
+        else if (Model.Status == "Pending" || Model.Status == "Police Inquiry" || Model.Status == "Police inquiry completed")
+        {
+            <div class="alert alert-warning" style="background-color: yellow; color: black;">
+                Current Status: <span class="font-weight-bold">@Model.Status</span>
+            </div>
+        }
+        else
+        {
+            <div class="alert alert-info" style="background-color: green; color: white;">
+                Current Status: <span class="font-weight-bold">@Model.Status</span>
+            </div>
+        }
+
+
+        <h4>User Passport Details</h4>
+        <hr />
+
+        <table class="table table-bordered table-striped">
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Image)</th>
+                <td>
+                    @if (Model.Image != null && Model.Image.Length > 0)
+                    {
+                        var base64 = Convert.ToBase64String(Model.Image);
+                        var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
+                    }
+                    else
+                    {
+                        <p>No image available</p>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.AadharPhoto)</th>
+                <td>
+                    @if (Model.AadharPhoto != null && Model.AadharPhoto.Length > 0)
+                    {
+                        var base64 = Convert.ToBase64String(Model.AadharPhoto);
+                        var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
+                    }
+                    else
+                    {
+                        <p>No image available</p>
+                    }
+                </td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Id)</th>
+                <td>@Html.DisplayFor(model => model.Id)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FullName)</th>
+                <td>@Html.DisplayFor(model => model.FullName)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.FatherName)</th>
+                <td>@Html.DisplayFor(model => model.FatherName)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.MothersName)</th>
+                <td>@Html.DisplayFor(model => model.MothersName)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Gender)</th>
+                <td>@Html.DisplayFor(model => model.Gender)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.DateOfBirth)</th>
+                <td>@Html.DisplayFor(model => model.DateOfBirth)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Address)</th>
+                <td>@Html.DisplayFor(model => model.Address)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Religion)</th>
+                <td>@Html.DisplayFor(model => model.Religion)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.State)</th>
+                <td>@Html.DisplayFor(model => model.State)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.District)</th>
+                <td>@Html.DisplayFor(model => model.District)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PhoneNumber)</th>
+                <td>@Html.DisplayFor(model => model.PhoneNumber)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Email)</th>
+                <td>@Html.DisplayFor(model => model.Email)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.AadharNumber)</th>
+                <td>@Html.DisplayFor(model => model.AadharNumber)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.PancardNumber)</th>
+                <td>@Html.DisplayFor(model => model.PancardNumber)</td>
+            </tr>
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.Education)</th>
+                <td>@Html.DisplayFor(model => model.Education)</td>
+            </tr>
+
+            <tr>
+                <th>@Html.DisplayNameFor(model => model.IdProof)</th>
+                <td>
+                    @if (Model.IdProof != null && Model.IdProof.Length > 0)
+                    {
+                        var base64 = Convert.ToBase64String(Model.IdProof);
+                        var imgSrc = string.Format("data:image/jpg;base64,{0}", base64);
+                        <img src="@imgSrc" class="img-thumbnail" style="max-width:100px; max-height:100px;" />
+                    }
+                    else
+                    {
+                        <p>No image available</p>
+                    }
+                </td>
+            </tr>
+        </table>
+        @if (Model.Status == "Success")
+        {
+            <button style="background-color: #4CAF50; /* Green */
+               border: none;
+               color: white;
+               padding: 15px 32px;
+               text-align: center;
+               text-decoration: none;
+               display: inline-block;
+               font-size: 16px;
+               margin: 4px 2px;
+               cursor: pointer;">
+                <a href="@Url.Action("PassportFormPage", "User")" style="color: white; text-decoration: none;">
+                    Download PDF
+                </a>
+            </button>
+
+        }
+        <footer>
+            <div class="footer">
+                <div class="column">
+                    <a href="https://www.facebook.com/"><i class="fa fa-facebook" style="width: 50px; height: 50px;"></i></a>
+                    <a href="https://www.instagram.com/"><i class="fa fa-instagram" style="width: 50px; height: 50px;"></i></a>
+                    <a href="https://www.youtube.com/"><i class="fa fa-youtube" style="width: 50px; height: 50px;"></i></a>
+                    <a href="https://x.com/i/flow/login"><i class="fa fa-twitter" style="width: 50px; height: 50px;"></i></a>
+                </div>
+
+                <div class="row">
+                    <ul>
+                        <li><a href="@Url.Action("Contact", "User")">Contact us</a></li>
+                        <li><a href="#">Privacy Policy</a></li>
+                        <li><a href="#">Terms & Conditions</a></li>
+                        <li><a href="#">Career</a></li>
+                    </ul>
+                </div>
+            </div>
+        </footer>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.3.3/js/bootstrap.esm.min.js" integrity="sha512-p6KKvRUjLcXZtvsFd+01s4jcHKu0PNWplQNHeEHmq+27tF5osNRRNkziDu45B5Mo+0+DE/k1qD0ZI29DHEutww==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+        <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+
+        <script>
+            function download() {
+                var element = document.body; // Select the entire page
+
+
+                let randomNumber = Math.floor(Math.random() * (10000000000 - 1)) + 1;
+
+                setTimeout(function () {
+                    var opt = {
+                        margin: 0,
+                        filename: 'Application form' + randomNumber + '.pdf',
+                        html2canvas: { scale: 3 }, // Adjust the scale as needed
+                        jsPDF: { unit: 'in', format: [20, 15], orientation: 'portrait' } // Set custom page size
+                    };
+
+                    html2pdf().set(opt).from(element).save();
+                }, 1000); // Adjust the delay as needed
+            }
+        </script>
 </body>
 </html>

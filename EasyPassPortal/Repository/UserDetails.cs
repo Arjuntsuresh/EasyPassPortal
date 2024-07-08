@@ -47,18 +47,20 @@ namespace EasyPassPortal.Repository
                 int userExists = Convert.ToInt32(checkCommand.ExecuteScalar());
                 UserDBConnection.Close();
 
-                if (userExists == 0) 
+                if (userExists == 0)
                 {
+                    string encryptedPassword = EncryptPasswordBase64(user.Password);
+
                     SqlCommand addCommand = new SqlCommand("AddUserDetails", UserDBConnection);
                     addCommand.CommandType = CommandType.StoredProcedure;
                     addCommand.Parameters.AddWithValue("@Email", user.Email);
-                    addCommand.Parameters.AddWithValue("@Password", user.Password);
+                    addCommand.Parameters.AddWithValue("@Password", encryptedPassword);
 
                     UserDBConnection.Open();
                     int result = addCommand.ExecuteNonQuery();
                     UserDBConnection.Close();
 
-                    return result > 0; 
+                    return result > 0;
                 }
 
                 return false;
@@ -69,6 +71,18 @@ namespace EasyPassPortal.Repository
                 return false;
             }
         }
+
+        public static string EncryptPasswordBase64(string password)
+        {
+            var plainTextBytes=System.Text.Encoding.UTF8.GetBytes(password);
+            return System.Convert.ToBase64String(plainTextBytes);
+        }
+        public static string DecryptPasswordBase64(string base64EncodedData)
+        {
+            var base64EncodedBytes = System.Convert.FromBase64String(base64EncodedData);
+            return System.Text.Encoding.UTF8.GetString(base64EncodedBytes);
+        }
+
 
         /// <summary>
         /// Verifing user login page.
@@ -81,17 +95,18 @@ namespace EasyPassPortal.Repository
             SqlConnection UserDBConnection = null;
             try
             {
+                string encryptedPassword = EncryptPasswordBase64(password); // Encrypt the input password
                 string ConfigurationConnection = ConfigurationManager.ConnectionStrings["UserData"].ToString();
                 UserDBConnection = new SqlConnection(ConfigurationConnection);
                 UserDBConnection.Open();
                 SqlCommand sqlCommand = new SqlCommand("GetUserLoginDetail", UserDBConnection);
                 sqlCommand.CommandType = System.Data.CommandType.StoredProcedure;
                 sqlCommand.Parameters.AddWithValue("@Email", email);
-                sqlCommand.Parameters.AddWithValue("@Password", password);
+                sqlCommand.Parameters.AddWithValue("@Password", encryptedPassword); // Use the encrypted password
                 int result = (int)sqlCommand.ExecuteScalar();
                 return result > 0;
             }
-            catch 
+            catch
             {
                 return false;
             }
@@ -103,6 +118,7 @@ namespace EasyPassPortal.Repository
                 }
             }
         }
+
 
 
         /// <summary>
@@ -192,12 +208,13 @@ namespace EasyPassPortal.Repository
         {
             try
             {
+                string encryptedPassword = EncryptPasswordBase64(user.Password);
                 UserConnection();
                 using (SqlCommand sqlCommand = new SqlCommand("UpdateUserPassword", UserDBConnection))
                 {
                     sqlCommand.CommandType = CommandType.StoredProcedure;
                     sqlCommand.Parameters.AddWithValue("@Email", user.Email);
-                    sqlCommand.Parameters.AddWithValue("@Password", user.Password);
+                    sqlCommand.Parameters.AddWithValue("@Password",encryptedPassword);
 
                     UserDBConnection.Open();
                     sqlCommand.ExecuteNonQuery();

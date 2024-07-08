@@ -9,102 +9,76 @@ namespace EasyPassPortal.Models
 {
     public class UserPassportDetails
     {
+        [Required]
         [Display(Name = "ID")]
         public int Id { get; set; }
 
-        [Required(ErrorMessage = "Full name is required.")]
+        [Required]
         [Display(Name = "Full Name")]
         public string FullName { get; set; }
 
-        [Required(ErrorMessage = "Father's name is required.")]
+        [Required]
         [Display(Name = "Father Name")]
         public string FatherName { get; set; }
 
-        [Required(ErrorMessage = "Gender is required.")]
+        [Required]
         [Display(Name = "Gender")]
         public string Gender { get; set; }
 
-        [Required(ErrorMessage = "Date of Birth is required.")]
+        [Required]
         [DataType(DataType.Date)]
         [Display(Name = "Date of Birth")]
-        [CustomValidation(typeof(UserPassportDetails), "ValidateDateOfBirth")]
+       
         public String DateOfBirth { get; set; }
 
-        [Required(ErrorMessage = "Address is required.")]
+        [Required]
         [Display(Name = "Address")]
         public string Address { get; set; }
 
-        [Required(ErrorMessage = "Religion is required.")]
+        [Required]
         [Display(Name = "Religion")]
         public string Religion { get; set; }
 
-        [Required(ErrorMessage = "State is required.")]
+        [Required]
         [Display(Name = "State")]
         public string State { get; set; }
 
-        [Required(ErrorMessage = "District is required.")]
+        [Required]
         [Display(Name = "District")]
         public string District { get; set; }
 
-   
-        [Required(ErrorMessage = "Phone number is required.")]
-        [Phone(ErrorMessage = "Invalid phone number.")]
+
+        [Required]
         [Display(Name = "Phone Number")]
         public string PhoneNumber { get; set; }
 
-        [Required(ErrorMessage = "Email is required.")]
-        [EmailAddress(ErrorMessage = "Invalid email address.")]
+       
         [Display(Name = "Email")]
         public string Email { get; set; }
-    
-        [Required(ErrorMessage = "Aadhar number is required.")]
+
+        [Required]
         [Display(Name = "Aadhar Number")]
         public string AadharNumber { get; set; }
 
-        [Required(ErrorMessage = "Pancard number is required.")]
+        [Required]
         [Display(Name = "Pancard Number")]
         public string PancardNumber { get; set; }
 
-        [Required(ErrorMessage = "Education field is required.")]
+        [Required]
         [Display(Name = "Education")]
         public string Education { get; set; }
 
         public string Status { get; set; }
+       
         public byte[] Image { get; set; }
-        
+     
         public byte[] AadharPhoto { get; set; }
+       
         public byte[] IdProof { get; set; }
 
-        [Required(ErrorMessage = "Mothers name is required.")]
+        [Required]
         [Display(Name = "MothersName")]
         public string MothersName { get; set; }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 
         public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth, ValidationContext context)
         {

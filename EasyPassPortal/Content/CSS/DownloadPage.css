@@ -1,0 +1,223 @@
+﻿body {
+    font-family: Arial, sans-serif;
+    margin-top: 20px;
+    color: #484b51;
+    background: url('/Content/Images/government-of-india.jpg') no-repeat center center fixed;
+    background-size: inherit; /* Adjusts the background image to cover the entire background */
+}
+
+
+.bg-blur {
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+}
+
+.container {
+    background: rgba(255, 255, 255, 0.8);
+    padding: 20px;
+    border-radius: 10px;
+}
+
+.table-bg {
+    background: rgba(255, 255, 255, 0); /* Remove background color */
+}
+
+.text-center.text-150 i {
+    font-size: 3rem;
+    color: #4caf50;
+}
+
+.text-default-d3 {
+    font-size: 2rem;
+}
+
+.text-blue {
+    color: #007bff;
+}
+
+.text-95 {
+    /*  font-size: 0.95rem;*/
+}
+
+.text-110 {
+    /* font-size: 1.1rem;*/
+}
+
+.text-120 {
+    /*  font-size: 1.2rem;*/
+}
+
+.text-150 {
+    /*font-size: 1.5rem;*/
+}
+
+.text-secondary-d1 {
+    color: #6c757d;
+    font-size:50%;
+}
+
+.text-secondary-d2 {
+    color: #343a40;
+}
+
+.text-secondary-m1 {
+    color: #adb5bd;
+}
+
+.text-secondary-m2 {
+    color: #ced4da;
+}
+
+.text-600 {
+    font-weight: 600;
+}
+
+.text-105 {
+      font-size: 1.05rem;
+}
+
+.badge-warning {
+    background-color: #ffc107;
+}
+
+.badge-pill {
+    border-radius: 50rem;
+}
+
+.bgc-default-tp1 {
+    background-color: #e9ecef;
+}
+
+.bgc-default-l4 {
+    background-color: #f8f9fa;
+}
+
+.bgc-primary-l3 {
+    background-color: #e2e6ea;
+}
+
+.brc-default-l1 {
+    border-color: #d1d8e0;
+}
+
+.brc-default-l2 {
+    border-color: #dee2e6;
+}
+
+.page-header {
+    margin: 0 0 1rem;
+    padding-bottom: 1rem;
+    padding-top: .5rem;
+    border-bottom: 1px dotted #e2e2e2;
+    display: -ms-flexbox;
+    display: flex;
+    -ms-flex-pack: justify;
+    justify-content: space-between;
+    -ms-flex-align: center;
+    align-items: center;
+}
+
+.page-title {
+    padding: 0;
+    margin: 0;
+    font-size: 100%;
+    font-weight: 300;
+}
+
+.ml-n1, .mx-n1 {
+    margin-left: -.25rem !important;
+}
+
+.mr-n1, .mx-n1 {
+    margin-right: -.25rem !important;
+}
+
+.mb-4, .my-4 {
+    margin-bottom: 1.5rem !important;
+}
+
+hr {
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+    border: 0;
+    border-top: 1px solid rgba(0,0,0,.1);
+}
+
+.text-grey-m2 {
+    color: #888a8d !important;
+}
+
+.text-success-m2 {
+    color: #86bd68 !important;
+}
+
+.font-bolder, .text-600 {
+    font-weight: 600 !important;
+}
+
+.text-110 {
+    /* font-size: 110% !important;*/
+}
+
+.text-blue {
+    color: #478fcc !important;
+}
+
+.pb-25, .py-25 {
+    padding-bottom: .75rem !important;
+}
+
+.pt-25, .py-25 {
+    padding-top: .75rem !important;
+}
+
+.bgc-default-tp1 {
+    background-color: rgba(121,169,197,.92) !important;
+}
+
+.bgc-default-l4, .bgc-h-default-l4:hover {
+    background-color: #f3f8fa !important;
+}
+
+.page-header .page-tools {
+    -ms-flex-item-align: end;
+    align-self: flex-end;
+}
+
+.btn-light {
+    color: #757984;
+    background-color: #f5f6f9;
+    border-color: #dddfe4;
+}
+
+.w-2 {
+    width: 1rem;
+}
+
+.text-120 {
+    /* font-size: 120% !important;*/
+}
+
+.text-primary-m1 {
+    color: #4087d4 !important;
+}
+
+.text-danger-m1 {
+    color: #dd4949 !important;
+}
+
+.text-blue-m2 {
+    color: #68a3d5 !important;
+}
+
+.text-60 {
+    /* font-size: 60% !important;*/
+}
+
+.text-grey-m1 {
+    color: #7b7d81 !important;
+}
+
+.align-bottom {
+    vertical-align: bottom !important;
+}

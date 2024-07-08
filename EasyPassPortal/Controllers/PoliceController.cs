@@ -115,6 +115,12 @@ namespace EasyPassPortal.Controllers
             }
         }
 
+        public ActionResult LogOutPolice()
+        {
+            Session.Abandon();
+            return RedirectToAction("PoliceLoginDetail", "Police");
+        }
+
 
     }
 }

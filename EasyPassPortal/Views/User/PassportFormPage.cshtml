@@ -1,0 +1,279 @@
+﻿@model EasyPassPortal.Models.UserPassportDetails
+
+@{
+    Layout = null;
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>PassportFormPage</title>
+    <link href="//netdna.bootstrapcdn.com/bootstrap/3.1.0/css/bootstrap.min.css" rel="stylesheet" id="bootstrap-css">
+    <script src="//netdna.bootstrapcdn.com/bootstrap/3.1.0/js/bootstrap.min.js"></script>
+    <script src="//code.jquery.com/jquery-1.11.1.min.js"></script>
+    <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
+    <link href="~/Content/CSS/DownloadPage.css" rel="stylesheet" />
+</head>
+<body>
+    <div class="page-content container">
+        <div class="page-header text-blue-d2">
+            <h1 class="page-title text-secondary-d1">
+                User Passport Details
+                <small class="">
+                    <i class="fa fa-angle-double-right text-80"></i>
+                    ID: #12345
+                </small>
+            </h1>
+            <div class="page-tools">
+                <div class="action-buttons">
+                    <button class="btn bg-white btn-light mx-1px text-95" id="downloadButton" onclick="download()" data-title="Print">
+                        <i class="mr-1 fa fa-print text-primary-m1 text-120 w-2"></i>
+                        Print
+                    </button>
+                </div>
+            </div>
+        </div>
+
+        <div class="container px-0">
+            <div class="row mt-4">
+                <div class="col-12 col-lg-12">
+                    <div class="row" style="position: relative;">
+                        <div class="col-12" style="display: flex; align-items: center;">
+                            <img src="~/Content/Images/passportseva.jpg" style="position: absolute; width: 160px; height: 160px;" alt="Left Corner Image" />
+                            <div class="text-center text-150" style="flex: 1;">
+                                <img src="~/Content/Images/amrita-egov-project-passport-seva-img.jpg" style="width: 20%; height: 20%;" />
+                                <span class="text-default-d3">EasyPassPortal</span>
+                            </div>
+                        </div>
+                    </div>
+
+                    <hr class="row brc-default-l1 mx-n1 mb-4" />
+                    <div class="row">
+                        <div class="col-sm-6">
+                            <div>
+                                <span class="text-sm text-grey-m2 align-middle">Full Name:</span>
+                                <span class="text-600 text-110 text-blue align-middle">@Html.DisplayFor(model => model.FullName)</span>
+                            </div>
+                            <div class="text-grey-m2">
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Father's Name:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">@Html.DisplayFor(model => model.FatherName)</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Mother's Name:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">@Html.DisplayFor(model => model.MothersName)</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Gender:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">@Html.DisplayFor(model => model.Gender)</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Date of Birth:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">@Html.DisplayFor(model => model.DateOfBirth)</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Address:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">@Html.DisplayFor(model => model.Address)</span>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="col-sm-6 align-self-start d-sm-flex justify-content-end">
+                            <div class="text-grey-m2">
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Contact for Consular Services:</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Name:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">Shri Amit Narang</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Position:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">Joint Secretary (CPV)</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Division:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">PSP Division</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Ministry:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">Ministry of External Affairs</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Address:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">Room No. 20, Patiala House Annex, Tilak Marg, New Delhi - 110001</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">Fax No.:</span>
+                                    <span class="text-600 text-110 text-blue align-middle">+91-11-23782821</span>
+                                </div>
+                                <div class="my-1">
+                                    <span class="text-sm text-grey-m2 align-middle">E-mail:</span>
+                                    <span class="text-600 text-110 text-blue align-middle"><a href="mailto:jscpv@mea.gov.in">jscpv@mea.gov.in</a></span>
+                                </div>
+                            </div>
+                        </div>
+
+                    </div>
+                    <div class="mt-4">
+                        <div class="row text-600 text-white bgc-default-tp1 py-25">
+                            <div class="col-9 col-sm-5">Field</div>
+                            <div class="col-2">Details</div>
+                        </div>
+
+                        <div class="text-95 text-secondary-d3">
+                            <div class="row mb-2 mb-sm-0 py-25">
+                                <div class="col-9 col-sm-5">Image</div>
+                                <div class="col-2 text-secondary-d2">
+                                    @if (Model.Image != null && Model.Image.Length > 0)
+                                    {
+                                        var base64 = Convert.ToBase64String(Model.Image);
+                                        var imgSrc = $"data:image/jpeg;base64,{base64}";
+                                        <img src="@imgSrc" style="max-width:100px; max-height:100px;" alt="User Image" />
+                                    }
+                                    else
+                                    {
+                                        <span>No image available</span>
+                                    }
+                                </div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25">
+
+                                <div class="col-9 col-sm-5">Full Name</div>
+                                <div class="col-2 text-secondary-d2" id="pdfFullName">@Html.DisplayFor(model => model.FullName)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+
+                                <div class="col-9 col-sm-5">Father's Name</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.FatherName)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25">
+
+                                <div class="col-9 col-sm-5">Mother's Name</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.MothersName)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+
+                                <div class="col-9 col-sm-5">Gender</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.Gender)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25">
+
+                                <div class="col-9 col-sm-5">Date of Birth</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.DateOfBirth)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+
+                                <div class="col-9 col-sm-5">Address</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.Address)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25">
+
+                                <div class="col-9 col-sm-5">Religion</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.Religion)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+
+                                <div class="col-9 col-sm-5">State</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.State)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25">
+
+                                <div class="col-9 col-sm-5">District</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.District)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+
+                                <div class="col-9 col-sm-5">Phone Number</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.PhoneNumber)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25">
+
+                                <div class="col-9 col-sm-5">Email</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.Email)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+
+                                <div class="col-9 col-sm-5">Aadhar Number</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.AadharNumber)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25">
+
+                                <div class="col-9 col-sm-5">Pan Card Number</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.PancardNumber)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25 bgc-default-l4">
+
+                                <div class="col-9 col-sm-5">Education</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.Education)</div>
+                            </div>
+
+                            <div class="row mb-2 mb-sm-0 py-25">
+
+                                <div class="col-9 col-sm-5">Status</div>
+                                <div class="col-2 text-secondary-d2">@Html.DisplayFor(model => model.Status)</div>
+                            </div>
+                        </div>
+                        <div class="row border-b-2 brc-default-l2"></div>
+                        <hr />
+                        <div style="display: flex; align-items: center;">
+                            <span class="text-secondary-d1 text-105">Thank you for your business</span>
+                            <img src="~/Content/Images/images.png" style="width: 20%; height: 20%; margin-left: 10px;" />
+                            <p style="margin-left: 10px;">
+                                <strong>
+                                    Your request has been successfully processed, and the passport will be delivered within
+                                    <span style="color: red;">15 days</span> via post.
+                                </strong>
+                            </p>
+                        </div>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script>
+        function download() {
+            // Get the full name from the placeholder element
+            var fullName = document.getElementById('pdfFullName').innerText;
+
+            // Create a new element to hold the content to be included in the PDF
+            var pdfContent = document.createElement('div');
+            pdfContent.innerHTML = document.body.innerHTML; // Append the body content
+
+            // Sanitize the full name for use in a filename
+            var sanitizedFullName = fullName.replace(/[^a-z0-9]/gi, '_').toLowerCase();
+
+            let randomNumber = Math.floor(Math.random() * (10000000000 - 1)) + 1;
+
+            setTimeout(function () {
+                var opt = {
+                    margin: 0,
+                    filename: sanitizedFullName + '_Passport' + randomNumber + '.pdf',
+                    html2canvas: { scale: 3 }, // Adjust the scale as needed
+                    jsPDF: { unit: 'in', format: [20, 15], orientation: 'portrait' } // Set custom page size
+                };
+
+                html2pdf().set(opt).from(pdfContent).save();
+            }, 1000); // Adjust the delay as needed
+        }
+    </script>
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/html2pdf.js/0.9.2/html2pdf.bundle.min.js"></script>
+</body>
+</html>

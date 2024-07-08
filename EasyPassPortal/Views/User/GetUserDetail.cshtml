@@ -29,6 +29,9 @@
                 {
                     // User has applied for a passport
                     // You can add content here that should be displayed when the user has applied for a passport
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("StatusEnquiry", "User")">Status Inquiry</a>
+                    </li>
                 }
                 else
                 {
@@ -36,6 +39,7 @@
                     <li class="nav-item">
                         <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
                     </li>
+                   
                 }
 
 
@@ -54,15 +58,16 @@
                     <li class="nav-item">
                         <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
                     </li>
+                    <li class="nav-item">
+                        <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
+                    </li>
                 }
 
 
-                <li class="nav-item">
-                    <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>
-                </li>
-                <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("Contact", "User")">Contact us</a>
-                </li>
+
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
@@ -91,7 +96,7 @@
         <div class="container mt-5">
             <div class="d-flex justify-content-between">
                 <a href="@Url.Action("EditUserPassword", "User")">Edit password</a>
-                <a class="m" href="@Url.Action("StatusEnquiry", "User")">Status Enquiry</a>
+              
             </div>
         </div>
     </div>

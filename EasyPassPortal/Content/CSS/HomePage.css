@@ -24,73 +24,43 @@
 
 .slider {
     width: 100%;
-    height: 500%;
+    height: 500%; /* Adjust height as needed */
     overflow: hidden;
 }
 
 figure {
     position: relative;
     left: 0;
-    width: 400%;
-    animation: 10s slide infinite;
+    width: 400%; /* Increased width to accommodate 4 slides */
+    white-space: nowrap; /* Prevent text wrapping */
+    overflow: hidden; /* Hide overflowing text */
+    animation: slide 40s linear infinite; /* Adjust animation duration */
 }
 
 .slide {
     position: relative;
-    width: 25%;
+    width: 25%; /* Adjusted width to 25% to fit 4 slides in the container */
     float: left;
+    box-sizing: border-box; /* Ensures padding and borders do not add to width */
+    padding: 10px; /* Optional: Add padding around slides */
 }
 
     .slide img {
         width: 100%;
-        height: 650px;
+        height: 650px; /* Adjust height as needed */
+        object-fit: cover; /* Maintain aspect ratio for images */
     }
 
 @keyframes slide {
     0% {
-        left: 0;
-    }
-
-    10% {
-        left: 0;
-    }
-
-    20% {
-        left: 0%;
-    }
-
-    30% {
-        left: -50%;
-    }
-
-    40% {
-        left: -75%;
-    }
-
-    50% {
-        left: -100%;
-    }
-
-    60% {
-        left: -150%;
-    }
-
-    70% {
-        left: -200%;
-    }
-
-    80% {
-        left: -250%;
-    }
-
-    90% {
-        left: -300%;
+        transform: translateX(0%);
     }
 
     100% {
-        left: 0%;
+        transform: translateX(-100%);
     }
 }
+
 
 
 .footer {
