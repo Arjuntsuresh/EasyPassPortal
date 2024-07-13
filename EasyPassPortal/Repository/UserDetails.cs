@@ -67,7 +67,7 @@ namespace EasyPassPortal.Repository
             }
             catch (Exception ex)
             {
-                // Optionally log the exception
+                Console.WriteLine(ex);
                 return false;
             }
         }
@@ -157,7 +157,7 @@ namespace EasyPassPortal.Repository
             }
             catch (Exception ex)
             {
-                // Log or handle the exception as needed
+               Console.WriteLine(ex.Message);
                 return false;
             }
         }
@@ -222,8 +222,7 @@ namespace EasyPassPortal.Repository
             }
             catch (Exception ex)
             {
-                // Log the exception for debugging purposes
-                // Log.Error(ex);
+                Console.WriteLine(ex.Message);
             }
             finally
             {
@@ -280,7 +279,7 @@ namespace EasyPassPortal.Repository
             }
             catch (Exception ex)
             {
-                // Log the exception
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }

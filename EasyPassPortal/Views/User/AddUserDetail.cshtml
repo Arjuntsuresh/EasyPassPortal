@@ -33,7 +33,7 @@
                 {
                     // User has not applied for a passport
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Apply passport</a>
                     </li>
                 }
 
@@ -41,12 +41,12 @@
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     @*<li class="nav-item">
-                <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
-            </li>*@
+                            <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+                        </li>*@
                 }
 
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Signin</a>
+                    <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Sign in</a>
                 </li>
 
                 @if (!string.IsNullOrEmpty(userEmail))
@@ -77,9 +77,11 @@
         </div>
     </div>
 
-    <div class="container pt-5">
+    <div class="container pt-5" style="max-width: 600px; margin: auto;">
         <div class="wrapper">
-            <div class="title text-center mb-4"><h2>Sign up</h2></div>
+            <div class="title text-center mb-4">
+                <h2>Sign up</h2>
+            </div>
             @using (Html.BeginForm())
             {
                 @Html.AntiForgeryToken()
@@ -88,23 +90,42 @@
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             <div class="row">
-                <i class="fas fa-user"></i>
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
-                @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                        </div>
+                        @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
+                </div>
             </div>
-
+            <div style="height:15px"></div>
             <div class="row">
-                <i class="fas fa-lock"></i>
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password", id = "Password" })
-                @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        </div>
+                        @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password", id = "Password" })
+                    </div>
+                    @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
+                </div>
             </div>
-
+            <div style="height:15px"></div>
             <div class="row">
-                <i class="fas fa-lock"></i>
-                <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" placeholder="Confirm Password" />
-                <span class="text-danger" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                <div class="col-md-12">
+                    <div class="input-group">
+                        <div class="input-group-prepend">
+                            <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                        </div>
+                        <input type="password" class="form-control" name="ConfirmPassword" id="ConfirmPassword" placeholder="Confirm Password" />
+                    </div>
+                    <span class="text-danger" data-valmsg-for="ConfirmPassword" data-valmsg-replace="true"></span>
+                </div>
             </div>
-            <div style="padding-top:5px;">
+            <div style="height:15px"></div>
+            <div style="padding-top: 5px;">
                 @if (ViewBag.Message != null)
                 {
                     <div class="alert alert-danger" role="alert">
@@ -112,14 +133,22 @@
                     </div>
                 }
             </div>
-          
-            <div class="button" style="text-align:end; padding-top:20px">
+
+            <div class="button" style="text-align: end; padding-top: 20px;">
                 <input type="submit" value="Sign Up" class="btn btn-primary" />
             </div>
         </div>
             }
+
+            <div style="display: flex; justify-content: flex-end; align-items: center;">
+                <p style="margin: 0; color: black; display: inline;">
+                    Already have an account?
+                    <a href="@Url.Action("LoginUserDetail", "User")" style="color: blue; display: inline;">Sign in</a>
+                </p>
+            </div>
         </div>
     </div>
+
 
     <footer>
         <div class="footer" style="margin-top:100px">
@@ -146,20 +175,20 @@
 
     <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
     <script>
-    $(document).ready(function () {
-        $('form').submit(function () {
-            var password = $('#Password').val();
-            var confirmPassword = $('#ConfirmPassword').val();
+        $(document).ready(function () {
+            $('form').submit(function () {
+                var password = $('#Password').val();
+                var confirmPassword = $('#ConfirmPassword').val();
 
-            if (password !== confirmPassword) {
-                $('.text-danger[data-valmsg-for="ConfirmPassword"]').text("Passwords do not match.");
-                return false; // Prevent form submission
-            } else {
-                $('.text-danger[data-valmsg-for="ConfirmPassword"]').text("");
-                return true; // Allow form submission
-            }
+                if (password !== confirmPassword) {
+                    $('.text-danger[data-valmsg-for="ConfirmPassword"]').text("Passwords do not match.");
+                    return false; // Prevent form submission
+                } else {
+                    $('.text-danger[data-valmsg-for="ConfirmPassword"]').text("");
+                    return true; // Allow form submission
+                }
+            });
         });
-    });
     </script>
 
 </body>

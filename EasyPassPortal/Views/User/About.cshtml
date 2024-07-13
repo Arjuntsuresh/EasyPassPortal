@@ -38,7 +38,7 @@
                 {
                     // User has not applied for a passport
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Apply passport</a>
                     </li>
                 }
 
@@ -56,10 +56,10 @@
                 @if (string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Signin</a>
+                        <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Sign in</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
+                        <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Sign up</a>
                     </li>
                 }
 
@@ -110,7 +110,7 @@
                     <div class="card">
 
                         <img src="~/Content/Images/Shri_Kirtivardhan_Singh.jpg" class="img-fluid" alt="Image 2">
-                        <h4 style="text-align: center; font-weight: 400;">Shri_Kirtivardhan_Singh</h4>
+                        <h4 style="text-align: center; font-weight: 400;">Shri Kirtivardhan Singh</h4>
                         <h6 style="text-align: center; font-weight: 100;">Minister of State for External Affairs</h6>
                     </div>
                 </div>

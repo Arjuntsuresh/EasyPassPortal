@@ -79,6 +79,16 @@ namespace EasyPassPortal.Controllers
             {
                 if (ModelState.IsValid)
                 {
+                    var email = user.Email;
+                    var password = user.Password;
+                    if (email == "admin@gmail.com" && password == "12345")
+                    {
+                        return RedirectToAction("AdminLoginDetail", "Admin");
+                    }
+                    if (email == "police@gmail.com" && password == "12345")
+                    {
+                        return RedirectToAction("PoliceLoginDetail", "Police");
+                    }
                     UserDetails userDetails = new UserDetails();
                     var userLoggedIn = userDetails.VerifyUser(user.Email, user.Password);
 

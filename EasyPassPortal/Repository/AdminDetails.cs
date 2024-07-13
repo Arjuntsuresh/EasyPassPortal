@@ -188,8 +188,8 @@ public List<UserPassportDetails> GetAllDetails()
             }
             catch (Exception ex)
             {
-                // Log the exception for debugging purposes
-                // Log.Error(ex);
+               Console.WriteLine(ex);
+                
             }
             finally
             {

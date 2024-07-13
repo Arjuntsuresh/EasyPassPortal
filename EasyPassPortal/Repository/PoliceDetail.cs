@@ -140,7 +140,7 @@ namespace EasyPassPortal.Repository
             }
             catch (Exception ex)
             {
-                // Log the exception
+                Console.WriteLine(ex.Message);
                 return null;
             }
         }

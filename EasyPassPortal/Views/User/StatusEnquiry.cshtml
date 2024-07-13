@@ -39,7 +39,7 @@
                 {
                     // User has not applied for a passport
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Apply passport</a>
                     </li>
                 }
 
@@ -54,10 +54,10 @@
                 @if (string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Signin</a>
+                        <a class="nav-link" href="@Url.Action("LoginUserDetail", "User")">Sign in</a>
                     </li>
                     <li class="nav-item">
-                        <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
+                        <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Sign up</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" aria-current="page" href="@Url.Action("About", "User")">About us</a>

@@ -28,12 +28,12 @@
                 @if (!string.IsNullOrEmpty(userEmail))
                 {
                     <li class="nav-item">
-                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Create Passport</a>
+                        <a class="nav-link active" aria-current="page" href="@Url.Action("AddUserPassportDetail", "User")">Apply passport</a>
                     </li>
                 }
 
                 <li class="nav-item">
-                    <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Signup</a>
+                    <a class="nav-link" href="@Url.Action("AddUserDetail", "User")">Sign up</a>
                 </li>
 
                 @if (!string.IsNullOrEmpty(userEmail))
@@ -64,7 +64,7 @@
         </div>
     </div>
 
-    <div class="container">
+    <div class="container" style="max-width: 600px; margin: auto;">
         <div class="wrapper mt-5">
             <div class="title text-center mb-4"><h2>Sign in</h2></div>
             @using (Html.BeginForm())
@@ -73,16 +73,28 @@
 
         <div class="form-group">
             <div class="form-group">
-                <label for="Email" class="control-label"><i class="fas fa-user"></i> Email</label>
-                @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                <label for="Email" class="control-label">Email</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-envelope"></i></span>
+                    </div>
+                    @Html.EditorFor(model => model.Email, new { htmlAttributes = new { @class = "form-control", placeholder = "Email" } })
+                </div>
                 @Html.ValidationMessageFor(model => model.Email, "", new { @class = "text-danger" })
             </div>
 
+
             <div class="form-group">
-                <label for="Password" class="control-label"><i class="fas fa-lock"></i> Password</label>
-                @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password" })
+                <label for="Password" class="control-label"> Password</label>
+                <div class="input-group">
+                    <div class="input-group-prepend">
+                        <span class="input-group-text"><i class="fas fa-lock"></i></span>
+                    </div>
+                    @Html.TextBoxFor(model => model.Password, new { @class = "form-control", placeholder = "Password", type = "password" })
+                </div>
                 @Html.ValidationMessageFor(model => model.Password, "", new { @class = "text-danger" })
             </div>
+
             @Html.ValidationSummary(true, "", new { @class = "text-danger" })
 
             @* Display error message if login fails *@
@@ -98,7 +110,14 @@
         </div>
             }
         </div>
+        <div style="display: flex; justify-content: flex-end; align-items: center;">
+            <p style="margin: 0; color: black; display: inline;">
+                Create an account?
+                <a href="@Url.Action("AddUserDetail", "User")" style="color: blue; display: inline;">Sign up</a>
+            </p>
+        </div>
     </div>
+    
 
     <footer>
         <div class="footer" style="margin-top:100px">

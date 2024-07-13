@@ -14,11 +14,11 @@ namespace EasyPassPortal.Models
         public int Id { get; set; }
 
         [Required]
-        [Display(Name = "Full Name")]
+        [Display(Name = "Full name")]
         public string FullName { get; set; }
 
         [Required]
-        [Display(Name = "Father Name")]
+        [Display(Name = "Father name")]
         public string FatherName { get; set; }
 
         [Required]
@@ -27,7 +27,7 @@ namespace EasyPassPortal.Models
 
         [Required]
         [DataType(DataType.Date)]
-        [Display(Name = "Date of Birth")]
+        [Display(Name = "Date of birth")]
        
         public String DateOfBirth { get; set; }
 
@@ -49,7 +49,7 @@ namespace EasyPassPortal.Models
 
 
         [Required]
-        [Display(Name = "Phone Number")]
+        [Display(Name = "Phone number")]
         public string PhoneNumber { get; set; }
 
        
@@ -57,11 +57,11 @@ namespace EasyPassPortal.Models
         public string Email { get; set; }
 
         [Required]
-        [Display(Name = "Aadhar Number")]
+        [Display(Name = "Aadhar number")]
         public string AadharNumber { get; set; }
 
         [Required]
-        [Display(Name = "Pancard Number")]
+        [Display(Name = "Pancard number")]
         public string PancardNumber { get; set; }
 
         [Required]
@@ -77,7 +77,7 @@ namespace EasyPassPortal.Models
         public byte[] IdProof { get; set; }
 
         [Required]
-        [Display(Name = "MothersName")]
+        [Display(Name = "Mother name")]
         public string MothersName { get; set; }
 
         public static ValidationResult ValidateDateOfBirth(DateTime dateOfBirth, ValidationContext context)

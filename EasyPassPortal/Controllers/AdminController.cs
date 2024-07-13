@@ -350,7 +350,7 @@ namespace EasyPassPortal.Controllers
         public ActionResult LogOutAdmin()
         {
             Session.Abandon();
-            return RedirectToAction("AdminLoginDetail", "Admin");
+            return RedirectToAction("HomePageDetails", "User");
         }
     }
 }
